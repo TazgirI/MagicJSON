@@ -18,7 +18,11 @@ public class ArgNumberStatementObject<T extends Number> extends ArgStatementObje
     {
         numberClass = myNewClass;
         numberIdentifier = myNewNumberType;
+    }
 
+    @Override
+    public void SetConstants()
+    {
         identifier = "ArgNumberStatementObject (this object is abstract, if you see this identifier then something has broken)";
     }
 
@@ -45,5 +49,11 @@ public class ArgNumberStatementObject<T extends Number> extends ArgStatementObje
         }
 
         return (T) DefaultValues.getDefault(numberClass);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "";
     }
 }

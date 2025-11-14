@@ -35,25 +35,19 @@ public class JsonToFunctionObject
         return stack.Finish();
     }
 
-    //TODO: Break of parts around if statements
-    // Instead of checking what the object will accept, instead pass it the element to respond
 
 
     public static void HandleJsonElement(JsonElement element, FunctionStack stack, String elementName)
     {
-        if(FunctionTokens.getFunctionObjectAsObject(elementName) instanceof BaseFunctionObject functionObject)
+        if(FunctionTokens.getFunctionObjectKeyAsObject(elementName) instanceof BaseFunctionObject functionObject)
         {
             stack.AddOpen(functionObject);
 
             if(element instanceof JsonObject object)
             {
                 LoopJsonObject(object, stack);
-                stack.Close();
             }
-            else
-            {
-                stack.Close();
-            }
+            stack.Close();
 
             return;
         }
@@ -68,7 +62,7 @@ public class JsonToFunctionObject
 
         if(!stack.AttemptElement(element, elementName))
         {
-            Logging.Warn("Failed to process JsonElement in perceived Function   " +
+            Logging.Debug("Failed to process JsonElement   " +
                     "Element: " + element + " " +
                     "Name: " + elementName, false);
         }

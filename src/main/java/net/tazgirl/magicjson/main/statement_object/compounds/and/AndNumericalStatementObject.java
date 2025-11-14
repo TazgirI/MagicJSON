@@ -12,7 +12,10 @@ import java.util.function.BiFunction;
 public class AndNumericalStatementObject extends CompoundStatementObject<ResolvesNumber<?>> implements ContainsNumbers, NumericalEvaluator
 {
 
-    public AndNumericalStatementObject()
+
+
+    @Override
+    public void SetConstants()
     {
         identifier = "AndNum";
     }

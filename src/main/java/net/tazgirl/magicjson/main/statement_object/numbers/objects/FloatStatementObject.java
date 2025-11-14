@@ -5,7 +5,8 @@ import net.tazgirl.magicjson.MagicJson;
 
 public class FloatStatementObject extends NumberStatementObject<Float>
 {
-    public FloatStatementObject()
+    @Override
+    public void SetConstants()
     {
         identifier = "Float";
         numberType = Float.class;

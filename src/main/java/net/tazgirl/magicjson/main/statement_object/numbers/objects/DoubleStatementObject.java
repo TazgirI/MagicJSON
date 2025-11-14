@@ -5,7 +5,8 @@ import net.tazgirl.magicjson.MagicJson;
 
 public class DoubleStatementObject extends NumberStatementObject<Double>
 {
-    public DoubleStatementObject()
+    @Override
+    public void SetConstants()
     {
         identifier = "Double";
         numberType = Double.class;

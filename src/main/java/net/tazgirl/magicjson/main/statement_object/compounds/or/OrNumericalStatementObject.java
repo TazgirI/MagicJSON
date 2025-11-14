@@ -12,7 +12,10 @@ import java.util.function.BiFunction;
 public class OrNumericalStatementObject extends CompoundStatementObject<NumberStatementObject<?>> implements ContainsNumbers, NumericalEvaluator
 {
 
-    public OrNumericalStatementObject()
+
+
+    @Override
+    public void SetConstants()
     {
         identifier = "OrNum";
     }

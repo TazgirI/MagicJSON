@@ -4,6 +4,7 @@ package net.tazgirl.magicjson.main;
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
 import net.tazgirl.magicjson.main.statement_object.BooleanStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StringStatementObject;
 import net.tazgirl.magicjson.main.statement_object.numbers.objects.*;
 
 
@@ -57,6 +58,21 @@ public class StatementStack
             {
                 ParsingError("Attempted to add bool to stack but current stack cannot accept a BooleanObject");
             }
+        }
+    }
+
+    public void Put(String string)
+    {
+        if(objectStack.isEmpty())
+        {
+            StringStatementObject stringObject = new StringStatementObject();
+            stringObject.HandleValue(string);
+
+            Put(stringObject);
+        }
+        else if(!objectStack.getLast().HandleValue(string))
+        {
+            ParsingError("Stack failed to handle String \"" + string + "\"");
         }
     }
 
@@ -140,12 +156,12 @@ public class StatementStack
         }
         else if(objectStack.isEmpty())
         {
-            Logging.Warn( "Attempted to return an empty stack as BaseObject\n" +
-                    "The process that requested this has been returned a null, stored function will now no longer exist.\n" +
-                    "The game should not be considered stable but tokenisation will continue to run to allow other debugging messages to be processed\n" +
-                    "If you are a player then please report this message to the Modpack/Datapack creator unless they have stated this is intended\n" +
+            Logging.Debug( "Attempted to return an empty stack as BaseObject " +
+                    "The process that requested this has been returned a null, stored function will now no longer exist.    " +
+                    "The game should not be considered stable but tokenisation will continue to run to allow other debugging messages to be processed   " +
+                    "If you are a player then please report this message to the Modpack/Datapack creator unless they have stated this is intended   " +
                     "Tokens being parsed: " + tokensBeingParsed +
-                    "\nContents of stack: " + objectStack, false);
+                    "   Contents of stack: " + objectStack, false);
             return null;
         }
         else
@@ -158,10 +174,10 @@ public class StatementStack
 
     public void ParsingError(String contextMessage)
     {
-        Logging.Warn( contextMessage + "\nTokenisation has not been stopped but unintended behaviour may occur!\n" +
-                "If you are a player then please report this message to the Modpack/Datapack creator unless they have stated this is intended\n" +
+        Logging.Debug( contextMessage + "   Tokenisation has not been stopped but unintended behaviour may occur!    " +
+                "If you are a player then please report this message to the Modpack/Datapack creator unless they have stated this is intended   " +
                 "Tokens being parsed: " + tokensBeingParsed +
-                "\nContents of stack: " + objectStack, false);
+                "   Contents of stack: " + objectStack, false);
     }
 
     @Override

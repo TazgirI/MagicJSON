@@ -1,5 +1,7 @@
 package net.tazgirl.magicjson.main;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,32 @@ public class Tokenise
                 continue;
             }
 
+            if(currentChar.equals('"'))
+            {
+                returnTokens.add(SymbolFromChars(currentToken));
+                currentToken.add(currentChar);
+
+                while(i < statement.length() - 1)
+                {
+                    i++;
+
+                    currentChar = statement.charAt(i);
+
+                    currentToken.add(currentChar);
+
+                    if(currentChar == '"' )
+                    {
+                        returnTokens.add(SymbolFromChars(currentToken));
+                        currentToken = new ArrayList<>();
+
+                        break;
+                    }
+                }
+
+                i++;
+                continue;
+            }
+
             if(!TextSymbols.tokenExcludeChars.contains(currentChar))
             {
                 currentToken.add(currentChar);
@@ -48,6 +76,8 @@ public class Tokenise
 
             i++;
         }
+
+        returnTokens.removeIf(String::isEmpty);
 
         return returnTokens;
     }

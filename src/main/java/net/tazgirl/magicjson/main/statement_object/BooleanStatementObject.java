@@ -20,6 +20,12 @@ public class BooleanStatementObject extends BaseStatementObject implements Resol
     }
 
     @Override
+    public void SetConstants()
+    {
+
+    }
+
+    @Override
     public Boolean HandleValue(Object content)
     {
         if(content instanceof Boolean contentBoolean)

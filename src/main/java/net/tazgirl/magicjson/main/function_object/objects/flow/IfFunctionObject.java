@@ -25,17 +25,23 @@ public class IfFunctionObject extends BaseFunctionObject
 
     SourceFunctionHolder falseObject = null;
 
+    public IfFunctionObject()
+    {
+        identifier = "If";
+    }
+
+
     @Override
-    public Boolean Run()
+    public Boolean RunPersonal()
     {
         if(checkStatement == null)
         {
-            Logging.Warn("If function is missing it's check statement " + getDebugString(), false);
+            Logging.Debug("If function is missing it's check statement " + getDebugString(), false);
         }
 
         if(!(PrivateCore.getStatement(checkStatement) instanceof ResolvesBoolean))
         {
-            Logging.Warn("If function has non-boolean Statement as it's check" + getDebugString(), false);
+            Logging.Debug("If function has non-boolean Statement as it's check" + getDebugString(), false);
             return null;
         }
 

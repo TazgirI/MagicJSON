@@ -10,24 +10,20 @@ public abstract class BaseStatementObject
 
     public BaseStatementObject()
     {
-
+        SetConstants();
     }
+
+    public abstract void SetConstants();
 
     // One at time
-    public Boolean HandleValue(Object content)
-    {
-        return false;
-    }
+    public abstract Boolean HandleValue(Object content);
 
     public Boolean numericalTest(BiFunction<Number, Number, Boolean> test, BaseStatementObject operand, Boolean operandIsLeft)
     {
         return null;
     }
 
-    public Object Resolve()
-    {
-        return null;
-    }
+    public abstract Object Resolve();
 
     public void SpreadManager(StatementManager newManager)
     {
@@ -46,9 +42,6 @@ public abstract class BaseStatementObject
     }
 
     @Override
-    public String toString()
-    {
-        return "null";
-    }
+    public abstract String toString();
 
 }

@@ -5,7 +5,8 @@ import net.tazgirl.magicjson.MagicJson;
 
 public class IntegerStatementObject extends NumberStatementObject<Integer>
 {
-    public IntegerStatementObject()
+    @Override
+    public void SetConstants()
     {
         identifier = "Integer";
         numberType = Integer.class;

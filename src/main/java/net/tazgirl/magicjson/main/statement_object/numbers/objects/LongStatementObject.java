@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class LongStatementObject extends NumberStatementObject<Long>
 {
-
-    public LongStatementObject()
+    @Override
+    public void SetConstants()
     {
         identifier = "Long";
         numberType = Long.class;

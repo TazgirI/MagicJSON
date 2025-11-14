@@ -12,14 +12,14 @@ public abstract class ReturnFunctionObject extends BaseFunctionObject
 
     public StatementAddress returnValue;
 
+
     public ReturnFunctionObject()
     {
-
+        identifier = "Return";
     }
 
-
     @Override
-    public Object Run()
+    public Object RunPersonal()
     {
         Object statementResult = MagicJson.RunStatement(manager.generateStatementManager(returnValue));
 

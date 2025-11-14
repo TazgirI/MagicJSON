@@ -32,7 +32,14 @@ public abstract class BaseFunctionObject
 
     }
 
-    public abstract Object Run();
+    public final Object Run()
+    {
+        manager.addStep();
+
+        return RunPersonal();
+    }
+
+    public abstract Object RunPersonal();
 
     public void SpreadArgs(FunctionManager newManager)
     {

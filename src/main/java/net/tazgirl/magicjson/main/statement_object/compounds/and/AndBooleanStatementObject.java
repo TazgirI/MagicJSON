@@ -7,7 +7,9 @@ import net.tazgirl.magicjson.main.statement_object.interface_categories.Resolves
 
 public class AndBooleanStatementObject extends CompoundStatementObject<ResolvesBoolean> implements ContainsBooleans, ResolvesBoolean
 {
-    public AndBooleanStatementObject()
+
+    @Override
+    public void SetConstants()
     {
         identifier = "AndBool";
     }

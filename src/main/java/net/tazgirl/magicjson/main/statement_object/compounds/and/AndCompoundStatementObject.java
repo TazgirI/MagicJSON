@@ -13,7 +13,8 @@ public class AndCompoundStatementObject extends CompoundStatementObject<Compound
     // NOTE: This class should honestly not be used in its current state unless there's something I'm missing that makes it useful
     // TODO: Rework this class to be a proper generics handler, see also: note in super constructor
 
-    public AndCompoundStatementObject()
+    @Override
+    public void SetConstants()
     {
         identifier = "AndCompound";
     }

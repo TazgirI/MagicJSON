@@ -39,6 +39,10 @@ public class TokenToStatement
             {
                 stack.PutNum(token);
             }
+            else if(token.charAt(0) == '"' && token.endsWith("\""))
+            {
+                stack.Put(token.substring(1, token.length() - 1));
+            }
             else
             {
                 stack.ParsingError("Attempted to parse unrecognised token");

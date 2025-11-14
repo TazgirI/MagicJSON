@@ -59,7 +59,7 @@ public class HookParametersFunctionObject extends BaseFunctionObject
 
 
     @Override
-    public Object Run()
+    public Object RunPersonal()
     {
         return this;
     }

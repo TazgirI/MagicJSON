@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class VoidHookFunctionObject extends BaseHookFunctionObject
 {
     @Override
-    public Object Run()
+    public Object RunPersonal()
     {
         manager.runVoidHook(hookName, parameters);
         return Constants.trueEmpty;

@@ -8,7 +8,10 @@ import net.tazgirl.magicjson.main.statement_object.interface_categories.Resolves
 public class OrBooleanStatementObject extends CompoundStatementObject<ResolvesBoolean> implements ContainsBooleans, ResolvesBoolean
 {
 
-    public OrBooleanStatementObject()
+
+
+    @Override
+    public void SetConstants()
     {
         identifier = "OrBool";
     }
