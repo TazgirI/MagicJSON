@@ -63,7 +63,7 @@ public class FunctionManager
 
 
 
-        String errorMessage = "Invalid return type, process has been continued until it next attempts to terminate.\nAttempted return type: " + newReturnValue.getClass() + "\nExpected return type: " + returnType.toString() + "\n" + origin.LogLocation();
+        String errorMessage = "Invalid return type, process has been continued until it next attempts to terminate.\nAttempted return type: " + (newReturnValue == null ? "unknown" : newReturnValue.getClass()) + "\nExpected return type: " + returnType.toString() + "\n" + origin.LogLocation();
         Logging.Debug(errorMessage, false);
 
         processFlag = ProcessFlag.RUN;

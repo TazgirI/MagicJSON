@@ -72,41 +72,36 @@ public class IfFunctionObject extends BaseFunctionObject
     @Override
     public @NotNull Boolean HandleElement(JsonElement element, String elementName, @Nullable FunctionStack stack)
     {
-        if(elementName == null){return false;}
-
         return switch (elementName)
         {
             case "check" ->
             {
-                if (element instanceof JsonPrimitive jsonPrimitive)
+                if (ElementAsStatementAddress(element) instanceof StatementAddress address)
                 {
-                    checkStatement = StatementAddress.from(jsonPrimitive.getAsString());
+                    checkStatement = address;
                     yield true;
                 }
                 LogWrongType(elementName, JsonPrimitive.class, element.getClass());
                 yield false;
             }
-            case "true" ->
+            case "true", "false" ->
             {
-                if (element instanceof JsonObject jsonObject)
+                if (ElementAsSourceFunctionHolder(element) instanceof SourceFunctionHolder holder)
                 {
-                    trueObject = JsonToFunctionObject.LoopJsonObject(jsonObject, new FunctionStack());
+                    if(elementName.equals("true"))
+                    {
+                        trueObject = holder;
+                    }
+                    else
+                    {
+                        falseObject = holder;
+                    }
                     yield true;
                 }
-                LogWrongType(elementName, JsonObject.class, element.getClass());
+                LogConversionFailedForRecognisedKey(element, SourceFunctionHolder.class, elementName);
                 yield false;
             }
-            case "false" ->
-            {
-                if (element instanceof JsonObject jsonObject)
-                {
-                    trueObject = JsonToFunctionObject.LoopJsonObject(jsonObject, new FunctionStack());
-                    yield true;
-                }
-                LogWrongType(elementName, JsonObject.class, element.getClass());
-                yield false;
-            }
-            default ->
+            case null, default ->
             {
                 if(super.CheckUnknownElementIsStatementAddress(element, identifier, elementName) instanceof StatementAddress statementAddress)
                 {

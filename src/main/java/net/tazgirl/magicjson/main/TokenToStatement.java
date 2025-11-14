@@ -1,7 +1,5 @@
 package net.tazgirl.magicjson.main;
 
-import net.tazgirl.magicjson.Logging;
-import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class TokenToStatement
             return null;
         }*/
 
-        Stack stack = new Stack(tokens);
+        StatementStack stack = new StatementStack(tokens);
 
 
         for(String token: tokens)

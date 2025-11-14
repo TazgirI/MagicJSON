@@ -9,9 +9,9 @@ public class StatementManager
 {
     StatementAddress statementAddress;
 
-    Map<String, Object> args = new HashMap<>();
+    Map<String, Object> args;
 
-    public StatementManager(StatementAddress statementAddress,Map<String, Object> args)
+    public StatementManager(StatementAddress statementAddress, Map<String, Object> args)
     {
         this.args = args;
         this.statementAddress = statementAddress;

@@ -1,12 +1,19 @@
 
+
+Cross run memory...
+
+
 FUNCTION
 
 - Modifier
     - How do templates work? -> Pass in a function with an input that matches its modifier type
 
+- ArgAdd
 
 
 
 STATEMENTS
 
 - ArgBool
+
+

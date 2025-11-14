@@ -1,25 +1,20 @@
 package net.tazgirl.magicjson.main.function_object.objects.returns;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.main.addresses.StatementAddress;
 import net.tazgirl.magicjson.main.function_object.FunctionStack;
 import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
-public abstract class BaseReturnFunctionObject<T extends Class<?>> extends BaseFunctionObject
+public abstract class ReturnFunctionObject extends BaseFunctionObject
 {
 
     public StatementAddress returnValue;
 
-    public BaseReturnFunctionObject()
+    public ReturnFunctionObject()
     {
-        contents = Map.of(
-                "returnValue", JsonObjectTypes.STATEMENT
-        );
+
     }
 
 
@@ -57,13 +52,28 @@ public abstract class BaseReturnFunctionObject<T extends Class<?>> extends BaseF
     @Override
     public @NotNull Boolean HandleElement(JsonElement element, String name, FunctionStack stack)
     {
-        if(element instanceof JsonPrimitive primitive)
+        return switch(name)
         {
-            returnValue = StatementAddress.from(primitive.getAsString());
-
-            return true;
-        }
-
-        return false;
+            case "returnValue" ->
+            {
+                if(ElementAsStatementAddress(element) instanceof StatementAddress address)
+                {
+                    returnValue = address;
+                    yield true;
+                }
+                LogConversionFailedForRecognisedKey(element, StatementAddress.class, name);
+                yield false;
+            }
+            case null, default ->
+            {
+                if(CheckUnknownElementIsStatementAddress(element, identifier, name) instanceof StatementAddress statementAddress)
+                {
+                    returnValue = statementAddress;
+                    yield true;
+                }
+                LogConversionFailedForUnknownName(element, element.getClass(), name);
+                yield false;
+            }
+        };
     }
 }

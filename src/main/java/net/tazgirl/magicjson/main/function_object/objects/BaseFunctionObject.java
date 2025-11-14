@@ -13,6 +13,7 @@ import net.tazgirl.magicjson.main.function_object.SourceFunctionHolder;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
 
 public abstract class BaseFunctionObject
@@ -23,7 +24,8 @@ public abstract class BaseFunctionObject
 
     public String identifier = "";
 
-    public Map<String, JsonObjectTypes> contents;
+    List<Address.verdict> statementMarkers = List.of(Address.verdict.STATEMENT, Address.verdict.DEFAULT);
+    List<Address.verdict> functionMarkers = List.of(Address.verdict.FUNCTION, Address.verdict.DEFAULT);
 
     public BaseFunctionObject()
     {
@@ -45,38 +47,49 @@ public abstract class BaseFunctionObject
 
     public StatementAddress CheckUnknownElementIsStatementAddress(JsonElement element, String identifier, String elementName)
     {
-        if(element instanceof JsonPrimitive primitive)
+        if(ElementAsStatementAddress(element) instanceof StatementAddress address)
         {
-            Address.verdict verdict = Address.Assess(primitive.getAsString());
 
-            if(verdict == Address.verdict.STATEMENT || verdict == Address.verdict.DEFAULT)
+            if(identifier != null && elementName != null)
             {
-
-                if(identifier != null && elementName != null)
-                {
-                    Logging.Debug(identifier + " has accepted \"" + elementName + "\" as a StatementAddress despite it not matching an expected property", false);
-                }
-
-                return StatementAddress.from(primitive.getAsString());
+                Logging.Debug(identifier + " has accepted \"" + elementName + "\" as a StatementAddress despite it not matching an expected property", false);
             }
+
+            return address;
         }
         return null;
     }
 
     public SourceFunctionHolder CheckUnknownElementIsSourceFunctionHolder(JsonElement element, String identifier, String elementName)
     {
-        if(element instanceof JsonObject object)
+        if(ElementAsSourceFunctionHolder(element) instanceof SourceFunctionHolder holder)
         {
-            if(JsonToFunctionObject.LoopJsonObject(object, new FunctionStack()) instanceof SourceFunctionHolder holder)
+            if(identifier != null && elementName != null)
             {
-                if(identifier != null && elementName != null)
-                {
-                    Logging.Debug(identifier + " has accepted \"" + elementName + "\" as a SourceFunctionHolder despite it not matching an expected property", false);
-                }
-
-                return holder;
+                Logging.Debug(identifier + " has accepted \"" + elementName + "\" as a SourceFunctionHolder despite it not matching an expected property", false);
             }
+
+            return holder;
         }
+        return null;
+    }
+
+    public StatementAddress ElementAsStatementAddress(JsonElement element)
+    {
+        if(element instanceof JsonPrimitive primitive && statementMarkers.contains(Address.Assess(primitive.getAsString())))
+        {
+            return StatementAddress.from(element.getAsString());
+        }
+        return null;
+    }
+
+    public SourceFunctionHolder ElementAsSourceFunctionHolder(JsonElement element)
+    {
+        if(element instanceof JsonObject object && JsonToFunctionObject.LoopJsonObject(object, new FunctionStack()) instanceof SourceFunctionHolder holder)
+        {
+            return holder;
+        }
+
         return null;
     }
 
@@ -102,7 +115,15 @@ public abstract class BaseFunctionObject
                 "Step: " + manager.getSteps();
     }
 
+    public SourceFunctionHolder LoopJsonObject(JsonElement element)
+    {
+        if(element instanceof JsonObject object)
+        {
+            return JsonToFunctionObject.LoopJsonObject(object, new FunctionStack());
+        }
 
+        return null;
+    }
 
     public void LogWrongType(String failedInputName, Class<?> expectedType, Class<?> receivedType)
     {
@@ -117,6 +138,16 @@ public abstract class BaseFunctionObject
     public void LogUnhandledValue(Class<?> failedInputType)
     {
         Logging.Debug("Function object " + identifier + " received a generic argument it was unable to handle of type " + failedInputType + ", value has been skipped", false);
+    }
+
+    public void LogConversionFailedForUnknownName(JsonElement element, Class<?> expectedType, String name)
+    {
+        Logging.Debug("Function object " + identifier + " has failed to convert the following JsonElement of un-recognised key \"" + name + "\" into a " + expectedType + ":  " + element, false);
+    }
+
+    public void LogConversionFailedForRecognisedKey(JsonElement element, Class<?> expectedType, String name)
+    {
+        Logging.Debug("Function object " + identifier + " has failed to convert the following JsonElement of recognised key \"" + name + "\" into a " + expectedType + ":  " + element, false);
     }
 
 }

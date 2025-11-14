@@ -2,7 +2,6 @@ package net.tazgirl.magicjson.main;
 
 
 import net.tazgirl.magicjson.Logging;
-import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
 import net.tazgirl.magicjson.main.statement_object.BooleanStatementObject;
 import net.tazgirl.magicjson.main.statement_object.numbers.objects.*;
@@ -12,13 +11,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stack
+public class StatementStack
 {
     public List<BaseStatementObject> objectStack = new ArrayList<>();
 
     public List<String> tokensBeingParsed;
 
-    public Stack(List<String> newTokensBeingParsed)
+    public StatementStack(List<String> newTokensBeingParsed)
     {
         tokensBeingParsed = newTokensBeingParsed;
     }

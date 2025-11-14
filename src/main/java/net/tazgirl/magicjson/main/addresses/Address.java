@@ -10,7 +10,7 @@ public abstract class Address
 {
 
     // Exclude the function/statement divider i.e. instead of magicjson:statement/calculate it would just be magicjson:calculate, the object type determines the registry to check
-    String localAddress = "";
+    String localAddress;
 
     static List<Character> breakPunctuation = List.of(':', '\\', '/');
 
