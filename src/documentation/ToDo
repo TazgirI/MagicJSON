@@ -4,7 +4,7 @@ FUNCTION
 - Modifier
     - How do templates work? -> Pass in a function with an input that matches its modifier type
 
-- Build function object from JSON file, hardcoded paths i.e if(object == if) then get true{} and get false{}
+
 
 
 STATEMENTS
