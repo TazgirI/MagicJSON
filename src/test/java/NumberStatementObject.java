@@ -1,6 +1,9 @@
 
+
 import net.tazgirl.magicjson.main.DefaultValues;
 import net.tazgirl.magicjson.main.statement_object.numbers.objects.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,55 +28,56 @@ class NumberStatementObject extends TestRoot
         emptyDoubleStatementObject = new DoubleStatementObject();
         emptyFloatStatementObject = new FloatStatementObject();
         emptyLongStatementObject = new LongStatementObject();
+
     }
 
 
     @Test
     void integerDefault()
     {
-        assertEqualsSuper(Integer.valueOf(0), DefaultValues.getDefault(Integer.class),"integerDefault");
+        assertEquals(Integer.valueOf(0), DefaultValues.getDefault(Integer.class),getFunctionFail("integerDefault"));
     }
 
     @Test
     void floatDefault()
     {
-        assertEqualsSuper(Float.valueOf(0f), DefaultValues.getDefault(Float.class),"floatDefault");
+        assertEquals(Float.valueOf(0f), DefaultValues.getDefault(Float.class),getFunctionFail("floatDefault"));
     }
 
     @Test
     void doubleDefault()
     {
-        assertEqualsSuper(Double.valueOf(0.0d), DefaultValues.getDefault(Double.class), "doubleDefault");
+        assertEquals(Double.valueOf(0.0d), DefaultValues.getDefault(Double.class), getFunctionFail("doubleDefault"));
     }
 
     @Test
     void longDefault()
     {
-        assertEqualsSuper(Long.valueOf(0L), DefaultValues.getDefault(Long.class), "longDefault");
+        assertEquals(Long.valueOf(0L), DefaultValues.getDefault(Long.class), getFunctionFail("longDefault"));
     }
 
     @Test
     void integerDefaultResolve()
     {
-        assertEqualsSuper(emptyIntegerStatementObject.Resolve(), Integer.valueOf(0), "integerDefaultResolve");
+        assertEquals(emptyIntegerStatementObject.Resolve(), Integer.valueOf(0), getFunctionFail("integerDefaultResolve"));
     }
 
     @Test
     void floatDefaultResolve()
     {
-        assertEqualsSuper(emptyFloatStatementObject.Resolve(), Float.valueOf(0f),"floatDefaultResolve");
+        assertEquals(emptyFloatStatementObject.Resolve(), Float.valueOf(0f),getFunctionFail("floatDefaultResolve"));
     }
 
     @Test
     void doubleDefaultResolve()
     {
-        assertEqualsSuper(emptyDoubleStatementObject.Resolve(), Double.valueOf(0.0d),"doubleDefaultResolve");
+        assertEquals(emptyDoubleStatementObject.Resolve(), Double.valueOf(0.0d),getFunctionFail("doubleDefaultResolve"));
     }
 
     @Test
     void longDefaultResolve()
     {
-        assertEqualsSuper(emptyLongStatementObject.Resolve(), Long.valueOf(0L),"longDefaultResolve");
+        assertEquals(emptyLongStatementObject.Resolve(), Long.valueOf(0L),getFunctionFail("longDefaultResolve"));
     }
 
 }

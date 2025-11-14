@@ -10,13 +10,13 @@ public class RegistrationResourceLocationToAddressTests extends TestRoot
     @Test
     void mostSimpleUsecase()
     {
-        assertEqualsSuper("magicjson:test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/test.json"),"mostSimpleUsecase");
+        assertEquals("magicjson:test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/test.json"),getFunctionFail("mostSimpleUsecase"));
     }
 
     @Test
     void subfolderConservation()
     {
-        assertEqualsSuper("magicjson:testfolder/test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/testfolder/test.json"),"subfolderConservation");
+        assertEquals("magicjson:testfolder/test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/testfolder/test.json"),getFunctionFail("subfolderConservation"));
     }
 
 }
