@@ -1,0 +1,13 @@
+{
+  "if":
+  {
+    "check": "magicjson:test",
+    "true":
+    {
+      "if":
+      {
+        "check": "magicjson:test2"
+      }
+    }
+  }
+}

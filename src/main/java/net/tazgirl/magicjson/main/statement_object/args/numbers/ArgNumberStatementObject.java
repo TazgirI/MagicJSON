@@ -5,6 +5,8 @@ import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.main.DefaultValues;
 import net.tazgirl.magicjson.main.statement_object.args.ArgStatementObject;
 
+import java.util.Map;
+
 public class ArgNumberStatementObject<T extends Number> extends ArgStatementObject
 {
 
@@ -16,11 +18,15 @@ public class ArgNumberStatementObject<T extends Number> extends ArgStatementObje
     {
         numberClass = myNewClass;
         numberIdentifier = myNewNumberType;
+
+        identifier = "ArgNumberStatementObject (this object is abstract, if you see this identifier then something has broken)";
     }
 
     @Override
     public T Resolve()
     {
+        Map<String, Object> args = manager.getArgs();
+
         Object keyValue = args.get(value);
         if(numberClass.isInstance(keyValue))
         {
@@ -28,11 +34,14 @@ public class ArgNumberStatementObject<T extends Number> extends ArgStatementObje
         }
         else if(keyValue == null)
         {
-            Logging.Error("Could not find the key \"" + value + "\" in provided args: \"" + args.toString() + "\"", MagicJson.LOGGER);
+            String errorMessage = "Could not find the key \"" + value + "\" in provided args: \"" + args.toString() + "\" \n" + LogLocation();
+
+            Logging.Warn(errorMessage, false);
         }
         else
         {
-            Logging.Error("The key \"" + value + "\" did not return " + numberIdentifier + " from provided args: \"" + args.toString() + "\"", MagicJson.LOGGER);
+            String errorMessage = "The key \"" + value + "\" did not return " + numberIdentifier + " from provided args: \"" + args.toString() + "\"\n" + LogLocation();
+            Logging.Warn(errorMessage, false);
         }
 
         return (T) DefaultValues.getDefault(numberClass);

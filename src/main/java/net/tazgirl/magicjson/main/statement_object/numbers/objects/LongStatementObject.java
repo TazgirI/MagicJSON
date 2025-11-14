@@ -3,6 +3,8 @@ package net.tazgirl.magicjson.main.statement_object.numbers.objects;
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.MagicJson;
 
+import java.util.Map;
+
 public class LongStatementObject extends NumberStatementObject<Long>
 {
 
@@ -26,7 +28,7 @@ public class LongStatementObject extends NumberStatementObject<Long>
             }
             catch (NumberFormatException error)
             {
-                Logging.Error("Attempted to convert the following String to a Long but failed: " + contentString, MagicJson.LOGGER);
+                Logging.Warn(FailedConversionMessage(contentString),false);
                 return false;
             }
             return true;
@@ -34,4 +36,6 @@ public class LongStatementObject extends NumberStatementObject<Long>
 
         return false;
     }
+
+
 }

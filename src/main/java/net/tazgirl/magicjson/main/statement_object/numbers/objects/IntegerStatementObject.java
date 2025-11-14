@@ -25,7 +25,7 @@ public class IntegerStatementObject extends NumberStatementObject<Integer>
             }
             catch (NumberFormatException error)
             {
-                Logging.Error("Attempted to convert the following String to a Integer but failed: " + contentString, MagicJson.LOGGER);
+                Logging.Warn(FailedConversionMessage(contentString),false);
                 return false;
             }
             return true;

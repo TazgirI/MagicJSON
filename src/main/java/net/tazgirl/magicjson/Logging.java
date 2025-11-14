@@ -3,42 +3,63 @@ package net.tazgirl.magicjson;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
-import javax.annotation.Nullable;
-
 public class Logging
 {
     static Logger localLogger = MagicJson.LOGGER;
 
-    public static void Log(@NotNull String message, @Nullable Logger callerLogger)
+
+    //BEFOREBUILD: REVIEW
+    static String currentBuildInformation = "\nThe current build is Alpha 0.1, no other loggable build information is present";
+
+
+
+    public static void Warn(@NotNull String warnMessage, boolean chatFlag)
     {
-        logCheck(callerLogger).info(message);
+        localLogger.warn(warnMessage.concat(currentBuildInformation));
+
+        if(chatFlag)
+        {
+            SendMessage.All(warnMessage);
+        }
     }
 
-    public static void Warn(@NotNull String message, @Nullable Logger callerLogger)
+    public static void Error(@NotNull String errorMessage, boolean chatFlag)
     {
-        logCheck(callerLogger).warn(message);
+        localLogger.error(errorMessage.concat(currentBuildInformation));
+
+        if(chatFlag)
+        {
+            SendMessage.All(errorMessage);
+        }
     }
 
-    public static void Error(@NotNull String message, @Nullable Logger callerLogger)
+    public static void Debug(@NotNull String debugMessage, boolean chatFlag)
     {
-        logCheck(callerLogger).error(message);
+        localLogger.debug(debugMessage);
+
+        if(chatFlag)
+        {
+            SendMessage.All(debugMessage);
+        }
     }
 
-    public static void Debug(@NotNull String message, @Nullable Logger callerLogger)
+    public static void Info(@NotNull String infoMessage, boolean chatFlag)
     {
-        logCheck(callerLogger).debug(message);
+        localLogger.info(infoMessage);
+
+        if(chatFlag)
+        {
+            SendMessage.All(infoMessage);
+        }
     }
 
-    public static void LogAndTell(@NotNull String message, @Nullable Logger callerLogger)
+    public enum LogType
     {
-        logCheck(callerLogger).info(message);
-        SendMessage.All(message);
+        INFO,
+        DEBUG,
+        WARN,
+        ERROR,
+
     }
 
-
-
-    static Logger logCheck(@Nullable Logger logger)
-    {
-        return logger != null ? logger : localLogger;
-    }
 }

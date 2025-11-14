@@ -25,7 +25,7 @@ public class DoubleStatementObject extends NumberStatementObject<Double>
             }
             catch (NumberFormatException error)
             {
-                Logging.Error("Attempted to convert the following String to a Double but failed: " + contentString, MagicJson.LOGGER);
+                Logging.Warn(FailedConversionMessage(contentString),false);
                 return false;
             }
             return true;

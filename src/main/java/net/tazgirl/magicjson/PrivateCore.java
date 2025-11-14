@@ -1,0 +1,57 @@
+package net.tazgirl.magicjson;
+
+import net.tazgirl.magicjson.main.addresses.FunctionAddress;
+import net.tazgirl.magicjson.main.addresses.StatementAddress;
+import net.tazgirl.magicjson.main.function_object.SourceFunctionHolder;
+import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class PrivateCore
+{
+    private static final Map<String, BaseStatementObject> statementMap = new HashMap<>();
+    private static final Map<String, SourceFunctionHolder> functionMap = new HashMap<>();
+
+    public static Map<String, BaseStatementObject> getStatementCopy()
+    {
+        return new HashMap<>(statementMap);
+    }
+
+    public static Map<String, SourceFunctionHolder> getFunctionCopy()
+    {
+        return new HashMap<>(functionMap);
+    }
+
+    public static BaseStatementObject getStatement(String address)
+    {
+        return statementMap.get(address);
+    }
+
+    public static BaseStatementObject getStatement(StatementAddress address)
+    {
+        return statementMap.get(address.getLocalAddress());
+    }
+
+    public static SourceFunctionHolder getFunction(String address)
+    {
+        return functionMap.get(address);
+    }
+
+    public static SourceFunctionHolder getFunction(FunctionAddress address)
+    {
+        return functionMap.get(address.getLocalAddress());
+    }
+
+    protected static void addStatement(String statementAddress, BaseStatementObject statementObject)
+    {
+        statementMap.put(statementAddress, statementObject);
+    }
+
+    protected static void addFunction(String functionAddress, SourceFunctionHolder functionObject)
+    {
+        functionMap.put(functionAddress, functionObject);
+    }
+
+
+}

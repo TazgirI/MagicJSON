@@ -1,10 +1,10 @@
 package net.tazgirl.magicjson.main.statement_object.numbers.comparison_objects;
 
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.NumericalEvaluator;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ResolvesBoolean;
 
-import java.util.Map;
 import java.util.function.BiFunction;
 
 public abstract class NumberComparisonStatementObject extends BaseStatementObject implements ResolvesBoolean, NumericalEvaluator
@@ -45,12 +45,12 @@ public abstract class NumberComparisonStatementObject extends BaseStatementObjec
     }
 
     @Override
-    public void SpreadArgs(Map<String, Object> newArgs)
+    public void SpreadManager(StatementManager newManager)
     {
-        super.SpreadArgs(newArgs);
+        super.SpreadManager(newManager);
 
-        leftOperand.SpreadArgs(newArgs);
-        rightOperand.SpreadArgs(newArgs);
+        leftOperand.SpreadManager(newManager);
+        rightOperand.SpreadManager(newManager);
     }
 
     @Override
@@ -59,3 +59,4 @@ public abstract class NumberComparisonStatementObject extends BaseStatementObjec
         return identifier + "( " + leftOperand.toString() + " " + rightOperand.toString() + " )";
     }
 }
+

@@ -141,12 +141,12 @@ public class Stack
         }
         else if(objectStack.isEmpty())
         {
-            net.tazgirl.magicjson.Logging.Error( "Attempted to return an empty stack as BaseObject\n" +
+            Logging.Warn( "Attempted to return an empty stack as BaseObject\n" +
                     "The process that requested this has been returned a null, stored function will now no longer exist.\n" +
                     "The game should not be considered stable but tokenisation will continue to run to allow other debugging messages to be processed\n" +
                     "If you are a player then please report this message to the Modpack/Datapack creator unless they have stated this is intended\n" +
                     "Tokens being parsed: " + tokensBeingParsed +
-                    "\nContents of stack: " + objectStack, MagicJson.LOGGER);
+                    "\nContents of stack: " + objectStack, false);
             return null;
         }
         else
@@ -159,10 +159,10 @@ public class Stack
 
     public void ParsingError(String contextMessage)
     {
-        Logging.Error( contextMessage + "\nTokenisation has not been stopped but unintended behaviour may occur!\n" +
+        Logging.Warn( contextMessage + "\nTokenisation has not been stopped but unintended behaviour may occur!\n" +
                 "If you are a player then please report this message to the Modpack/Datapack creator unless they have stated this is intended\n" +
                 "Tokens being parsed: " + tokensBeingParsed +
-                "\nContents of stack: " + objectStack, MagicJson.LOGGER);
+                "\nContents of stack: " + objectStack, false);
     }
 
     @Override

@@ -1,10 +1,9 @@
 package net.tazgirl.magicjson.main.statement_object.compounds.or;
 
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import net.tazgirl.magicjson.main.statement_object.compounds.CompoundStatementObject;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ContainsBooleans;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ResolvesBoolean;
-
-import java.util.Map;
 
 public class OrBooleanStatementObject extends CompoundStatementObject<ResolvesBoolean> implements ContainsBooleans, ResolvesBoolean
 {
@@ -15,12 +14,12 @@ public class OrBooleanStatementObject extends CompoundStatementObject<ResolvesBo
     }
 
     @Override
-    public void SpreadArgs(Map<String, Object> newArgs)
+    public void SpreadManager(StatementManager newManager)
     {
-        super.SpreadArgs(newArgs);
+        super.SpreadManager(newManager);
         for(ResolvesBoolean object: contents)
         {
-            object.SpreadArgs(args);
+            object.SpreadManager(newManager);
         }
     }
 

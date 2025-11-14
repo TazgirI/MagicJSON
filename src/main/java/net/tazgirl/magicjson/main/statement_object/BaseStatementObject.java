@@ -1,13 +1,12 @@
 package net.tazgirl.magicjson.main.statement_object;
 
-import java.util.Map;
 import java.util.function.BiFunction;
 
 public abstract class BaseStatementObject
 {
-    public Map<String, Object> args;
-
     public String identifier = "";
+
+    public StatementManager manager;
 
     public BaseStatementObject()
     {
@@ -30,19 +29,20 @@ public abstract class BaseStatementObject
         return null;
     }
 
-    public void SetArgs(Map<String, Object> newArgs)
+    public void SpreadManager(StatementManager newManager)
     {
-        this.args = newArgs;
-    }
-
-    public void SpreadArgs(Map<String, Object> newArgs)
-    {
-        this.args = newArgs;
+        this.manager = newManager;
     }
 
     public BaseStatementObject NullCheckArgs(BaseStatementObject arg1, BaseStatementObject arg2)
     {
         return arg1 != null ? arg1 : arg2;
+    }
+
+    public String LogLocation()
+    {
+        return "Object: " + this.identifier + "\n" +
+                "Statement address: " + this.manager.statementAddress.getLocalAddress();
     }
 
     @Override

@@ -1,11 +1,11 @@
 package net.tazgirl.magicjson.main.statement_object.compounds.and;
 
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import net.tazgirl.magicjson.main.statement_object.compounds.CompoundStatementObject;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ContainsNumbers;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ResolvesBoolean;
 
-import java.util.Map;
 import java.util.function.BiFunction;
 
 public class AndCompoundStatementObject extends CompoundStatementObject<CompoundStatementObject<?>>
@@ -49,12 +49,12 @@ public class AndCompoundStatementObject extends CompoundStatementObject<Compound
     }
 
     @Override
-    public void SpreadArgs(Map<String, Object> newArgs)
+    public void SpreadManager(StatementManager newManager)
     {
-        super.SpreadArgs(newArgs);
+        super.SpreadManager(newManager);
         for(CompoundStatementObject<?> object: contents)
         {
-            object.SpreadArgs(args);
+            object.SpreadManager(newManager);
         }
     }
 }

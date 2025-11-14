@@ -25,7 +25,7 @@ public class FloatStatementObject extends NumberStatementObject<Float>
             }
             catch (NumberFormatException error)
             {
-                Logging.Error("Attempted to convert the following String to a Float but failed: " + contentString, MagicJson.LOGGER);
+                Logging.Warn(FailedConversionMessage(contentString),false);
                 return false;
             }
             return true;

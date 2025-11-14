@@ -1,35 +1,24 @@
 package net.tazgirl.magicjson;
 
-import net.tazgirl.magicjson.Config;
+import net.tazgirl.magicjson.main.addresses.StatementAddress;
+import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
+import net.tazgirl.magicjson.main.function_object.FunctionManager;
+import net.tazgirl.magicjson.main.function_object.SourceFunctionHolder;
+import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MagicJson.MODID)
@@ -40,16 +29,12 @@ public class MagicJson
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public MagicJson(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
 
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
-        NeoForge.EVENT_BUS.register(this);
+
+
+
+    public MagicJson(IEventBus modEventBus, ModContainer modContainer)
+    {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -58,6 +43,66 @@ public class MagicJson
     private void commonSetup(FMLCommonSetupEvent event)
     {
 
+    }
+
+
+    // Function that allows you to process a function without declaring the base manager, that way paths can run themselves without divulging or overwriting the address
+
+
+
+    // Function manager is a data handler only, actual running/execution is run in this function
+    public static Object RunFunction(FunctionManager functionManager)
+    {
+        SourceFunctionHolder functionHolder = PrivateCore.getFunctionCopy().get(functionManager.getFunctionAddress().getLocalAddress());
+
+
+
+        if(functionHolder != null)
+        {
+            return RunFunction(functionHolder, functionManager);
+        }
+
+        //TRY: May be Debug if string handling is supported for mutating to form a function address?
+        Logging.Warn("Attempted to run a function that does not match any known addresses\n" +
+                "Failed address: " + functionManager.getFunctionAddress(), false);
+
+        return null;
+    }
+
+
+    public static Object RunFunction(SourceFunctionHolder functionHolder, FunctionManager functionManager)
+    {
+        functionHolder.SpreadManager(functionManager);
+
+        for(BaseFunctionObject functionObject: functionHolder.heldObjects())
+        {
+            if(functionManager.getProcessFlag() == FunctionManager.ProcessFlag.STOP)
+            {
+                break;
+            }
+            functionObject.Run();
+        }
+
+        return functionManager.getReturnValue();
+    }
+
+    public static Object RunStatement(StatementManager statementManager)
+    {
+        BaseStatementObject statementObject = PrivateCore.getStatement(statementManager.getStatementAddress());
+
+        if(statementObject != null)
+        {
+            statementObject.SpreadManager(statementManager);
+            return statementObject.Resolve();
+        }
+
+        return null;
+    }
+
+    // ONly to be used for statements without args
+    public static Object RunStatement(StatementAddress statementAddress)
+    {
+        return RunStatement(new StatementManager(statementAddress, new HashMap<>()));
     }
 
 }

@@ -63,4 +63,9 @@ public abstract class NumberStatementObject<T extends Number> extends BaseStatem
     {
         return identifier + "( " + value.toString() + " )";
     }
+
+    public String FailedConversionMessage(String source)
+    {
+        return "Attempted to convert the following String to a " + identifier + " but failed: " + source;
+    }
 }

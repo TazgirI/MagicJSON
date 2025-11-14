@@ -11,11 +11,13 @@ public class TokenToStatement
 
     public static BaseStatementObject objectFromTokens(List<String> tokens)
     {
-        if(TextSymbols.tokenStackObjectPairs.get(tokens.getFirst()) == null)
+
+        //EXP: Shouldn't be needed as stack can now handle primitives
+/*        if(TextSymbols.tokenStackObjectPairs.get(tokens.getFirst()) == null)
         {
-            Logging.Log("Statement did not start with a recognizable token: " + tokens.toString(), MagicJson.LOGGER);
+            Logging.Log("Statement did not start with a recognizable token: " + tokens.toString(), Logging.LogType.LOG, false, );
             return null;
-        }
+        }*/
 
         Stack stack = new Stack(tokens);
 
