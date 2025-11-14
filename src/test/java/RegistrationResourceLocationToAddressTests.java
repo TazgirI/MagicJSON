@@ -16,7 +16,7 @@ public class RegistrationResourceLocationToAddressTests extends TestRoot
     @Test
     void subfolderConservation()
     {
-        assertEquals("magicjson:testfolder/tes", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/testfolder/test.json"),getFunctionFail("subfolderConservation"));
+        assertEquals("magicjson:testfolder/test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/testfolder/test.json"),getFunctionFail("subfolderConservation"));
     }
 
 }
