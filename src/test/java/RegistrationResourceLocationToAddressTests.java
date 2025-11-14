@@ -4,19 +4,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegistrationResourceLocationToAddressTests
+public class RegistrationResourceLocationToAddressTests extends TestRoot
 {
 
     @Test
     void mostSimpleUsecase()
     {
-        assertEquals("magicjson:test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/test.json"));
+        assertEqualsSuper("magicjson:test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/test.json"),"mostSimpleUsecase");
     }
 
     @Test
     void subfolderConservation()
     {
-        assertEquals("magicjson:testfolder/test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/testfolder/test.json"));
+        assertEqualsSuper("magicjson:testfolder/test", Registration.ResourceLocationToAddress("magicjson:magicjson/statement/testfolder/test.json"),"subfolderConservation");
     }
 
 }
