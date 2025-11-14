@@ -22,7 +22,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Run Gradle tests
-        run: ./gradlew test --stacktrace
+        run: ./gradlew test
 
 #      - name: Upload test results
 #        uses: actions/upload-test-results@v4
