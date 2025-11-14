@@ -22,10 +22,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Run Gradle tests
-        run: ./gradlew test
+        run: ./gradlew test --stacktrace
 
-      - name: Upload test results
-        uses: actions/upload-test-results@v4
-        with:
-          junit-files: '**/build/test-results/test/*.xml'
+#      - name: Upload test results
+#        uses: actions/upload-test-results@v4
+#        with:
+#          junit-files: '**/build/test-results/test/*.xml'
 
