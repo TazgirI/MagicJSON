@@ -23,3 +23,9 @@ jobs:
 
       - name: Run Gradle tests
         run: ./gradlew test
+
+      - name: Upload test results
+        uses: actions/upload-test-results@v2
+        with:
+          junit-files: '**/build/test-results/test/*.xml'
+
