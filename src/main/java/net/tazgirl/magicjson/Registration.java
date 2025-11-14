@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -99,23 +100,32 @@ public class Registration
         return resourceManager.listResources("magicjson/statement", path -> path.getPath().endsWith(".txt"));
     }
 
+    // Make sure to exit after first hit to prevent too much removal
+    public static Map<String, String> resourceLocationReplacements = Map.of(
+            "magicjson/statement/", "",
+            "magicjson/function/", "",
+            // Very important the list is handled in order as the ones below this line are only backups to catch shorthand
+            ":statement/", ":",
+            ":function/", ":"
+    );
+
     public static String ResourceLocationToAddress(String location)
     {
-        if(!location.contains("/") && !location.contains(":")){return null;}
+        if(!location.contains(":")){return null;}
 
-        if(location.contains("magicjson/statement/"))
+        for(String stringToReplace : resourceLocationReplacements.keySet())
         {
-            location = location.replace("magicjson/statement/","");
-        }
-        else if(location.contains("magicjson/function/"))
-        {
-            location = location.replace("magicjson/function/","");
+            if(location.contains(stringToReplace))
+            {
+                location = location.replace(stringToReplace,resourceLocationReplacements.get(stringToReplace));
+                break;
+            }
         }
 
-        if(location.endsWith(".json"))
-        {
-            location = location.substring(0, location.length() - 5);
-        }
+        int indexSubtraction = location.contains(".") ? location.substring(location.lastIndexOf('.')).length() : 0;
+
+        location = location.substring(0, location.length() - indexSubtraction);
+
 
         return location;
     }
