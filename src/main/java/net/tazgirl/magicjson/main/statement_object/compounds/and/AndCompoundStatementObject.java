@@ -48,14 +48,4 @@ public class AndCompoundStatementObject extends CompoundStatementObject<Compound
     {
         return CheckBooleans();
     }
-
-    @Override
-    public void SpreadManager(StatementManager newManager)
-    {
-        super.SpreadManager(newManager);
-        for(CompoundStatementObject<?> object: contents)
-        {
-            object.SpreadManager(newManager);
-        }
-    }
 }

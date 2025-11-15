@@ -2,9 +2,11 @@ package net.tazgirl.magicjson.main.statement_object.numbers.objects;
 
 import net.tazgirl.magicjson.main.DefaultValues;
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.NumericalEvaluator;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.PrimitiveObject;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ResolvesNumber;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiFunction;
 
@@ -22,7 +24,7 @@ public abstract class NumberStatementObject<T extends Number> extends BaseStatem
     }*/
 
     @Override
-    public Boolean numericalTest(BiFunction<Number, Number, Boolean> test, BaseStatementObject operand, Boolean operandIsLeft)
+    public Boolean numericalTest(@NotNull BiFunction<Number, Number, Boolean> test, BaseStatementObject operand, @NotNull Boolean operandIsLeft)
     {
         Object operandResult = operand.Resolve();
 
@@ -67,5 +69,11 @@ public abstract class NumberStatementObject<T extends Number> extends BaseStatem
     public String FailedConversionMessage(String source)
     {
         return "Attempted to convert the following String to a " + identifier + " but failed: " + source;
+    }
+
+    @Override
+    public void SpreadManager(@NotNull StatementManager newManager)
+    {
+        manager = newManager;
     }
 }

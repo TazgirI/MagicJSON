@@ -1,6 +1,7 @@
 package net.tazgirl.magicjson.main.statement_object.compounds;
 
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.*;
 
 import java.util.ArrayList;
@@ -56,5 +57,13 @@ public abstract class CompoundStatementObject<T> extends BaseStatementObject
         }
 
         return identifier + "( " + childrenStrings + " )";
+    }
+
+    @Override
+    public void SpreadManager(StatementManager newManager)
+    {
+        manager = newManager;
+
+        contents.forEach(content -> ((BaseStatementInterface) content).SpreadManager(newManager));
     }
 }

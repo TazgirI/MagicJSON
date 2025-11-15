@@ -47,7 +47,7 @@ public abstract class NumberComparisonStatementObject extends BaseStatementObjec
     @Override
     public void SpreadManager(StatementManager newManager)
     {
-        super.SpreadManager(newManager);
+        manager = newManager;
 
         leftOperand.SpreadManager(newManager);
         rightOperand.SpreadManager(newManager);

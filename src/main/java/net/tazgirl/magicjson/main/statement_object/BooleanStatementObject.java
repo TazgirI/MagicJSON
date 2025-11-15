@@ -38,6 +38,12 @@ public class BooleanStatementObject extends BaseStatementObject implements Resol
     }
 
     @Override
+    public void SpreadManager(StatementManager newManager)
+    {
+        manager = newManager;
+    }
+
+    @Override
     public String toString()
     {
         return "BooleanObject( " + value + " )";

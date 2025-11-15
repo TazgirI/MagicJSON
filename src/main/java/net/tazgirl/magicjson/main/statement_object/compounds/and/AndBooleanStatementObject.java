@@ -1,9 +1,13 @@
 package net.tazgirl.magicjson.main.statement_object.compounds.and;
 
+import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
 import net.tazgirl.magicjson.main.statement_object.StatementManager;
 import net.tazgirl.magicjson.main.statement_object.compounds.CompoundStatementObject;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ContainsBooleans;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.ResolvesBoolean;
+import net.tazgirl.magicjson.main.statement_object.interface_categories.ResolvesNumber;
+
+import java.util.List;
 
 public class AndBooleanStatementObject extends CompoundStatementObject<ResolvesBoolean> implements ContainsBooleans, ResolvesBoolean
 {
@@ -25,13 +29,5 @@ public class AndBooleanStatementObject extends CompoundStatementObject<ResolvesB
         return true;
     }
 
-    @Override
-    public void SpreadManager(StatementManager newManager)
-    {
-        super.SpreadManager(newManager);
-        for(ResolvesBoolean object: contents)
-        {
-            object.SpreadManager(newManager);
-        }
-    }
+
 }

@@ -17,16 +17,6 @@ public class OrBooleanStatementObject extends CompoundStatementObject<ResolvesBo
     }
 
     @Override
-    public void SpreadManager(StatementManager newManager)
-    {
-        super.SpreadManager(newManager);
-        for(ResolvesBoolean object: contents)
-        {
-            object.SpreadManager(newManager);
-        }
-    }
-
-    @Override
     public Boolean Resolve()
     {
         for(ResolvesBoolean object: contents)

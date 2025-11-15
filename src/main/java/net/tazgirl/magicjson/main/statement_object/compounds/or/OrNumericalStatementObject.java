@@ -30,14 +30,4 @@ public class OrNumericalStatementObject extends CompoundStatementObject<NumberSt
 
         return false;
     }
-
-    @Override
-    public void SpreadManager(StatementManager newManager)
-    {
-        super.SpreadManager(newManager);
-        for(NumberStatementObject<?> object: contents)
-        {
-            object.SpreadManager(newManager);
-        }
-    }
 }

@@ -1,4 +1,6 @@
 
+To make customisation easier, all objects should hold primitive values as the primitive statement objects
+    - Does not apply to pre-stored constants like Identifiers, just values input during tokenisation
 
 Cross run memory...
 

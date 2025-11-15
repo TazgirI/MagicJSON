@@ -1,8 +1,15 @@
 package net.tazgirl.magicjson.main.statement_object;
 
-import java.util.function.BiFunction;
+import net.tazgirl.magicjson.main.statement_object.interface_categories.BaseStatementInterface;
+import org.checkerframework.checker.units.qual.N;
 
-public abstract class BaseStatementObject
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+@ParametersAreNonnullByDefault
+public abstract class BaseStatementObject implements BaseStatementInterface
 {
     public String identifier = "";
 
@@ -25,10 +32,8 @@ public abstract class BaseStatementObject
 
     public abstract Object Resolve();
 
-    public void SpreadManager(StatementManager newManager)
-    {
-        this.manager = newManager;
-    }
+    public abstract void SpreadManager(StatementManager newManager);
+
 
     public BaseStatementObject NullCheckArgs(BaseStatementObject arg1, BaseStatementObject arg2)
     {
@@ -43,5 +48,41 @@ public abstract class BaseStatementObject
 
     @Override
     public abstract String toString();
+
+    static Map<Class<? extends Number>,Function<Number, Number>> classMatch = Map.of(
+            Integer.class, BaseStatementObject::IntegerConversion,
+            Float.class, BaseStatementObject::FloatConversion,
+            Long.class, BaseStatementObject::LongConversion,
+            Double.class, BaseStatementObject::DoubleConversion
+    );
+
+    public static <T extends Number>  T AttemptNumberConversion(Class<T> expectedTypeClass, Number number)
+    {
+        return (T) classMatch.get(expectedTypeClass).apply(number);
+    }
+
+    public static Integer IntegerConversion(Number number)
+    {
+        number = Math.round(number.doubleValue());
+
+        return number.intValue();
+    }
+
+    public static Float FloatConversion(Number number)
+    {
+        return number.floatValue();
+    }
+
+    public static Long LongConversion(Number number)
+    {
+        number = Math.round(number.doubleValue());
+
+        return number.longValue();
+    }
+
+    public static Double DoubleConversion(Number number)
+    {
+        return number.doubleValue();
+    }
 
 }

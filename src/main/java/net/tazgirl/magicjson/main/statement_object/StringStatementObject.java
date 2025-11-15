@@ -29,6 +29,12 @@ public class StringStatementObject extends BaseStatementObject implements Resolv
     }
 
     @Override
+    public void SpreadManager(StatementManager newManager)
+    {
+        manager = newManager;
+    }
+
+    @Override
     public String toString()
     {
         return identifier + "(" + value + ")";

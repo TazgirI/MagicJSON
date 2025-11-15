@@ -1,13 +1,14 @@
 package net.tazgirl.magicjson.main.statement_object.args;
 
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.main.statement_object.StatementManager;
 
 public abstract class ArgStatementObject<T> extends BaseStatementObject
 {
 
     protected String value;
 
-    Class<T> type;
+    protected Class<T> type;
 
     @Override
     public Boolean HandleValue(Object content)
@@ -32,5 +33,17 @@ public abstract class ArgStatementObject<T> extends BaseStatementObject
         }
 
         return null;
+    }
+
+    @Override
+    public String toString()
+    {
+        return identifier + "(" + value + ")";
+    }
+
+    @Override
+    public void SpreadManager(StatementManager newManager)
+    {
+        manager = newManager;
     }
 }

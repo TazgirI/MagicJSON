@@ -31,14 +31,4 @@ public class AndNumericalStatementObject extends CompoundStatementObject<Resolve
 
         return true;
     }
-
-    @Override
-    public void SpreadManager(StatementManager newManager)
-    {
-        super.SpreadManager(newManager);
-        for(ResolvesNumber<?> object: contents)
-        {
-            object.SpreadManager(newManager);
-        }
-    }
 }
