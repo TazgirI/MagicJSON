@@ -2,12 +2,13 @@ package net.tazgirl.magicjson.main.function_object;
 
 import net.tazgirl.magicjson.Constants;
 import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.main.addresses.FunctionAddress;
 import net.tazgirl.magicjson.main.addresses.StatementAddress;
 import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
-import net.tazgirl.magicjson.main.function_object.objects.hooks.hook_objects.Hook;
+import net.tazgirl.magicjson.main.hook_object.Hook;
 import net.tazgirl.magicjson.main.function_object.objects.hooks.function_objects.HookParametersFunctionObject;
-import net.tazgirl.magicjson.main.function_object.objects.hooks.hook_objects.VoidHook;
+import net.tazgirl.magicjson.main.hook_object.VoidHook;
 import net.tazgirl.magicjson.main.statement_object.StatementManager;
 
 import javax.annotation.Nullable;
@@ -25,17 +26,15 @@ public class FunctionManager
     FunctionAddress functionAddress;
 
     Map<String, Object> args;
-    Map<String, Hook<?>> hooks;
 
     int steps = 0;
 
 
-    public FunctionManager(FunctionAddress functionAddress, Map<String, Object> args, Map<String, Hook<?>> hooks)
+    public FunctionManager(FunctionAddress functionAddress, Map<String, Object> args)
     {
         this.functionAddress = functionAddress;
 
         this.args = args;
-        this.hooks = hooks;
     }
 
 
@@ -114,15 +113,6 @@ public class FunctionManager
         return returnType;
     }
 
-    public Map<String, Hook<?>> getHooks()
-    {
-        return hooks;
-    }
-    public Hook<?> getHook(String hookName)
-    {
-        return hooks.get(hookName);
-    }
-
     public StatementManager generateStatementManager(String statementAddress)
     {
         return new StatementManager(StatementAddress.from(statementAddress), args);
@@ -135,21 +125,17 @@ public class FunctionManager
 
     public void runVoidHook(String hookName, HookParametersFunctionObject params)
     {
-        Hook<?> hook = hooks.get(hookName);
-        if(hook instanceof VoidHook)
-        {
-            hook.RunHook(params);
-        }
+        PrivateCore.runVoidHook(hookName);
     }
 
     public FunctionManager copy()
     {
-        return new FunctionManager(functionAddress, args, hooks);
+        return new FunctionManager(functionAddress, args);
     }
 
     public FunctionManager copyWithNewAddress(FunctionAddress newAddress)
     {
-        return new FunctionManager(newAddress, args, hooks);
+        return new FunctionManager(newAddress, args);
     }
 
 

@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson.main.statement_object;
 
+import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.main.statement_object.interface_categories.BaseStatementInterface;
 import org.checkerframework.checker.units.qual.N;
 
@@ -83,6 +84,12 @@ public abstract class BaseStatementObject implements BaseStatementInterface
     public static Double DoubleConversion(Number number)
     {
         return number.doubleValue();
+    }
+
+    public BaseStatementObject ImplicitChild()
+    {
+        Logging.Debug("Attempted to fetch the implicit child of an object without one, \"(\" token has been skipped. (An implicit child is a \"(\" character without an object token such as \"ANDBOOL\" in front of it)", false);
+        return null;
     }
 
 }

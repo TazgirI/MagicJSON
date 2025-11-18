@@ -60,9 +60,22 @@ public class MagicJson
             return RunFunction(functionHolder, functionManager);
         }
 
-        //TRY: May be Debug if string handling is supported for mutating to form a function address?
-        Logging.Warn("Attempted to run a function that does not match any known addresses\n" +
+
+        Logging.Debug("Attempted to run a function that does not match any known addresses   " +
                 "Failed address: " + functionManager.getFunctionAddress(), false);
+
+        return null;
+    }
+
+    public static Object RunFunction(String address, FunctionManager functionManager)
+    {
+        if(PrivateCore.hasFunction(address))
+        {
+            return RunFunction(PrivateCore.getFunction(address), functionManager);
+        }
+
+        Logging.Debug("Attempted to run a function that does not match any known addresses   " +
+                "Failed address: " + address, false);
 
         return null;
     }
@@ -91,6 +104,19 @@ public class MagicJson
         if(statementObject != null)
         {
             statementObject.SpreadManager(statementManager);
+            return statementObject.Resolve();
+        }
+
+        return null;
+    }
+
+    public static Object RunStatement(StatementAddress address, StatementManager manager)
+    {
+        BaseStatementObject statementObject = PrivateCore.getStatement(address);
+
+        if(statementObject != null)
+        {
+            statementObject.SpreadManager(manager);
             return statementObject.Resolve();
         }
 

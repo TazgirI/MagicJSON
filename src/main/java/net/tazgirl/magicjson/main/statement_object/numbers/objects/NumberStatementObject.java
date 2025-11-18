@@ -24,7 +24,7 @@ public abstract class NumberStatementObject<T extends Number> extends BaseStatem
     }*/
 
     @Override
-    public Boolean numericalTest(@NotNull BiFunction<Number, Number, Boolean> test, BaseStatementObject operand, @NotNull Boolean operandIsLeft)
+    public Boolean numericalTest(@NotNull BiFunction<Number, Number, Boolean> test, @NotNull BaseStatementObject operand, @NotNull Boolean operandIsLeft)
     {
         Object operandResult = operand.Resolve();
 

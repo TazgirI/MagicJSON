@@ -23,6 +23,8 @@ public abstract class BaseHookFunctionObject extends BaseFunctionObject
         return false;
     }
 
+
+    // TODO: Update with keys and handle JSON object parameters
     @Override
     public @NotNull Boolean HandleObject(Object value, String key, FunctionStack stack)
     {

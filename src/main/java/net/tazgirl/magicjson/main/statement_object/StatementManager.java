@@ -17,6 +17,12 @@ public class StatementManager
         this.statementAddress = statementAddress;
     }
 
+    public StatementManager(Map<String, Object> args)
+    {
+        this.args = args;
+        this.statementAddress = StatementAddress.from("none");
+    }
+
     public StatementAddress getStatementAddress()
     {
         return statementAddress;

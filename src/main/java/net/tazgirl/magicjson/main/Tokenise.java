@@ -33,7 +33,7 @@ public class Tokenise
                 currentToken = new ArrayList<>();
             }
 
-            if(currentChar.equals(')'))
+            if(currentChar.equals(')') || currentChar.equals('('))
             {
                 currentToken.add(currentChar);
                 returnTokens.add(SymbolFromChars(currentToken));

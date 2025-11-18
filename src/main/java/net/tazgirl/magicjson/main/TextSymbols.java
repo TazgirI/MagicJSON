@@ -6,6 +6,7 @@ import net.tazgirl.magicjson.main.statement_object.compounds.and.AndCompoundStat
 import net.tazgirl.magicjson.main.statement_object.compounds.and.AndNumericalStatementObject;
 import net.tazgirl.magicjson.main.statement_object.compounds.or.OrBooleanStatementObject;
 import net.tazgirl.magicjson.main.statement_object.compounds.or.OrNumericalStatementObject;
+import net.tazgirl.magicjson.main.statement_object.hook.HookParameterStatementObject;
 import net.tazgirl.magicjson.main.statement_object.numbers.comparison_objects.LessThanStatementObject;
 
 import java.util.List;
@@ -36,7 +37,11 @@ public class TextSymbols
             "ORNUM", OrNumericalStatementObject.class,
             "ORBOOL", OrBooleanStatementObject.class,
 
-            "LESSTHAN", LessThanStatementObject.class
+            "LESSTHAN", LessThanStatementObject.class,
+
+
+            "HOOKPARAM", HookParameterStatementObject.class,
+            "PARAM", HookParameterStatementObject.class
 
 
     );

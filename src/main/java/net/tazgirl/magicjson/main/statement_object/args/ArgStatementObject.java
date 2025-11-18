@@ -2,6 +2,7 @@ package net.tazgirl.magicjson.main.statement_object.args;
 
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
 import net.tazgirl.magicjson.main.statement_object.StatementManager;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class ArgStatementObject<T> extends BaseStatementObject
 {
@@ -11,7 +12,7 @@ public abstract class ArgStatementObject<T> extends BaseStatementObject
     protected Class<T> type;
 
     @Override
-    public Boolean HandleValue(Object content)
+    public Boolean HandleValue(@NotNull Object content)
     {
         if(content instanceof String contentString)
         {

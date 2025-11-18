@@ -2,6 +2,7 @@ package net.tazgirl.magicjson.main.statement_object.numbers.objects;
 
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.MagicJson;
+import org.jetbrains.annotations.NotNull;
 
 public class IntegerStatementObject extends NumberStatementObject<Integer>
 {
@@ -13,7 +14,7 @@ public class IntegerStatementObject extends NumberStatementObject<Integer>
     }
 
     @Override
-    public Boolean HandleValue(Object content)
+    public Boolean HandleValue(@NotNull Object content)
     {
         if(content instanceof String contentString)
         {

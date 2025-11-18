@@ -70,6 +70,7 @@ public class StatementStack
 
             Put(stringObject);
         }
+        // TODO: Make all objects expect a StringPrimitive???
         else if(!objectStack.getLast().HandleValue(string))
         {
             ParsingError("Stack failed to handle String \"" + string + "\"");
