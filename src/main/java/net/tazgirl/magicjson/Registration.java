@@ -49,7 +49,7 @@ public class Registration
                 {
                     PrivateCore.addFunction(
                             ResourceLocationToAddress(entry.getKey().toString()),
-                            JsonToFunctionObject.ConstructFunctionFromJson(jsonObject));
+                            JsonToFunctionObject.ConstructFunctionFromJson(jsonObject, ResourceLocationToAddress(entry.getKey().toString())));
                 }
 
             }
@@ -66,13 +66,12 @@ public class Registration
         {
             try(InputStream inputStream = entry.getValue().open())
             {
-                PrivateCore.addStatement(ResourceLocationToAddress(entry.getKey().toString()),
+                String address = ResourceLocationToAddress(entry.getKey().toString());
+                PrivateCore.addStatement(address,
                         TokenToStatement.objectFromTokens
                                 (
-                                        Tokenise.TokeniseStatement
-                                                (
-                                                        new String(inputStream.readAllBytes(), StandardCharsets.UTF_8)
-                                                )
+                                        Tokenise.TokeniseStatement(new String(inputStream.readAllBytes(), StandardCharsets.UTF_8)),
+                                        address
                                 )
                 );
 

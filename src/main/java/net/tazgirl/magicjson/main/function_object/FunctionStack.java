@@ -8,6 +8,13 @@ import java.util.List;
 
 public class FunctionStack
 {
+    String processedAddress;
+
+    public FunctionStack(String processedAddress)
+    {
+        this.processedAddress = processedAddress;
+    }
+
 
     List<BaseFunctionObject> closedObjects = new ArrayList<>();
 

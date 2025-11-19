@@ -92,7 +92,7 @@ public abstract class BaseFunctionObject
 
     public SourceFunctionHolder ElementAsSourceFunctionHolder(JsonElement element)
     {
-        if(element instanceof JsonObject object && JsonToFunctionObject.LoopJsonObject(object, new FunctionStack()) instanceof SourceFunctionHolder holder)
+        if(element instanceof JsonObject object && JsonToFunctionObject.LoopJsonObject(object, new FunctionStack(manager.getFunctionAddress().getLocalAddress())) instanceof SourceFunctionHolder holder)
         {
             return holder;
         }
@@ -126,7 +126,7 @@ public abstract class BaseFunctionObject
     {
         if(element instanceof JsonObject object)
         {
-            return JsonToFunctionObject.LoopJsonObject(object, new FunctionStack());
+            return JsonToFunctionObject.LoopJsonObject(object, new FunctionStack(manager.getFunctionAddress().getLocalAddress()));
         }
 
         return null;

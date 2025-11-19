@@ -5,6 +5,14 @@ To make customisation easier, all objects should hold primitive values as the pr
 Cross run memory...
 
 
+
+
+
+SHOULD I REMOVE FUNCTIONS? All flow can be handled within statements ecspeacilly with the ability to call other Statements, the literal only advantage of Functions is the ability to handle voids and slightly easier to read flow
+
+Statements could handle voids by returning Constants.trueEmpty
+Sequences could literally be handled by a sequence StatementObject for stuff like ArgAdd
+
 FUNCTION
 
 - Modifier

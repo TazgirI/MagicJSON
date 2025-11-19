@@ -4,6 +4,8 @@ import net.tazgirl.magicjson.main.addresses.FunctionAddress;
 import net.tazgirl.magicjson.main.addresses.StatementAddress;
 import net.tazgirl.magicjson.main.function_object.SourceFunctionHolder;
 import net.tazgirl.magicjson.main.hook_object.Hook;
+import net.tazgirl.magicjson.main.hook_object.HookParameters;
+import net.tazgirl.magicjson.main.hook_object.VoidHook;
 import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
 
 import java.util.HashMap;
@@ -72,5 +74,16 @@ public class PrivateCore
     public static Hook<?> getHook(String name)
     {
         return registeredHooks.get(name);
+    }
+
+    public static Boolean runVoidHook(String name, HookParameters parameters)
+    {
+        if(registeredHooks.get(name) instanceof VoidHook hook)
+        {
+            hook.RunHook(parameters);
+            return true;
+        }
+
+        return false;
     }
 }

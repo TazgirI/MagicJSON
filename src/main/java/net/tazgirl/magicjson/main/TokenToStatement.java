@@ -7,7 +7,7 @@ import java.util.List;
 public class TokenToStatement
 {
 
-    public static BaseStatementObject objectFromTokens(List<String> tokens)
+    public static BaseStatementObject objectFromTokens(List<String> tokens, String statementAddress)
     {
 
         //EXP: Shouldn't be needed as stack can now handle primitives
@@ -17,7 +17,7 @@ public class TokenToStatement
             return null;
         }*/
 
-        StatementStack stack = new StatementStack(tokens);
+        StatementStack stack = new StatementStack(tokens, statementAddress);
 
 
         for(int i = 0; i < tokens.size(); i++)

@@ -1,6 +1,8 @@
 package net.tazgirl.magicjson.main.function_object.objects.hooks.function_objects;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.main.addresses.Address;
@@ -9,10 +11,14 @@ import net.tazgirl.magicjson.main.addresses.StatementAddress;
 import net.tazgirl.magicjson.main.function_object.FunctionManager;
 import net.tazgirl.magicjson.main.function_object.FunctionStack;
 import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
+import net.tazgirl.magicjson.main.hook_object.HookParameter;
+import net.tazgirl.magicjson.main.hook_object.HookParameters;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HookParametersFunctionObject extends BaseFunctionObject
@@ -20,57 +26,48 @@ public class HookParametersFunctionObject extends BaseFunctionObject
 
     FunctionManager manager;
 
-    Map<String, Address> parameters = new HashMap<>();
+    List<HookParameter> parameters = new ArrayList<>();
 
     public HookParametersFunctionObject(FunctionManager manager)
     {
         this.manager = manager;
     }
 
-    public void PutParameter(String parameterName,Address parameterAddress)
+    public void putParameter(String name, Object value)
     {
-        parameters.put(parameterName, parameterAddress);
+        parameters.add(new HookParameter(name, value));
     }
 
-
-    // Takes in name of parameter
-    // If the name corresponds to a StatementAddress, fetch it, generate a new StatementManager and return its Resolve value
-    // If the name corresponds to a FunctionHolder, fetch it and run it through with a fresh manager made with this ones args and then return the final return value
-    public Object get(String name)
+    public void putParameter(HookParameter parameter)
     {
-        Object parameterAddress = parameters.get(name);
-
-        if(parameterAddress instanceof StatementAddress statementAddress)
-        {
-            return MagicJson.RunStatement(manager.generateStatementManager(statementAddress));
-        }
-        else if(parameterAddress instanceof FunctionAddress functionAddress)
-        {
-            return MagicJson.RunFunction(manager.copyWithNewAddress(functionAddress));
-        }
-
-        Logging.Debug("Parameter \"" + name + "\" was requested but does not exist in the parameter set: " + parameters.toString() +
-                "\nNull has been returned and issues may occur", false);
-
-        // This method is only called by Java classes, not MagicJSON objects
-        // As such null handling is expected by the caller
-        return null;
+        parameters.add(parameter);
     }
 
 
     @Override
-    public Object RunPersonal()
+    public HookParameters RunPersonal()
     {
-        return this;
+        return new HookParameters(parameters);
     }
 
 
     @Override
     public @NotNull Boolean HandleObject(Object content, String key, FunctionStack stack)
     {
-        if(content instanceof HookFunctionParameter(String parameterName, Address statementAddress))
+        if(content instanceof JsonObject object)
         {
-            parameters.put(parameterName, statementAddress);
+            JsonElement name = object.get("name");
+            JsonElement value = object.get("value");
+
+            if(name instanceof JsonPrimitive nameObject && value instanceof JsonPrimitive valueObject)
+            {
+                parameters.add(new HookParameter(nameObject.getAsString(), valueObject));
+                return true;
+            }
+
+            Logging.Debug("HookParameter in function did not contain both a \"name\" and \"value\" JsonPrimitive", false);
+
+            return false;
         }
 
         return false;

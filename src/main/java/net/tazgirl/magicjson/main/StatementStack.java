@@ -14,13 +14,16 @@ import java.util.List;
 
 public class StatementStack
 {
+    String processedAddress;
+
     public List<BaseStatementObject> objectStack = new ArrayList<>();
 
     public List<String> tokensBeingParsed;
 
-    public StatementStack(List<String> newTokensBeingParsed)
+    public StatementStack(List<String> tokensBeingParsed, String processedAddress)
     {
-        tokensBeingParsed = newTokensBeingParsed;
+        this.tokensBeingParsed = tokensBeingParsed;
+        this.processedAddress = processedAddress;
     }
 
     public void Put(BaseStatementObject statementObject)

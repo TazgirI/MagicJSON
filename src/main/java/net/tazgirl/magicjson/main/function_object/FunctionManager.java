@@ -8,6 +8,7 @@ import net.tazgirl.magicjson.main.addresses.StatementAddress;
 import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
 import net.tazgirl.magicjson.main.hook_object.Hook;
 import net.tazgirl.magicjson.main.function_object.objects.hooks.function_objects.HookParametersFunctionObject;
+import net.tazgirl.magicjson.main.hook_object.HookParameters;
 import net.tazgirl.magicjson.main.hook_object.VoidHook;
 import net.tazgirl.magicjson.main.statement_object.StatementManager;
 
@@ -123,9 +124,9 @@ public class FunctionManager
         return new StatementManager(statementAddress, args);
     }
 
-    public void runVoidHook(String hookName, HookParametersFunctionObject params)
+    public void runVoidHook(String hookName, HookParameters params)
     {
-        PrivateCore.runVoidHook(hookName);
+        PrivateCore.runVoidHook(hookName, params);
     }
 
     public FunctionManager copy()

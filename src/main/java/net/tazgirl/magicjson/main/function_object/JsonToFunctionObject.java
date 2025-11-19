@@ -10,9 +10,9 @@ import java.util.Map;
 public class JsonToFunctionObject
 {
 
-    public static SourceFunctionHolder ConstructFunctionFromJson(JsonObject rootObject)
+    public static SourceFunctionHolder ConstructFunctionFromJson(JsonObject rootObject, String address)
     {
-        FunctionStack stack = new FunctionStack();
+        FunctionStack stack = new FunctionStack(address);
 
         return LoopJsonObject(rootObject, stack);
     }

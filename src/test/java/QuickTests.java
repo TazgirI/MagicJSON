@@ -8,7 +8,7 @@ public class QuickTests
     @Test
     void quickTest()
     {
-        Print(TokenToStatement.objectFromTokens(Tokenise.TokeniseStatement("\"test\"")).toString());
+        Print(TokenToStatement.objectFromTokens(Tokenise.TokeniseStatement("\"test\""), "test").toString());
     }
 
     static void Print(String string)

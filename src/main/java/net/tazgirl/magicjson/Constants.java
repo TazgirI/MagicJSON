@@ -1,10 +1,12 @@
 package net.tazgirl.magicjson;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.tazgirl.magicjson.memory.WorldMemory;
 
 @EventBusSubscriber(modid = MagicJson.MODID)
 
@@ -22,7 +24,7 @@ public class Constants
     public static void OnServerStarting(ServerStartingEvent event)
     {
         server = event.getServer();
-
+        server.overworld().getDataStorage().computeIfAbsent(new SavedData.Factory<>(WorldMemory::create, WorldMemory::load), "WorldMemory");
     }
 
 

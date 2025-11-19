@@ -3,6 +3,7 @@ package net.tazgirl.magicjson.main.function_object.objects.hooks.function_object
 import com.google.gson.JsonElement;
 import net.tazgirl.magicjson.main.function_object.FunctionStack;
 import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
+import net.tazgirl.magicjson.main.hook_object.HookParameters;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +11,7 @@ public abstract class BaseHookFunctionObject extends BaseFunctionObject
 {
     String hookName = "";
 
-    HookParametersFunctionObject parameters;
+    HookParameters parameters;
 
     public void setHookName(String hookName)
     {
@@ -35,7 +36,8 @@ public abstract class BaseHookFunctionObject extends BaseFunctionObject
         }
         if(value instanceof HookParametersFunctionObject hookParameters)
         {
-            parameters = hookParameters;
+            // Skips the manager step add as all HookParametersFunctionObject are destroyed after construction
+            parameters = hookParameters.RunPersonal();
             return true;
         }
 
