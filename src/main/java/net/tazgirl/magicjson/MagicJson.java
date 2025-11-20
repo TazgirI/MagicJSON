@@ -1,11 +1,13 @@
 package net.tazgirl.magicjson;
 
-import net.tazgirl.magicjson.main.addresses.StatementAddress;
-import net.tazgirl.magicjson.main.function_object.objects.BaseFunctionObject;
-import net.tazgirl.magicjson.main.function_object.FunctionManager;
-import net.tazgirl.magicjson.main.function_object.SourceFunctionHolder;
-import net.tazgirl.magicjson.main.statement_object.BaseStatementObject;
-import net.tazgirl.magicjson.main.statement_object.StatementManager;
+import net.tazgirl.magicjson.old.Config;
+import net.tazgirl.magicjson.old.PrivateCore;
+import net.tazgirl.magicjson.old.main.addresses.StatementAddress;
+import net.tazgirl.magicjson.old.main.function_object.objects.BaseFunctionObject;
+import net.tazgirl.magicjson.old.main.function_object.FunctionManager;
+import net.tazgirl.magicjson.old.main.function_object.SourceFunctionHolder;
+import net.tazgirl.magicjson.old.main.statement_object.BaseStatementObject;
+import net.tazgirl.magicjson.old.main.statement_object.StatementManager;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;

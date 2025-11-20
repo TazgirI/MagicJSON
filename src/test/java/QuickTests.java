@@ -1,5 +1,5 @@
-import net.tazgirl.magicjson.main.TokenToStatement;
-import net.tazgirl.magicjson.main.Tokenise;
+import net.tazgirl.magicjson.old.main.TokenToStatement;
+import net.tazgirl.magicjson.old.main.Tokenise;
 import org.junit.jupiter.api.Test;
 
 public class QuickTests

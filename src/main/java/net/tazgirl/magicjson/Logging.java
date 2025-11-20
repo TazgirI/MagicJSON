@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson;
 
+import net.tazgirl.magicjson.old.SendMessage;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
