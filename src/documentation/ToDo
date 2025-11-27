@@ -1,15 +1,20 @@
-
-To make customisation easier, all objects should hold primitive values as the primitive statement objects
-    - Does not apply to pre-stored constants like Identifiers, just values input during tokenisation
-
 Cross run memory...
 
 
 Currently compounds exit on first required value (AND on first false and OR on first true), this needs to be configurable
 
 
+BIG THING NOW:
 
-The multiple calls problem:
+- Stack
+- Parsing
+- General Building
+
+
+
+
+
+The multiple calls problem: SOFTRESOLVE FIXES THIS IF ACCURATELY IMPLIMENTED
 
 - Most objects will run .Resolve() once, but some functions like .NumericalTest with numerical compounds will cause multiple
 - i.e. LESSTHAN(AND(23 45) OR(5 6)), if you imagine each number is an object, then the objects in And() will call .Resolve twice as Or is forced to run two tests, this doesn't matter for simple objects but if 23 was a sequence, there may be unintended hooks ran twice

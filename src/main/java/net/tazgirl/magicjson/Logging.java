@@ -1,6 +1,5 @@
 package net.tazgirl.magicjson;
 
-import net.tazgirl.magicjson.old.SendMessage;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
@@ -14,53 +13,24 @@ public class Logging
 
 
 
-    public static void Warn(@NotNull String warnMessage, boolean chatFlag)
+    public static void Warn(@NotNull String warnMessage)
     {
         localLogger.warn(warnMessage.concat(currentBuildInformation));
-
-        if(chatFlag)
-        {
-            SendMessage.All(warnMessage);
-        }
     }
 
-    public static void Error(@NotNull String errorMessage, boolean chatFlag)
+    public static void Error(@NotNull String errorMessage)
     {
         localLogger.error(errorMessage.concat(currentBuildInformation));
-
-        if(chatFlag)
-        {
-            SendMessage.All(errorMessage);
-        }
     }
 
-    public static void Debug(@NotNull String debugMessage, boolean chatFlag)
+    public static void Debug(@NotNull String debugMessage)
     {
         localLogger.debug(debugMessage);
 
-        if(chatFlag)
-        {
-            SendMessage.All(debugMessage);
-        }
     }
 
-    public static void Info(@NotNull String infoMessage, boolean chatFlag)
+    public static void Info(@NotNull String infoMessage)
     {
         localLogger.info(infoMessage);
-
-        if(chatFlag)
-        {
-            SendMessage.All(infoMessage);
-        }
     }
-
-    public enum LogType
-    {
-        INFO,
-        DEBUG,
-        WARN,
-        ERROR,
-
-    }
-
 }

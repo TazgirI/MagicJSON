@@ -5,6 +5,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.tazgirl.magicjson.MagicJson;
+import net.tazgirl.magicjson.statements.objects.interface_tags.can.CanResolveBool;
+import net.tazgirl.magicjson.statements.objects.interface_tags.can.CanResolveString;
 
 @EventBusSubscriber(modid = MagicJson.MODID)
 
