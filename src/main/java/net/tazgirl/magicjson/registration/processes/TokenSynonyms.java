@@ -8,17 +8,14 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.helpers.InputStreamToJson;
-import net.tazgirl.magicjson.registration.Registers;
+import net.tazgirl.magicjson.registration.RegistersForProcessing;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class HookTokenSynonyms
+public class TokenSynonyms
 {
-
-
-
     public static void RegisterSynonyms(ServerStartingEvent event)
     {
         Map<ResourceLocation, Resource> resources = GetAllSynonymJsons(event);
@@ -61,7 +58,7 @@ public class HookTokenSynonyms
                         return;
                     }
 
-                    String previousSynonym = Registers.hookTokenSynonyms.put(address, synonym);
+                    String previousSynonym = RegistersForProcessing.tokenSynonyms.put(address, synonym);
 
                     if(previousSynonym != null)
                     {

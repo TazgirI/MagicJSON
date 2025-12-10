@@ -1,1 +1,1 @@
-ANDBOOL(TRUE TRUE)
+and(true true)

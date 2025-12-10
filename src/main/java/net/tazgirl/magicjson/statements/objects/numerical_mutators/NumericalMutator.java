@@ -3,16 +3,15 @@ package net.tazgirl.magicjson.statements.objects.numerical_mutators;
 import net.tazgirl.magicjson.helpers.NumberHandling;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
-import net.tazgirl.magicjson.statements.objects.interface_tags.ResolveNumber;
-import net.tazgirl.magicjson.statements.objects.interface_tags.Will;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public abstract class NumericalMutator extends Base implements Will, ResolveNumber
+public abstract class NumericalMutator extends Base
 {
-    Class<? extends Number> prefferedReturnType;
+    Class<? extends Number> prefferedReturnType = null;
 
     List<Base> values = new ArrayList<>();
 
@@ -29,7 +28,34 @@ public abstract class NumericalMutator extends Base implements Will, ResolveNumb
     @Override
     public Number Resolve()
     {
-        return null;
+        List<Number> finalNumbers = new ArrayList<>();
+
+        Number returnNum = 0;
+
+        if(values.getFirst().Resolve() instanceof Number number)
+        {
+            returnNum = number;
+            finalNumbers.add(number);
+        }
+
+        for(int i = 1; i < values.size(); i++)
+        {
+            Base base = values.get(i);
+
+            if(base.Resolve() instanceof Number loopNum)
+            {
+                returnNum = function.apply(returnNum, loopNum);
+                finalNumbers.add(loopNum);
+            }
+        }
+
+
+        if(prefferedReturnType == null)
+        {
+            prefferedReturnType =  NumberHandling.findReturnType(finalNumbers);
+        }
+
+        return NumberHandling.getNumberAsType(prefferedReturnType, returnNum);
     }
 
     @Override
@@ -38,17 +64,18 @@ public abstract class NumericalMutator extends Base implements Will, ResolveNumb
         if(object instanceof Base base)
         {
             values.add(base);
+            holder.AddRelationship(this, base);
             return true;
         }
         return false;
     }
 
     @Override
-    public Boolean HandleUniqueArgument(Object object)
+    public @NotNull Boolean HandleUniqueArgument(String string)
     {
-        if(object instanceof Class<?> objectClass && NumberHandling.requestedTypeToFunction.containsKey(objectClass))
+        if(NumberHandling.numberClassStrings.get(string) instanceof Class<? extends Number> numberClass)
         {
-            prefferedReturnType = (Class<? extends Number>) objectClass;
+            prefferedReturnType = numberClass;
             return true;
         }
         return false;
@@ -61,7 +88,7 @@ public abstract class NumericalMutator extends Base implements Will, ResolveNumb
     }
 
     @Override
-    public String setIdentifier()
+    public @NotNull String setIdentifier()
     {
         return "";
     }

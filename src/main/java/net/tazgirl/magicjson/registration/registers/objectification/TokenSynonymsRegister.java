@@ -1,18 +1,16 @@
-package net.tazgirl.magicjson.registration.registers.tokenisation;
+package net.tazgirl.magicjson.registration.registers.objectification;
 
 import net.tazgirl.magicjson.magicjson_events.registers.bases.MapRegisterFetchEvent;
 import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
 import net.tazgirl.magicjson.registration.registers.base.MapRegister;
-import net.tazgirl.magicjson.statements.hooks.Hook;
 
-import java.util.Map;
-
-public class HookTokensRegister extends MapRegister<String, Class<? extends Hook>>
+public class TokenSynonymsRegister extends MapRegister<String, String>
 {
+
     @Override
     public String getIdentifier()
     {
-        return "HookTokensRegister";
+        return "HookTokenSynonymsRegister";
     }
 
     @Override
@@ -21,13 +19,12 @@ public class HookTokensRegister extends MapRegister<String, Class<? extends Hook
         return new FetchEvent();
     }
 
-    public static class FetchEvent extends MapRegisterFetchEvent<String, Class<? extends Hook>>
+    public static class FetchEvent extends MapRegisterFetchEvent<String, String>
     {
-
         @Override
         public String getIdentifier()
         {
-            return "HookTokensRegister";
+            return "HookTokenSynonymsRegisterEvent";
         }
     }
 }

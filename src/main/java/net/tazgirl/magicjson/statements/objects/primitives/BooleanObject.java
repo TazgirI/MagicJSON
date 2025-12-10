@@ -2,6 +2,7 @@ package net.tazgirl.magicjson.statements.objects.primitives;
 
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import org.jetbrains.annotations.NotNull;
 
 public class BooleanObject extends Base
 {
@@ -21,13 +22,19 @@ public class BooleanObject extends Base
     @Override
     public Boolean HandleValue(Object object)
     {
-        return null;
+        if(object instanceof Boolean bool)
+        {
+            value = bool;
+            return true;
+        }
+        DebugUnHandledType(object.getClass());
+        return false;
     }
 
     @Override
-    public Boolean HandleUniqueArgument(Object object)
+    public @NotNull Boolean HandleUniqueArgument(String string)
     {
-        return null;
+        return false;
     }
 
     @Override
@@ -37,7 +44,7 @@ public class BooleanObject extends Base
     }
 
     @Override
-    public String setIdentifier()
+    public @NotNull String setIdentifier()
     {
         return "Boolean";
     }

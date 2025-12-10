@@ -7,4 +7,6 @@ import java.util.Set;
 public abstract class RegisterFetchEventRoot<T> extends Event
 {
     public abstract T SendAndCollectEvent();
+
+    public abstract T getResult();
 }

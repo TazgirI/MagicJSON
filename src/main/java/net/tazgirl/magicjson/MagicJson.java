@@ -1,5 +1,7 @@
 package net.tazgirl.magicjson;
 
+import net.tazgirl.magicjson.registration.registers.fill.FillRegisters;
+import net.tazgirl.magicjson.registration.registers.tokenisation.EndCharsRegister;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -27,8 +29,6 @@ public class MagicJson
 
     public MagicJson(IEventBus modEventBus, ModContainer modContainer)
     {
-
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
 
         // TODO: Uncomment after tests
         // modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

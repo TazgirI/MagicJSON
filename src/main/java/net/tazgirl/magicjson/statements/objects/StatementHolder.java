@@ -19,6 +19,10 @@ public class StatementHolder
     Map<Base, List<Base>> parentToChildren = new HashMap<>();
     Map<Base, Base> childToParent = new HashMap<>();
 
+    public Object Run()
+    {
+        return root.Resolve();
+    }
 
     public void AddRelationship(Base parent, Base child)
     {

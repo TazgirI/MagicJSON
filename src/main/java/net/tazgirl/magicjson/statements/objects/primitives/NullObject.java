@@ -4,37 +4,22 @@ import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
-
-public class StringObject extends Base
+public class NullObject extends Base
 {
-    String value;
-
-    public StringObject(StatementHolder holder)
+    public NullObject(StatementHolder holder)
     {
         super(holder);
-    }
-
-    public StringObject(StatementHolder holder, String value)
-    {
-        super(holder);
-        this.value = value;
     }
 
     @Override
     public Object Resolve()
     {
-        return value;
+        return null;
     }
 
     @Override
-    public Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleValue(Object object)
     {
-        if(object instanceof String string)
-        {
-            value = string;
-            return true;
-        }
         return false;
     }
 
@@ -53,18 +38,18 @@ public class StringObject extends Base
     @Override
     public @NotNull String setIdentifier()
     {
-        return "String";
+        return "Null";
     }
 
     @Override
     public String toString()
     {
-        return "\"" + value + "\"";
+        return identifier;
     }
 
     @Override
     public Class<?>[] SoftResolve()
     {
-        return new Class[]{String.class};
+        return new Class[]{NullObject.class};
     }
 }

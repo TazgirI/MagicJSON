@@ -1,11 +1,10 @@
 package net.tazgirl.magicjson.statements.objects.primitives.numbers;
 
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
-import net.tazgirl.magicjson.statements.objects.interface_tags.ResolveNumber;
-import net.tazgirl.magicjson.statements.objects.interface_tags.Will;
 import net.tazgirl.magicjson.statements.objects.primitives.NumberObject;
+import org.jetbrains.annotations.NotNull;
 
-public class LongObject extends NumberObject<Long> implements Will, ResolveNumber
+public class LongObject extends NumberObject<Long>
 {
     public LongObject(StatementHolder holder)
     {
@@ -19,7 +18,7 @@ public class LongObject extends NumberObject<Long> implements Will, ResolveNumbe
     }
 
     @Override
-    public String setIdentifier()
+    public @NotNull String setIdentifier()
     {
         return "Long";
     }

@@ -1,6 +1,6 @@
 package net.tazgirl.magicjson.processing;
 
-import net.tazgirl.magicjson.data.TextSymbols;
+import net.tazgirl.magicjson.registration.RegistersForProcessing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Tokenisation
 
             // Checks that do not halt this char:
 
-            if(TextSymbols.endChars.contains(currentChar) && !currentToken.isEmpty())
+            if(RegistersForProcessing.endChars.contains(currentChar) && !currentToken.isEmpty())
             {
                 EndChar();
             }
@@ -38,7 +38,7 @@ public class Tokenisation
 
             // Checks that skip to next char:
 
-            if(TextSymbols.soloChars.contains(currentChar))
+            if(RegistersForProcessing.soloChars.contains(currentChar))
             {
                 SoloChar();
                 continue;
@@ -53,7 +53,7 @@ public class Tokenisation
         }
 
 
-        tokens.removeIf(TextSymbols::excludedTokenStrings);
+        tokens.removeIf(RegistersForProcessing.excludeChars::isStringExcludable);
 
         return tokens;
     }

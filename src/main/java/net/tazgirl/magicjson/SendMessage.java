@@ -1,8 +1,9 @@
-package net.tazgirl.magicjson.old;
+package net.tazgirl.magicjson;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.tazgirl.magicjson.data.Constants;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;

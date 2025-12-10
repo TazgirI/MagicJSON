@@ -1,16 +1,11 @@
 package net.tazgirl.magicjson.registration.registers.base;
 
-import net.tazgirl.magicjson.magicjson_events.registers.bases.MapRegisterFetchEvent;
-import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
-import org.checkerframework.checker.units.qual.K;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class MapRegister<K, V> extends Register<Map<K,V>>
 {
     protected final Map<K, V> register = new HashMap<>();
-
 
     public V put(K key, V value)
     {
@@ -25,5 +20,11 @@ public abstract class MapRegister<K, V> extends Register<Map<K,V>>
     public V get(K key)
     {
         return register.get(key);
+    }
+
+    @Override
+    public void putEventOutput(Map<K,V> eventOutput)
+    {
+        register.putAll(eventOutput);
     }
 }

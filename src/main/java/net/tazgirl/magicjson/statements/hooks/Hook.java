@@ -3,16 +3,12 @@ package net.tazgirl.magicjson.statements.hooks;
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public abstract class Hook extends Base
 {
-    static
-    {
-
-    }
-
     protected List<HookArgument> arguments = new ArrayList<>();
     protected Map<String, Base> referenceArguments = new HashMap<>();
     protected static Class<? extends Hook> myClassStatic;
@@ -63,7 +59,7 @@ public abstract class Hook extends Base
 
     @Override
     // End bracket is to prevent accidental token matching as it was easier to add an impossible token char than an if statement to the event
-    public String setIdentifier()
+    public @NotNull String setIdentifier()
     {
         return "Hook)";
     }

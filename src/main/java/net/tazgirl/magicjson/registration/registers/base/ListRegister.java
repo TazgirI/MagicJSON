@@ -1,15 +1,11 @@
 package net.tazgirl.magicjson.registration.registers.base;
 
-import net.tazgirl.magicjson.magicjson_events.registers.bases.ListRegisterFetchEvent;
-import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ListRegister<T> extends Register<List<T>>
 {
     protected final List<T> register = new ArrayList<>();
-
 
     public void add(T value)
     {
@@ -29,5 +25,16 @@ public abstract class ListRegister<T> extends Register<List<T>>
     public int size()
     {
         return register.size();
+    }
+
+    public boolean contains(T value)
+    {
+        return register.contains(value);
+    }
+
+    @Override
+    public void putEventOutput(List<T> eventOutput)
+    {
+        register.addAll(eventOutput);
     }
 }

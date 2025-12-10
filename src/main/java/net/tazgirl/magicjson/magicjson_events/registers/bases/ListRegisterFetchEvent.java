@@ -24,6 +24,12 @@ public abstract class ListRegisterFetchEvent<T> extends RegisterFetchEventRoot<L
     }
 
     @Override
+    public List<T> getResult()
+    {
+        return registry;
+    }
+
+    @Override
     public List<T> SendAndCollectEvent()
     {
         NeoForge.EVENT_BUS.post(this);

@@ -1,11 +1,11 @@
 package net.tazgirl.magicjson.statements.objects.primitives.numbers;
 
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
-import net.tazgirl.magicjson.statements.objects.interface_tags.ResolveNumber;
-import net.tazgirl.magicjson.statements.objects.interface_tags.Will;
 import net.tazgirl.magicjson.statements.objects.primitives.NumberObject;
+import org.jetbrains.annotations.NotNull;
 
-public class IntegerObject extends NumberObject<Integer> implements Will, ResolveNumber
+
+public class IntegerObject extends NumberObject<Integer>
 {
     public IntegerObject(StatementHolder holder)
     {
@@ -19,7 +19,7 @@ public class IntegerObject extends NumberObject<Integer> implements Will, Resolv
     }
 
     @Override
-    public String setIdentifier()
+    public @NotNull String setIdentifier()
     {
         return "Integer";
     }

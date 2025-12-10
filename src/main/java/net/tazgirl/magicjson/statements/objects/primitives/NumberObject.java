@@ -3,6 +3,10 @@ package net.tazgirl.magicjson.statements.objects.primitives;
 import net.tazgirl.magicjson.helpers.NumberHandling;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEvaluatorBase;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.function.BiFunction;
 
 public abstract class NumberObject<T extends Number> extends Base
 {
@@ -18,31 +22,38 @@ public abstract class NumberObject<T extends Number> extends Base
     protected abstract Class<? extends Number> setType();
 
     @Override
-    public Object Resolve()
+    public T Resolve()
     {
-        return null;
+        return value;
     }
 
     @Override
     public Class<?>[] SoftResolve()
     {
-        return new Class[]{Number.class};
+        return new Class[]{typeClass};
     }
 
     @Override
-    public Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleValue(Object object)
     {
         if(object instanceof Number number)
         {
             value = (T) NumberHandling.getNumberAsType(typeClass, number);
+            return true;
         }
-        return null;
+        return false;
     }
 
     @Override
-    public Boolean HandleUniqueArgument(Object object)
+    public @NotNull Boolean HandleUniqueArgument(String string)
     {
-        return null;
+        return false;
+    }
+
+    @Override
+    public Boolean NumericalTest(Object rightHandOperand, NumericEvaluatorBase evaluator, boolean invert)
+   {
+        return super.NumericalTest(rightHandOperand, evaluator, invert);
     }
 
     @Override
@@ -54,6 +65,6 @@ public abstract class NumberObject<T extends Number> extends Base
     @Override
     public String toString()
     {
-        return value.toString() + identifier.charAt(0);
+        return value.toString() + identifier.toLowerCase().charAt(0);
     }
 }

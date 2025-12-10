@@ -43,6 +43,12 @@ public abstract class MapRegisterFetchEvent<K, V> extends RegisterFetchEventRoot
     }
 
     @Override
+    public Map<K, V> getResult()
+    {
+        return registry;
+    }
+
+    @Override
     public Map<K, V> SendAndCollectEvent()
     {
         NeoForge.EVENT_BUS.post(this);

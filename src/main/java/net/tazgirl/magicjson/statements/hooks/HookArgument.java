@@ -2,6 +2,7 @@ package net.tazgirl.magicjson.statements.hooks;
 
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -43,9 +44,9 @@ public class HookArgument extends Base
     }
 
     @Override
-    public Boolean HandleUniqueArgument(Object object)
+    public @NotNull Boolean HandleUniqueArgument(String string)
     {
-        return null;
+        return false;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class HookArgument extends Base
     }
 
     @Override
-    public String setIdentifier()
+    public @NotNull String setIdentifier()
     {
         return "HookArgument";
     }

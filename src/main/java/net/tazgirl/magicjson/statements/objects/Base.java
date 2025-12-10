@@ -1,6 +1,10 @@
 package net.tazgirl.magicjson.statements.objects;
 
 import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEvaluatorBase;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.function.BiFunction;
 
 public abstract class Base
 {
@@ -14,21 +18,30 @@ public abstract class Base
         this.holder = holder;
     }
 
+
     public abstract Object Resolve();
 
+    @NotNull
     public abstract Boolean HandleValue(Object object);
 
-    public abstract Boolean HandleUniqueArgument(Object object);
+    @NotNull
+    public abstract Boolean HandleUniqueArgument(String string);
+
 
     public abstract Base ImplicitChild();
 
-
+    @NotNull
     public abstract String setIdentifier();
 
     @Override
     public abstract String toString();
 
     public abstract Class<?>[] SoftResolve();
+
+    public Boolean NumericalTest(Object rightHandOperand, NumericEvaluatorBase evaluator, boolean invert)
+    {
+        return false;
+    }
 
     public void DebugUnHandledType(Class<?> failedType)
     {

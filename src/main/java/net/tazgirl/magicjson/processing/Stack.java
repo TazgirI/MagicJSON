@@ -41,9 +41,20 @@ public class Stack
         return false;
     }
 
-    public void PutUniqueArgument(Object object)
+    public boolean Close(int amount)
     {
-        objectStack.getLast().HandleUniqueArgument(object);
+        boolean returnBool = true;
+        for(int i = 0; i < amount; i++)
+        {
+            if(!Close()){returnBool = false;}
+        }
+
+        return returnBool;
+    }
+
+    public void PutUniqueArgument(String string)
+    {
+        objectStack.getLast().HandleUniqueArgument(string);
     }
 
     public void Put(Base base)
