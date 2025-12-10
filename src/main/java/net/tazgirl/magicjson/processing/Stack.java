@@ -54,7 +54,7 @@ public class Stack
 
     public void PutUniqueArgument(String string)
     {
-        objectStack.getLast().HandleUniqueArgument(string);
+        objectStack.getLast().HandleUniqueArgument(string.toLowerCase());
     }
 
     public void Put(Base base)

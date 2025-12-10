@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import static net.tazgirl.magicjson.data.Constants.trueEmpty.TRUE_EMPTY;
-
 public class NumericalComparisonHandler
 {
+    // TODO: Whole class is dirty, fix later if possible but I cannot be asked anymore for this
+
     public static Boolean RunTest(Base leftOperand, Base rightOperand, NumericEvaluatorBase evaluator)
     {
         boolean leftIsCompound = leftOperand instanceof CompoundBase;
@@ -25,17 +25,14 @@ public class NumericalComparisonHandler
 
         if(!leftIsCompound)
         {
-            return oneSideCompound(leftOperand, (CompoundBase) rightOperand, evaluator, false);
+            return compareSingleToCompound(leftOperand, (CompoundBase) rightOperand, evaluator.getEvaluator(), false, rightOperand instanceof And);
         }
         if(!rightIsCompound)
         {
-            return oneSideCompound(rightOperand, (CompoundBase) leftOperand, evaluator,true);
+            return compareSingleToCompound(rightOperand, (CompoundBase) leftOperand, evaluator.getDirectionalInverseEvaluator(),true, leftOperand instanceof And);
         }
 
         return bothSidesCompound((CompoundBase) leftOperand, (CompoundBase) rightOperand, evaluator);
-
-
-
     }
 
     // AND < OR -> all AND < any number from OR
@@ -416,57 +413,100 @@ public class NumericalComparisonHandler
     }
 
     // TODO: This is so abhorrently fucked, mainly when dealing with opening Boolean edge cases
-    // Haveing an IF at the start of the for loop would cut down on the opening nest but would reduce performance for more cycles
-    static Boolean singleToOr(Base leftOperand, CompoundBase rightOperand, BiFunction<Number, Number, Boolean> evaluator, boolean inverted)
+    // Having an IF at the start of the for loop would cut down on the opening nest but would reduce performance for more cycles
+    // The loop will only ever run a few times at most, why the fuck did I optimise the loop
+    static Boolean compareSingleToCompound(Base leftOperand, CompoundBase rightOperand, BiFunction<Number, Number, Boolean> evaluator, boolean inverted, boolean rightDefault)
     {
-        boolean returnValue = false;
+        Number leftnum = null;
+
+        boolean returnValue = rightDefault;
         boolean returnFound = false;
 
         int jumpStep = 0;
 
-        Number leftNum = null;
-
         if(inverted)
         {
-            jumpStep = 1;
+           jumpStep = 1;
 
-            Object tempRight = rightOperand.ResolveSpecific(0);
+           Object tempRight = rightOperand.ResolveSpecific(0);
 
-            if(tempRight instanceof Boolean bool && bool)
+           if(tempRight instanceof Number rightNum)
+           {
+               Object tempLeft = leftOperand.Resolve();
+
+               if(tempLeft instanceof Number tempLeftNum)
+               {
+                   leftnum = tempLeftNum;
+               }
+               else if(tempLeft instanceof Boolean bool)
+               {
+                   if(rightOperand.breakOnFind)
+                   {
+                       return bool;
+                   }
+                   else
+                   {
+                       returnValue = bool;
+                       returnFound = true;
+                   }
+               }
+               else
+               {
+                   if(rightOperand.breakOnFind)
+                   {
+                       return false;
+                   }
+                   else
+                   {
+                   returnValue = false;
+                   returnFound = true;
+                   }
+               }
+
+               if(evaluator.apply(leftnum, rightNum) != rightDefault)
+               {
+                   returnValue = !rightDefault;
+                   returnFound = true;
+               }
+           }
+           else if(tempRight instanceof Boolean bool && bool != rightDefault)
+           {
+               if(rightOperand.breakOnFind)
+               {
+                   return !rightDefault;
+               }
+               else
+               {
+                   returnValue = !rightDefault;
+                   returnFound = true;
+               }
+           }
+        }
+
+        if(leftnum == null)
+        {
+            Object tempLeft = leftOperand.Resolve();
+
+            if(tempLeft instanceof Number num)
             {
-                returnValue = true;
-                returnFound = true;
+                leftnum = num;
             }
-            else
+            else if(tempLeft instanceof Boolean bool)
             {
-                Object leftResolveHolder = leftOperand.Resolve();
-                if(leftResolveHolder instanceof Boolean bool)
+                if(rightOperand.breakOnFind)
+                {
+                    return bool;
+                }
+                else
                 {
                     returnValue = bool;
                     returnFound = true;
                 }
-                else if(leftResolveHolder instanceof Number num)
-                {
-                    leftNum = num;
-                    if(tempRight instanceof Number rightNum && evaluator.apply(leftNum, rightNum))
-                    {
-                        returnValue = true;
-                        returnFound = true;
-                    }
-                }
-                else
-                {
-                    returnValue = false;
-                    returnFound = true;
-                }
             }
-
         }
-
 
         for(int i = jumpStep; i < rightOperand.numberOfContents(); i++)
         {
-
             Object rightResult = rightOperand.ResolveSpecific(i);
 
             if(returnFound)
@@ -474,72 +514,67 @@ public class NumericalComparisonHandler
                 continue;
             }
 
-            if(rightResult instanceof Number num && evaluator.apply(leftNum, num))
+            if(rightResult instanceof Number num)
             {
-                returnValue = true;
-                returnFound = true;
-                if(rightOperand.breakOnFind)
+                if(evaluator.apply(leftnum, num) != rightDefault)
                 {
-                    break;
+                    returnValue = !rightDefault;
+                    returnFound = true;
                 }
             }
-            else if(rightResult instanceof Boolean bool && bool)
+            else if(rightResult instanceof Boolean bool && bool != rightDefault)
             {
-                returnValue = true;
+                returnValue = !rightDefault;
                 returnFound = true;
-                if(rightOperand.breakOnFind)
-                {
-                    break;
-                }
+            }
+
+            if(returnFound && rightOperand.breakOnFind)
+            {
+                break;
             }
         }
 
         return returnValue;
     }
 
-    static Boolean singleToAnd(Base leftOperand, CompoundBase rightOperand, BiFunction<Number, Number, Boolean> evaluator)
-    {
-
-    }
-
-    static Boolean oneSideCompound(Base leftOperand, CompoundBase rightOperand, NumericEvaluatorBase evaluator, Boolean invertDirection)
-    {
-        boolean defaultResult = rightOperand instanceof And;
-        boolean returnResult = defaultResult;
-        BiFunction<Number, Number, Boolean> evaluatorFunction = invertDirection ? evaluator.getDirectionalInverseEvaluator() : evaluator.getEvaluator();
-
-        Object leftResult = leftOperand.Resolve();
-        Number leftNum;
-
-        if(leftResult instanceof Boolean bool){return bool;}
-
-        if(leftResult instanceof Number num){leftNum = num;}
-        else{return true;}
-
-        for(int i = 0; i < rightOperand.numberOfContents(); i++)
-        {
-            boolean loopResult = defaultResult;
-            Object compoundLoopResult = rightOperand.ResolveSpecific(i);
-
-            if(compoundLoopResult instanceof Boolean bool){loopResult = bool;}
-            else if(compoundLoopResult instanceof Number number)
-            {
-                loopResult = evaluatorFunction.apply(leftNum, number);
-            }
-
-
-            if(loopResult != defaultResult)
-            {
-                returnResult = loopResult;
-                if(rightOperand.breakOnFind)
-                {
-                    break;
-                }
-            }
-        }
-
-        return returnResult;
-    }
+//    static Boolean oneSideCompound(Base leftOperand, CompoundBase rightOperand, NumericEvaluatorBase evaluator, Boolean invertDirection)
+//    {
+//        boolean defaultResult = rightOperand instanceof And;
+//        boolean returnResult = defaultResult;
+//        BiFunction<Number, Number, Boolean> evaluatorFunction = invertDirection ? evaluator.getDirectionalInverseEvaluator() : evaluator.getEvaluator();
+//
+//        Object leftResult = leftOperand.Resolve();
+//        Number leftNum;
+//
+//        if(leftResult instanceof Boolean bool){return bool;}
+//
+//        if(leftResult instanceof Number num){leftNum = num;}
+//        else{return true;}
+//
+//        for(int i = 0; i < rightOperand.numberOfContents(); i++)
+//        {
+//            boolean loopResult = defaultResult;
+//            Object compoundLoopResult = rightOperand.ResolveSpecific(i);
+//
+//            if(compoundLoopResult instanceof Boolean bool){loopResult = bool;}
+//            else if(compoundLoopResult instanceof Number number)
+//            {
+//                loopResult = evaluatorFunction.apply(leftNum, number);
+//            }
+//
+//
+//            if(loopResult != defaultResult)
+//            {
+//                returnResult = loopResult;
+//                if(rightOperand.breakOnFind)
+//                {
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return returnResult;
+//    }
 
     // If no nums found it defaults to false
     static Boolean bothNonCompounds(Base leftOperand, Base rightOperand, NumericEvaluatorBase evaluator)
