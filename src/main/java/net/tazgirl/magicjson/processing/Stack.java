@@ -34,6 +34,7 @@ public class Stack
 
         if(objectStack.getLast().HandleValue(top))
         {
+            holder.AddRelationship(objectStack.getLast(), top);
             return true;
         }
 
@@ -46,7 +47,7 @@ public class Stack
         boolean returnBool = true;
         for(int i = 0; i < amount; i++)
         {
-            if(!Close()){returnBool = false;}
+            returnBool = returnBool ? Close() : false;
         }
 
         return returnBool;

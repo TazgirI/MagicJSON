@@ -35,24 +35,4 @@ public class And extends CompoundBase
     {
         return "And";
     }
-
-    @Override
-    public Boolean NumericalTest(Object rightHandOperand, NumericEvaluatorBase evaluator, boolean invert)
-    {
-        boolean returnResult = true;
-
-        if(rightHandOperand instanceof Number num)
-        {
-            for(Base base: values)
-            {
-                boolean loopResult = true;
-                Object resolveResult = base.Resolve();
-
-                if(resolveResult instanceof Number num2)
-                {
-                    evaluator.getEvaluator().apply()
-                }
-            }
-        }
-    }
 }

@@ -50,12 +50,7 @@ public abstract class NumberObject<T extends Number> extends Base
         return false;
     }
 
-    @Override
-    public Boolean NumericalTest(Object rightHandOperand, NumericEvaluatorBase evaluator, boolean invert)
-   {
-        return super.NumericalTest(rightHandOperand, evaluator, invert);
-    }
-
+    
     @Override
     public Base ImplicitChild()
     {

@@ -38,11 +38,6 @@ public abstract class Base
 
     public abstract Class<?>[] SoftResolve();
 
-    public Boolean NumericalTest(Object rightHandOperand, NumericEvaluatorBase evaluator, boolean invert)
-    {
-        return false;
-    }
-
     public void DebugUnHandledType(Class<?> failedType)
     {
         Logging.Debug("Failed to handle Object of type \"" + failedType.toString() + "\" in a(n) " + identifier + " within: " + holder.getAddress());

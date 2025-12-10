@@ -27,8 +27,6 @@ public class Or extends CompoundBase
     }
 
     @Override
-
-    @Override
     public @NotNull String setIdentifier()
     {
         return "Or";
