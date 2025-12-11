@@ -82,6 +82,16 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
+    public void Replace(Base oldBase, Base newBase)
+    {
+        int index = values.indexOf(oldBase);
+        if(index != -1)
+        {
+            values.set(index, newBase);
+        }
+    }
+
+    @Override
     public Base ImplicitChild()
     {
         return null;
@@ -97,11 +107,5 @@ public abstract class NumericalMutator extends Base
     public String toString()
     {
         return "";
-    }
-
-    @Override
-    public Class<?>[] SoftResolve()
-    {
-        return new Class[0];
     }
 }

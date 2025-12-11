@@ -29,9 +29,7 @@ public class MagicJson
 
     public MagicJson(IEventBus modEventBus, ModContainer modContainer)
     {
-
-        // TODO: Uncomment after tests
-        // modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event)

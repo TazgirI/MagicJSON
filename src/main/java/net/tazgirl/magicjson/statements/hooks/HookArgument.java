@@ -68,8 +68,15 @@ public class HookArgument extends Base
     }
 
     @Override
-    public Class<?>[] SoftResolve()
+    public void Replace(Base oldBase, Base newBase)
     {
-        return null;
+        if(name == oldBase)
+        {
+            name = newBase;
+        }
+        else if(value == oldBase)
+        {
+            value = newBase;
+        }
     }
 }

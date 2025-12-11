@@ -63,8 +63,8 @@ public class StringObject extends Base
     }
 
     @Override
-    public Class<?>[] SoftResolve()
+    public void Replace(Base oldBase, Base newBase)
     {
-        return new Class[]{String.class};
+
     }
 }

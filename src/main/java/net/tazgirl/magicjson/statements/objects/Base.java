@@ -36,7 +36,7 @@ public abstract class Base
     @Override
     public abstract String toString();
 
-    public abstract Class<?>[] SoftResolve();
+    public abstract void Replace(Base oldBase, Base newBase);
 
     public void DebugUnHandledType(Class<?> failedType)
     {

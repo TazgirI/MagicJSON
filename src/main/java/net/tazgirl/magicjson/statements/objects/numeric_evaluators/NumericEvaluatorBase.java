@@ -95,6 +95,16 @@ public abstract class NumericEvaluatorBase extends Base
     }
 
     @Override
+    public void Replace(Base oldBase, Base newBase)
+    {
+        int index = values.indexOf(oldBase);
+        if(index != -1)
+        {
+            values.set(index, newBase);
+        }
+    }
+
+    @Override
     public Base ImplicitChild()
     {
         return null;
@@ -112,12 +122,6 @@ public abstract class NumericEvaluatorBase extends Base
         return "";
     }
 
-    @Override
-    public Class<?>[] SoftResolve()
-    {
-        return new Class[0];
-    }
-
     public BiFunction<Number, Number, Boolean> getEvaluator()
     {
         return evaluator;
@@ -128,6 +132,6 @@ public abstract class NumericEvaluatorBase extends Base
         return inverseEvaluator;
     }
 
-    abstract BiFunction<Number, Number, Boolean> createEvaluator();
-    abstract BiFunction<Number, Number, Boolean> createDirectionalInverseEvaluator();
+    public abstract BiFunction<Number, Number, Boolean> createEvaluator();
+    public abstract BiFunction<Number, Number, Boolean> createDirectionalInverseEvaluator();
 }

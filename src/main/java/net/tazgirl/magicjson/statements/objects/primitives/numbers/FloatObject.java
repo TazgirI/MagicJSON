@@ -11,7 +11,10 @@ public class FloatObject extends NumberObject<Float>
         super(holder);
     }
 
-
+    public FloatObject(StatementHolder holder, Float value)
+    {
+        super(holder, value);
+    }
 
     @Override
     protected Class<? extends Number> setType()

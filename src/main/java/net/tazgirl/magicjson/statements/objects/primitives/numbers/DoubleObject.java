@@ -11,6 +11,11 @@ public class DoubleObject extends NumberObject<Double>
         super(holder);
     }
 
+    public DoubleObject(StatementHolder holder, Double value)
+    {
+        super(holder, value);
+    }
+
     @Override
     public @NotNull Boolean HandleUniqueArgument(String string)
     {

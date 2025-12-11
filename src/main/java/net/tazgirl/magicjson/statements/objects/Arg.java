@@ -65,8 +65,11 @@ public class Arg extends Base
     }
 
     @Override
-    public Class<?>[] SoftResolve()
+    public void Replace(Base oldBase, Base newBase)
     {
-        return null;
+        if(argumentName == oldBase)
+        {
+            argumentName = newBase;
+        }
     }
 }

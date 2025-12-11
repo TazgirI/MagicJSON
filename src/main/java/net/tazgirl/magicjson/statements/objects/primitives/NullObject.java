@@ -48,8 +48,9 @@ public class NullObject extends Base
     }
 
     @Override
-    public Class<?>[] SoftResolve()
+    public void Replace(Base oldBase, Base newBase)
     {
-        return new Class[]{NullObject.class};
+
     }
+
 }

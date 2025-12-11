@@ -56,9 +56,8 @@ public class BooleanObject extends Base
     }
 
     @Override
-    public Class<?>[] SoftResolve()
+    public void Replace(Base oldBase, Base newBase)
     {
-        return new Class[]{Boolean.class};
-    }
 
+    }
 }

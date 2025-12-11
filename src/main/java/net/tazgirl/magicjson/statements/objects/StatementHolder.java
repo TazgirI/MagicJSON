@@ -54,7 +54,12 @@ public class StatementHolder
         return this;
     }
 
-
+    public void clearRelations()
+    {
+        uniques = new ArrayList<>();
+        parentToChildren = new HashMap<>();
+        childToParent = new HashMap<>();
+    }
 
     public String getAddress()
     {

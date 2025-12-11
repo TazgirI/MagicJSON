@@ -12,6 +12,11 @@ public class IntegerObject extends NumberObject<Integer>
         super(holder);
     }
 
+    public IntegerObject(StatementHolder holder, Integer value)
+    {
+        super(holder, value);
+    }
+
     @Override
     protected Class<? extends Number> setType()
     {

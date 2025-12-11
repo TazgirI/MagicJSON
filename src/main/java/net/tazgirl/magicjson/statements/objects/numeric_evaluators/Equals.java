@@ -10,14 +10,7 @@ import java.util.function.BiFunction;
 
 public class Equals extends NumericEvaluatorBase
 {
-    BiFunction<Number, Number, Boolean> function = new BiFunction<Number, Number, Boolean>()
-    {
-        @Override
-        public Boolean apply(Number number, Number number2)
-        {
-            return number.doubleValue() == number2.doubleValue();
-        }
-    };
+    //BiFunction<Number, Number, Boolean> function = (number, number2) -> number.doubleValue() == number2.doubleValue();
 
     public Equals(StatementHolder holder)
     {
@@ -25,14 +18,14 @@ public class Equals extends NumericEvaluatorBase
     }
 
     @Override
-    BiFunction<Number, Number, Boolean> createEvaluator()
+    public BiFunction<Number, Number, Boolean> createEvaluator()
     {
-        return null;
+        return (number, number2) -> number.doubleValue() == number2.doubleValue();
     }
 
     @Override
-    BiFunction<Number, Number, Boolean> createDirectionalInverseEvaluator()
+    public BiFunction<Number, Number, Boolean> createDirectionalInverseEvaluator()
     {
-        return null;
+        return (number, number2) -> number.doubleValue() == number2.doubleValue();
     }
 }

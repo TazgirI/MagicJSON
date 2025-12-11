@@ -10,6 +10,7 @@ import net.tazgirl.magicjson.registration.registers.tokenisation.EndCharsRegiste
 import net.tazgirl.magicjson.registration.registers.tokenisation.ExcludeCharsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.SoloCharsRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.StatementObjectTokensRegister;
+import net.tazgirl.magicjson.statements.objects.Arg;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Add;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Divide;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Subtract;
@@ -47,6 +48,8 @@ public class FillRegisters
     @SubscribeEvent
     public static void fillStatementObjectTokens(StatementObjectTokensRegister.FetchEvent event)
     {
+        event.put("magicjson:arg", Arg.class);
+
         event.put(List.of("div","/"), "magicjson",Divide.Full.class);
         event.put(List.of("mod","%"), "magicjson",Divide.Full.class);
         event.put(List.of("add","+","plus"), "magicjson", Add.class);

@@ -33,4 +33,12 @@ public class PrivateCore
             Logging.Warn(address + " was just overwritten during Statement registration, if two mods are conflicting then you must create a synonym");
         }
     }
+
+    static void clearHolderRelations()
+    {
+        for(StatementHolder holder: statementRegister.values())
+        {
+            holder.clearRelations();
+        }
+    }
 }

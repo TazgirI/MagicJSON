@@ -61,10 +61,16 @@ public abstract class CompoundBase extends Base
     }
 
     @Override
-    public Class<?>[] SoftResolve()
+    public void Replace(Base oldBase, Base newBase)
     {
-        // Resolves a bool but can also hold null executables
-        return null;
+
+        int index = values.indexOf(oldBase);
+        if(index != -1)
+        {
+            values.remove(index);
+            values.add(index, newBase);
+        }
+
     }
 
     public int numberOfContents()

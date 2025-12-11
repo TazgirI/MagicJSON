@@ -68,6 +68,11 @@ public class StatementObjectTokensRegister extends MapRegister<String, Class<? e
             return super.put(address, value);
         }
 
+        public Class<? extends Base> put(String keyword, String namespace, Class<? extends Base> value)
+        {
+            return put(namespace + ":" + keyword, value);
+        }
+
         public List<Class<? extends Base>> put(List<String> addresses, Class<? extends Base> value)
         {
             List<Class<? extends Base>> classes = new ArrayList<>();

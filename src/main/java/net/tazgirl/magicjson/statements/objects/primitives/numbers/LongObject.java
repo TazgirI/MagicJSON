@@ -11,6 +11,11 @@ public class LongObject extends NumberObject<Long>
         super(holder);
     }
 
+    public LongObject(StatementHolder holder, Long value)
+    {
+        super(holder, value);
+    }
+
     @Override
     protected Class<? extends Number> setType()
     {

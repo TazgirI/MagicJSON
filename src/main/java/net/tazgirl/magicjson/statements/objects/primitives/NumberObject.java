@@ -19,18 +19,19 @@ public abstract class NumberObject<T extends Number> extends Base
         typeClass = setType();
     }
 
+    public NumberObject(StatementHolder holder, T value)
+    {
+        super(holder);
+        typeClass = setType();
+        this.value = value;
+    }
+
     protected abstract Class<? extends Number> setType();
 
     @Override
     public T Resolve()
     {
         return value;
-    }
-
-    @Override
-    public Class<?>[] SoftResolve()
-    {
-        return new Class[]{typeClass};
     }
 
     @Override
@@ -50,7 +51,7 @@ public abstract class NumberObject<T extends Number> extends Base
         return false;
     }
 
-    
+
     @Override
     public Base ImplicitChild()
     {
@@ -61,5 +62,11 @@ public abstract class NumberObject<T extends Number> extends Base
     public String toString()
     {
         return value.toString() + identifier.toLowerCase().charAt(0);
+    }
+
+    @Override
+    public void Replace(Base oldBase, Base newBase)
+    {
+
     }
 }

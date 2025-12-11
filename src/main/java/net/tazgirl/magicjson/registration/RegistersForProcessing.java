@@ -10,7 +10,6 @@ import net.tazgirl.magicjson.registration.registers.tokenisation.SoloCharsRegist
 
 import java.util.List;
 
-@EventBusSubscriber(modid = MagicJson.MODID)
 public class RegistersForProcessing
 {
     // Tokenisation

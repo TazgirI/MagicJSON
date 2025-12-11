@@ -58,8 +58,8 @@ public class NumberHandling
     static Map<Class<?>, Integer> priorityMap = Map.of(
             Integer.class, 1,
             Float.class, 2,
-            Long.class, 4,
-            Double.class, 3
+            Double.class, 3,
+            Long.class, 4
     );
 
     public static Class<? extends Number> findReturnType(Class<? extends Number> input1, Class<? extends Number> input2)
