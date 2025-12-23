@@ -1,18 +1,19 @@
-package net.tazgirl.magicjson.statements.objects;
+package net.tazgirl.magicjson.statements.objects.memory.args;
 
-import org.jetbrains.annotations.Debug;
+import net.tazgirl.magicjson.statements.objects.Base;
+import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class Arg extends Base
+public class ArgGet extends ArgBase
 {
     public Base argumentName;
 
-    public Arg(StatementHolder holder)
+    public ArgGet(StatementHolder holder)
     {
         super(holder);
     }
 
-    public Arg(StatementHolder holder, Base argumentName)
+    public ArgGet(StatementHolder holder, Base argumentName)
     {
         super(holder);
         this.argumentName = argumentName;
@@ -29,20 +30,14 @@ public class Arg extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleBase(Base base)
     {
-        if(object instanceof Base base)
+        if(argumentName == null)
         {
             argumentName = base;
             return true;
         }
-        DebugUnHandledType(object.getClass());
-        return false;
-    }
 
-    @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
-    {
         return false;
     }
 

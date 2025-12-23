@@ -155,8 +155,6 @@ public class NumericalComparisonHandler
         }
 
         return returnValue;
-
-
     }
 
 

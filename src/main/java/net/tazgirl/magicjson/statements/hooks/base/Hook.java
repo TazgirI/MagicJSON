@@ -1,4 +1,4 @@
-package net.tazgirl.magicjson.statements.hooks;
+package net.tazgirl.magicjson.statements.hooks.base;
 
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.statements.objects.Base;
@@ -39,15 +39,15 @@ public abstract class Hook extends Base
     public abstract Object RunHook(Map<String, Base> hookArgs);
 
     @Override
-    public Boolean HandleValue(Object object)
+    public Boolean HandleBase(Base base)
     {
-        if(object instanceof HookArgument argument)
+        if(base instanceof HookArgument argument)
         {
             arguments.add(argument);
             return true;
         }
 
-        DebugUnHandledType(object.getClass());
+        DebugUnHandledType(base.getClass());
         return false;
     }
 
@@ -78,5 +78,4 @@ public abstract class Hook extends Base
         return identifier + "( " + argsString.toString() + ")";
     }
 
-    public abstract <T extends Hook> T getBlankForRegistry();
 }

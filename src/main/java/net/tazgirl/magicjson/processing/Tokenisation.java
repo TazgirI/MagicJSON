@@ -52,7 +52,10 @@ public class Tokenisation
             currentToken.append(currentChar);
         }
 
-
+        if(!currentToken.isEmpty())
+        {
+            TokenToTokens();
+        }
         tokens.removeIf(RegistersForProcessing.excludeChars::isStringExcludable);
 
         return tokens;
@@ -81,6 +84,7 @@ public class Tokenisation
 
         boolean lastCharWasEscape = false;
 
+        i++;
         for(i = i; i < statement.length(); i++)
         {
             currentChar = statement.charAt(i);

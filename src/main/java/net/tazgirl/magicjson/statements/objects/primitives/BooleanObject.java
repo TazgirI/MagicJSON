@@ -20,7 +20,13 @@ public class BooleanObject extends Base
     }
 
     @Override
-    public Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleBase(Base base)
+    {
+        return false;
+    }
+
+    @Override
+    public @NotNull Boolean HandleObject(Object object)
     {
         if(object instanceof Boolean bool)
         {

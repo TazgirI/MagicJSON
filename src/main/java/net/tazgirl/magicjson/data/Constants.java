@@ -13,11 +13,20 @@ public class Constants
     public static final String hookSynonymAddressElement = "address";
     public static final String hookSynonymSynonymElement = "synonym";
 
+    public static final String statementSubscriberAddresssElement = "address";
+    public static final String statementSubscriberPriorityElement = "priority";
+
+    public static String eventParamName = "event";
+
+
     public static final List<Register<?>> allRegisters = RegistersForProcessing.allRegisters;
 
     public static MinecraftServer server;
 
     public static boolean isTesting = false;
+    public static boolean chatDebugFlags;
+
+
 
     public static enum trueEmpty
     {

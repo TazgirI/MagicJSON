@@ -20,7 +20,6 @@ public class CloseTokensRegister extends ListRegister<String>
 
     public static class FetchEvent extends ListRegisterFetchEvent<String>
     {
-
         @Override
         public String getIdentifier()
         {

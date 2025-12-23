@@ -59,15 +59,11 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public Boolean HandleValue(Object object)
+    public Boolean HandleBase(Base base)
     {
-        if(object instanceof Base base)
-        {
-            values.add(base);
-            holder.AddRelationship(this, base);
-            return true;
-        }
-        return false;
+        values.add(base);
+        holder.AddRelationship(this, base);
+        return true;
     }
 
     @Override
@@ -98,14 +94,8 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public @NotNull String setIdentifier()
-    {
-        return "";
-    }
-
-    @Override
     public String toString()
     {
-        return "";
+        return identifier + "( " + values.toString() + " )";
     }
 }

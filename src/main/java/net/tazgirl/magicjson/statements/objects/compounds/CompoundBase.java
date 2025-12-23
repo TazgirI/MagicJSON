@@ -18,16 +18,10 @@ public abstract class CompoundBase extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleBase(Base base)
     {
-        if(object instanceof Base base)
-        {
-            values.add(base);
-            return true;
-        }
-
-        DebugUnHandledType(object.getClass());
-        return false;
+        values.add(base);
+        return true;
     }
 
     @Override

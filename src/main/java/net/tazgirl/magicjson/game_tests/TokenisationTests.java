@@ -15,7 +15,10 @@ public class TokenisationTests extends TestRoot
 
     public static List<Component> basicTokenise()
     {
-        if(List.of("add","(", "12d", "13d", ")").toString().equals(new Tokenisation("add(12d 13d)").TokeniseStatement().toString()))
+        result = new Tokenisation("add(12d 13d)").TokeniseStatement().toString();
+        expected = List.of("add","(", "12d", " " ,"13d", ")").toString();
+
+        if(result.equals(expected))
         {
             return List.of(assertSuccess("basicTokenise"));
         }

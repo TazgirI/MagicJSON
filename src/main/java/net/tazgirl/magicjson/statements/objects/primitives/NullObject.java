@@ -18,7 +18,7 @@ public class NullObject extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleBase(Base base)
     {
         return false;
     }

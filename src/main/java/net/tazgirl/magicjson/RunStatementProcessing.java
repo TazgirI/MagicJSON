@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class RunStatementProcessing
 {
-
     public static void ProcessStatements(ServerStartingEvent event)
     {
         for(Map.Entry<ResourceLocation, Resource> entry : GetAllStatements(event).entrySet())
@@ -38,6 +37,7 @@ public class RunStatementProcessing
             catch (IOException e)
             {
                 Logging.Warn(entry.getKey().toString() + " could not be opened, skipping file");
+                continue;
             }
         }
     }

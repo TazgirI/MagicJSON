@@ -3,6 +3,7 @@ package net.tazgirl.magicjson.statements.objects.numeric_evaluators;
 import net.tazgirl.magicjson.helpers.NumericalComparisonHandler;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public abstract class NumericEvaluatorBase extends Base
     BiFunction<Number, Number, Boolean> inverseEvaluator;
     Boolean breakOnFindFalse = true;
     Boolean assumption = true;
+    Boolean flip = false;
 
     public NumericEvaluatorBase(StatementHolder holder)
     {
@@ -26,12 +28,17 @@ public abstract class NumericEvaluatorBase extends Base
         inverseEvaluator = createDirectionalInverseEvaluator();
     }
 
+//     t f C
+//    t f t
+//    f t f
+//    F
     @Override
     public Object Resolve()
     {
         if(values.size() == 2)
         {
-            return NumericalComparisonHandler.RunTest(values.get(0), values.get(1), this);
+            // flip ? !value : value
+            return flip != NumericalComparisonHandler.RunTest(values.get(0), values.get(1), this);
         }
         if(values.size() == 1)
         {
@@ -47,30 +54,27 @@ public abstract class NumericEvaluatorBase extends Base
         {
             if(NumericalComparisonHandler.RunTest(values.get(i-1), values.get(i), this) != assumption)
             {
-                return !assumption;
+                // flip ? assumption : !assumption;
+                return flip == assumption;
             }
         }
-        return assumption;
+        // flip ? !assumption : assumption
+        return flip != assumption;
 
     }
 
     @Override
-    public @NotNull Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleBase(Base base)
     {
-        if(object instanceof Base base)
-        {
-            values.add(base);
-            return true;
-        }
-
-        DebugUnHandledType(object.getClass());
-        return false;
+        values.add(base);
+        return true;
     }
 
     @Override
     public @NotNull Boolean HandleUniqueArgument(String string)
     {
         // One of these will always be active by default but this allows for statements to be strongly typed against changes in the default case
+        // ****************************************************************
         if(string.equals(".break"))
         {
             breakOnFindFalse = true;
@@ -81,14 +85,22 @@ public abstract class NumericEvaluatorBase extends Base
             breakOnFindFalse = false;
             return true;
         }
-        if(string.contains("true"))
+        // ****************************************************************
+
+
+        if(string.equals(".true"))
         {
             assumption = true;
             return true;
         }
-        if(string.contains("false"))
+        if(string.equals(".false"))
         {
             assumption = false;
+            return true;
+        }
+        if(string.equals(".not") || string.equals(".!"))
+        {
+            flip = true;
             return true;
         }
         return false;

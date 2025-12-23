@@ -1,27 +1,28 @@
 package net.tazgirl.magicjson.helpers;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResourceLocationToStatementAddress
 {
     // Make sure to exit after first hit to prevent too much removal
-    public static Map<String, String> resourceLocationReplacements = Map.of(
-            ":magicjson/statement/", ":",
-            ":magicjson/function/", ":",
+    public static List<String> resourceLocationReplacements = List.of(
+            ":magicjson/statement/",
+            ":magicjson/function/",
             // The entrys below this line are only backups to catch shorthand
-            ":statement/", ":",
-            ":function/", ":"
+            ":statement/",
+            ":function/"
     );
 
     public static String handle(String location)
     {
         if(!location.contains(":")){return null;}
 
-        for(String stringToReplace : resourceLocationReplacements.keySet())
+        for(String stringToReplace : resourceLocationReplacements)
         {
             if(location.contains(stringToReplace))
             {
-                location = location.replace(stringToReplace,resourceLocationReplacements.get(stringToReplace));
+                location = location.replace(stringToReplace,":");
                 break;
             }
         }

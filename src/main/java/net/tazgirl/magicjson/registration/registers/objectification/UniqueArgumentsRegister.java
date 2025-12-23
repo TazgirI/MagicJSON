@@ -3,7 +3,7 @@
 //import net.tazgirl.magicjson.magicjson_events.registers.bases.MapRegisterFetchEvent;
 //import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
 //import net.tazgirl.magicjson.registration.registers.base.MapRegister;
-//import net.tazgirl.magicjson.statements.hooks.Hook;
+//import net.tazgirl.magicjson.statements.hooks.base.Hook;
 //import org.checkerframework.checker.units.qual.K;
 //
 //public class UniqueArgumentsRegister extends MapRegister<String, Object>

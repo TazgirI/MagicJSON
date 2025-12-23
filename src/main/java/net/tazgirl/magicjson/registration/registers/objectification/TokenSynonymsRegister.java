@@ -6,7 +6,6 @@ import net.tazgirl.magicjson.registration.registers.base.MapRegister;
 
 public class TokenSynonymsRegister extends MapRegister<String, String>
 {
-
     @Override
     public String getIdentifier()
     {

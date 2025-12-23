@@ -18,7 +18,7 @@ import java.util.List;
 public class TestCommand
 {
 
-    static List<TestRoot> allTests = List.of(new AllRegistersTests(), new TokenisationTests());
+    static List<TestRoot> runTests = List.of(new AllRegistersTests(), new TokenisationTests(), new NumericalComparisonTests(), new ArgTests());
 
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event)

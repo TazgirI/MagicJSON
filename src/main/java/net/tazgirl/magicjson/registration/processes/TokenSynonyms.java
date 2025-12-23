@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class TokenSynonyms
 {
-    public static void RegisterSynonyms(ServerStartingEvent event)
+    public static void RegisterSynonyms()
     {
-        Map<ResourceLocation, Resource> resources = GetAllSynonymJsons(event);
+        Map<ResourceLocation, Resource> resources = GetAllSynonymJsons();
 
         for(Map.Entry<ResourceLocation, Resource> entry: resources.entrySet())
         {
@@ -26,9 +26,9 @@ public class TokenSynonyms
         }
     }
 
-    public static Map<ResourceLocation, Resource> GetAllSynonymJsons(ServerStartingEvent event)
+    public static Map<ResourceLocation, Resource> GetAllSynonymJsons()
     {
-        ResourceManager resourceManager = event.getServer().getResourceManager();
+        ResourceManager resourceManager = Constants.server.getResourceManager();
 
         return resourceManager.listResources("magicjson", path -> path.getPath().endsWith("hook_synonyms.json"));
     }

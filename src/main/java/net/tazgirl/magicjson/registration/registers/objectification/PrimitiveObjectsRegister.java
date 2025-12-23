@@ -3,11 +3,11 @@ package net.tazgirl.magicjson.registration.registers.objectification;
 import net.tazgirl.magicjson.Logging;
 import net.tazgirl.magicjson.magicjson_events.registers.bases.MapRegisterFetchEvent;
 import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
-import net.tazgirl.magicjson.registration.InitRecord;
+import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.RegistersForProcessing;
 import net.tazgirl.magicjson.registration.registers.base.MapRegister;
 
-public class PrimitiveObjectsRegister extends MapRegister<String, InitRecord>
+public class PrimitiveObjectsRegister extends MapRegister<String, PrimitiveInitRecord>
 {
 
     @Override
@@ -22,7 +22,7 @@ public class PrimitiveObjectsRegister extends MapRegister<String, InitRecord>
         return new FetchEvent();
     }
 
-    public static class FetchEvent extends MapRegisterFetchEvent<String, InitRecord>
+    public static class FetchEvent extends MapRegisterFetchEvent<String, PrimitiveInitRecord>
     {
         @Override
         public String getIdentifier()
@@ -31,7 +31,7 @@ public class PrimitiveObjectsRegister extends MapRegister<String, InitRecord>
         }
 
         @Override
-        public InitRecord put(String address, InitRecord value)
+        public PrimitiveInitRecord put(String address, PrimitiveInitRecord value)
         {
             if(!address.contains(":") || address.contains("/")){
                 Logging.Warn("Attempted to register a PrimitiveObject without using the correct form of \"namespace:token\", the attempted token registration for \"" + address + "\" has been skipped"); return null;}

@@ -1,4 +1,4 @@
-package net.tazgirl.magicjson.statements.hooks;
+package net.tazgirl.magicjson.statements.hooks.base;
 
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
@@ -24,21 +24,20 @@ public class HookArgument extends Base
     }
 
     @Override
-    public Boolean HandleValue(Object object)
+    public Boolean HandleBase(Base base)
     {
-        if(object instanceof Base base)
+
+        if(name == null)
         {
-            if(name == null)
-            {
-                name = base;
-                return true;
-            }
-            if(value == null)
-            {
-                value = base;
-                return true;
-            }
+            name = base;
+            return true;
         }
+        if(value == null)
+        {
+            value = base;
+            return true;
+        }
+
 
         return false;
     }

@@ -5,14 +5,14 @@ import net.tazgirl.magicjson.statements.objects.StatementHolder;
 
 import java.lang.reflect.InvocationTargetException;
 
-public record InitRecord(Class<? extends Base> initClass, Object initArgument)
+public record PrimitiveInitRecord(Class<? extends Base> initClass, Object initArgument)
 {
     public Base init(StatementHolder holder)
     {
         try
         {
             Base returnObject = initClass.getDeclaredConstructor(StatementHolder.class).newInstance(holder);
-            returnObject.HandleValue(initArgument);
+            returnObject.HandleObject(initArgument);
             return returnObject;
         }
         catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException | InstantiationException e)

@@ -35,13 +35,19 @@ public abstract class NumberObject<T extends Number> extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleValue(Object object)
+    public @NotNull Boolean HandleObject(Object object)
     {
         if(object instanceof Number number)
         {
             value = (T) NumberHandling.getNumberAsType(typeClass, number);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public @NotNull Boolean HandleBase(Base base)
+    {
         return false;
     }
 

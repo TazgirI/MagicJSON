@@ -19,6 +19,16 @@ public class PrivateCore
         return null;
     }
 
+    public static Object runStatement(String address, Map<String, Object> args)
+    {
+        if(statementRegister.get(address) instanceof StatementHolder holder)
+        {
+            holder.setArgs(args);
+            return holder.Run();
+        }
+        return null;
+    }
+
     public static String addressBuilder(String namespace, String fileNameAndPath)
     {
         return namespace + ":" + fileNameAndPath;
@@ -32,6 +42,11 @@ public class PrivateCore
         {
             Logging.Warn(address + " was just overwritten during Statement registration, if two mods are conflicting then you must create a synonym");
         }
+    }
+
+    public static boolean hasStatement(String address)
+    {
+        return statementRegister.containsKey(address);
     }
 
     static void clearHolderRelations()
