@@ -27,6 +27,12 @@ public class StatementHolder
         this.constructor = stack;
     }
 
+    public StatementHolder(TEST_CASE testCase)
+    {
+
+    }
+
+
     public Object Run()
     {
         Object result = root.Resolve();
@@ -125,5 +131,10 @@ public class StatementHolder
 
             parentToChildren.put(newBase, acceptedChildren);
         }
+    }
+
+    public enum TEST_CASE
+    {
+        THIS_IS_A_TEST_OPTION_ONLY_FOR_CONTROLLED_SITUATIONS
     }
 }
