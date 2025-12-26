@@ -7,7 +7,7 @@ public class StatementOptional<T>
     Object value;
     T defaultValue;
 
-    public StatementOptional(T value, @NotNull T defaultValue)
+    public StatementOptional(Object value, @NotNull T defaultValue)
     {
         this.value = value;
         this.defaultValue = defaultValue;
