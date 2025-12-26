@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class StatementOptional<T>
 {
-    Object value;
-    T defaultValue;
+    public Object value;
+    public T defaultValue;
 
     public StatementOptional(Object value, @NotNull T defaultValue)
     {
