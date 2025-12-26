@@ -59,7 +59,7 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public Boolean HandleBase(Base base)
+    public @NotNull Boolean HandleBase(Base base)
     {
         values.add(base);
         holder.AddRelationship(this, base);

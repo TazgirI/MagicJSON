@@ -24,7 +24,7 @@ public class HookArgument extends Base
     }
 
     @Override
-    public Boolean HandleBase(Base base)
+    public @NotNull Boolean HandleBase(Base base)
     {
 
         if(name == null)

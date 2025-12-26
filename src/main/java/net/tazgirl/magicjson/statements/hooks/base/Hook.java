@@ -39,7 +39,7 @@ public abstract class Hook extends Base
     public abstract Object RunHook(Map<String, Base> hookArgs);
 
     @Override
-    public Boolean HandleBase(Base base)
+    public @NotNull Boolean HandleBase(Base base)
     {
         if(base instanceof HookArgument argument)
         {
