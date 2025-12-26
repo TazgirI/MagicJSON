@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class StatementOptional<T>
 {
-    T value;
+    Object value;
     T defaultValue;
 
     public StatementOptional(T value, @NotNull T defaultValue)
@@ -29,7 +29,7 @@ public class StatementOptional<T>
 
         }
 
-        return value != null ? value : defaultValue;
+        return value != null ? (T) value : defaultValue;
     }
 
 
