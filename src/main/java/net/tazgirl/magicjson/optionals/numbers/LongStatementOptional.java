@@ -1,9 +1,10 @@
-package net.tazgirl.magicjson.optionals;
+package net.tazgirl.magicjson.optionals.numbers;
 
 import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.optionals.IStatementOptional;
 import org.jetbrains.annotations.NotNull;
 
-public class LongStatementOptional extends Number implements IStatementOptional<Long>
+public class LongStatementOptional extends Number implements IStatementOptional<Long>, Comparable<Long>
 {
     public Object value;
     public Long defaultValue;
@@ -61,5 +62,11 @@ public class LongStatementOptional extends Number implements IStatementOptional<
     public double doubleValue()
     {
         return get().doubleValue();
+    }
+
+    @Override
+    public int compareTo(@NotNull Long o)
+    {
+        return get().compareTo(o);
     }
 }

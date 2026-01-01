@@ -1,9 +1,10 @@
-package net.tazgirl.magicjson.optionals;
+package net.tazgirl.magicjson.optionals.numbers;
 
 import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.optionals.IStatementOptional;
 import org.jetbrains.annotations.NotNull;
 
-public class FloatStatementOptional extends Number implements IStatementOptional<Float>
+public class FloatStatementOptional extends Number implements IStatementOptional<Float>, Comparable<Float>
 {
     public Object value;
     public Float defaultValue;
@@ -61,5 +62,11 @@ public class FloatStatementOptional extends Number implements IStatementOptional
     public double doubleValue()
     {
         return get().doubleValue();
+    }
+
+    @Override
+    public int compareTo(@NotNull Float o)
+    {
+        return get().compareTo(o);
     }
 }

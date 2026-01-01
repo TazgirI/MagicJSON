@@ -1,22 +1,21 @@
-package net.tazgirl.magicjson.optionals.numbers;
+package net.tazgirl.magicjson.optionals;
 
 import net.tazgirl.magicjson.PrivateCore;
-import net.tazgirl.magicjson.optionals.IStatementOptional;
 import org.jetbrains.annotations.NotNull;
 
-public class DoubleStatementOptional extends Number implements IStatementOptional<Double>
+public class StringStatementOptional implements IStatementOptional<String>, CharSequence, Comparable<String>
 {
     public Object value;
-    public Double defaultValue;
+    public String defaultValue;
 
-    public DoubleStatementOptional(Object value, @NotNull Double defaultValue)
+    public StringStatementOptional(Object value, @NotNull String defaultValue)
     {
         this.value = value;
         this.defaultValue = defaultValue;
     }
 
     @Override
-    public Double get()
+    public String get()
     {
         Object tempValue = value;
         if(tempValue instanceof String string && PrivateCore.hasStatement(string))
@@ -24,9 +23,9 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
             tempValue = PrivateCore.runStatement(string);
         }
 
-        if(tempValue instanceof Number number)
+        if(tempValue instanceof String parsedValue)
         {
-            return number.doubleValue();
+            return parsedValue;
         }
         else
         {
@@ -41,25 +40,32 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
     }
 
     @Override
-    public int intValue()
+    public int length()
     {
-        return get().intValue();
+        return get().length();
     }
 
     @Override
-    public long longValue()
+    public char charAt(int index)
     {
-        return get().longValue();
+        return get().charAt(index);
     }
 
     @Override
-    public float floatValue()
+    public @NotNull CharSequence subSequence(int start, int end)
     {
-        return get().floatValue();
+        return get().substring(start,end);
+    }
+
+    // Infinite loop potential, I think, if passed a StringStatementOptional as a String (Or I'm too tired and that's only if I used o.compareTo(get()))
+    @Override
+    public int compareTo(@NotNull String o)
+    {
+        return get().compareTo(o);
     }
 
     @Override
-    public double doubleValue()
+    public @NotNull String toString()
     {
         return get();
     }

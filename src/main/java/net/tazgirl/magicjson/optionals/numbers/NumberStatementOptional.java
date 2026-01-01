@@ -4,19 +4,19 @@ import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
 import org.jetbrains.annotations.NotNull;
 
-public class DoubleStatementOptional extends Number implements IStatementOptional<Double>
+public class NumberStatementOptional extends Number implements IStatementOptional<Number>, Comparable<Number>
 {
     public Object value;
-    public Double defaultValue;
+    public Number defaultValue;
 
-    public DoubleStatementOptional(Object value, @NotNull Double defaultValue)
+    public NumberStatementOptional(Object value, @NotNull Number defaultValue)
     {
         this.value = value;
         this.defaultValue = defaultValue;
     }
 
     @Override
-    public Double get()
+    public Number get()
     {
         Object tempValue = value;
         if(tempValue instanceof String string && PrivateCore.hasStatement(string))
@@ -26,7 +26,7 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
 
         if(tempValue instanceof Number number)
         {
-            return number.doubleValue();
+            return number;
         }
         else
         {
@@ -61,6 +61,13 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
     @Override
     public double doubleValue()
     {
-        return get();
+        return get().doubleValue();
+    }
+
+    // Probably useless but kind of funny
+    @Override
+    public int compareTo(@NotNull Number o)
+    {
+        return Double.compare(o.doubleValue(), o.doubleValue());
     }
 }

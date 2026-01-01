@@ -1,5 +1,6 @@
-package net.tazgirl.magicjson;
+package net.tazgirl.magicjson.optionals;
 
+import net.tazgirl.magicjson.PrivateCore;
 import org.jetbrains.annotations.NotNull;
 
 public class StatementOptional<T>
@@ -15,22 +16,24 @@ public class StatementOptional<T>
 
     public T get()
     {
-        if(value instanceof String string && PrivateCore.hasStatement(string))
+        Object tempValue = value;
+        if(tempValue instanceof String string && PrivateCore.hasStatement(string))
         {
-            Object statementResult = PrivateCore.runStatement(string);
-            try
-            {
-                return statementResult != null ? (T) statementResult : defaultValue;
-            }
-            catch (ClassCastException e)
-            {
-                return defaultValue;
-            }
-
+            tempValue = PrivateCore.runStatement(string);
         }
 
-        return value != null ? (T) value : defaultValue;
+        try
+        {
+            return (T) tempValue;
+        }
+        catch (ClassCastException e)
+        {
+            return defaultValue;
+        }
     }
 
-
+    public Object getRaw()
+    {
+        return value;
+    }
 }
