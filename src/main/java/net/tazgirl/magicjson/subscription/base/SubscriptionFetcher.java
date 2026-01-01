@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.helpers.InputStreamToJson;
 
@@ -60,7 +60,7 @@ public class SubscriptionFetcher
                     }
                     catch (IllegalStateException | NullPointerException e)
                     {
-                        Logging.Warn("JsonObject \"" + elementEntry.getKey() + "\" did not have the expected contents of two JsonPrimitive Strings named \"" + Constants.hookSynonymAddressElement + "\" and \"" + Constants.hookSynonymSynonymElement + "\" respectively");
+                        MJLogging.Warn("JsonObject \"" + elementEntry.getKey() + "\" did not have the expected contents of two JsonPrimitive Strings named \"" + Constants.hookSynonymAddressElement + "\" and \"" + Constants.hookSynonymSynonymElement + "\" respectively");
                     }
 
                 }
@@ -68,7 +68,7 @@ public class SubscriptionFetcher
         }
         catch (IOException e)
         {
-            Logging.Error("Could not process .json: " + entry.getKey());
+            MJLogging.Error("Could not process .json: " + entry.getKey());
         }
 
         return returnMap;

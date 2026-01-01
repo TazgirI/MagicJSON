@@ -1,7 +1,7 @@
 package net.tazgirl.magicjson.processing;
 
 import net.tazgirl.magicjson.Config;
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.RegistersForProcessing;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
@@ -33,7 +33,7 @@ public class TokensToHolder
 
         if(tokens.isEmpty())
         {
-            Logging.Debug("Statement at debug address \"" + stack.processingResourceAddress + "\" returned an empty tokens list");
+            MJLogging.Debug("Statement at debug address \"" + stack.processingResourceAddress + "\" returned an empty tokens list");
             stack.Put(new NullObject(stack.holder));
             return stack.finalise();
         }
@@ -84,7 +84,7 @@ public class TokensToHolder
                     }
                     catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
                     {
-                        Logging.Error("Failed to construct the AppendHook with the token of " + token.substring(2));
+                        MJLogging.Error("Failed to construct the AppendHook with the token of " + token.substring(2));
                     }
                 }
                 else
@@ -113,17 +113,17 @@ public class TokensToHolder
                 }
                 else
                 {
-                    Logging.Debug("Detected token '" + token + "' is a string but is too short to process");
+                    MJLogging.Debug("Detected token '" + token + "' is a string but is too short to process");
                 }
             }
 
             if(Config.OBJECTIFICATION_PING_COUNT.getAsBoolean())
             {
-                Logging.Info("The token \"" + token + "\" was pinged " + pings + " time(s) during object construction");
+                MJLogging.Info("The token \"" + token + "\" was pinged " + pings + " time(s) during object construction");
             }
             if(Config.OBJECTIFICATION_PING_CONTENTS.getAsBoolean())
             {
-                Logging.Info(stack.objectStack.toString());
+                MJLogging.Info(stack.objectStack.toString());
             }
 
 

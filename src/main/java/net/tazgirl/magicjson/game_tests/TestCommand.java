@@ -7,7 +7,7 @@ import net.minecraft.network.chat.TextColor;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.SendMessage;
 
@@ -36,7 +36,7 @@ public class TestCommand
                                 SendMessage.All(component);
                                 if(component.getStyle().getColor() == red)
                                 {
-                                    Logging.Error(component.getString());
+                                    MJLogging.Error(component.getString());
                                 }
                             }
 

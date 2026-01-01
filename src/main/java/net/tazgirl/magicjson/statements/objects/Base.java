@@ -1,6 +1,6 @@
 package net.tazgirl.magicjson.statements.objects;
 
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Base
@@ -43,7 +43,7 @@ public abstract class Base
 
     public void DebugUnHandledType(Class<?> failedType)
     {
-        Logging.Debug("Failed to handle Object of type \"" + failedType.toString() + "\" in a(n) " + identifier + " within: " + holder.getAddress());
+        MJLogging.Debug("Failed to handle Object of type \"" + failedType.toString() + "\" in a(n) " + identifier + " within: " + holder.getAddress());
     }
 
     public void DebugUnHandledType(Object object)

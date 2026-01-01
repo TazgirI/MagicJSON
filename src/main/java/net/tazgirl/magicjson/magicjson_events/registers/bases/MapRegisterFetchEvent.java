@@ -1,13 +1,9 @@
 package net.tazgirl.magicjson.magicjson_events.registers.bases;
 
-import net.neoforged.bus.api.Event;
 import net.neoforged.neoforge.common.NeoForge;
-import net.tazgirl.magicjson.Logging;
-import org.checkerframework.checker.index.qual.SearchIndexBottom;
-import org.checkerframework.checker.units.qual.K;
+import net.tazgirl.magicjson.MJLogging;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class MapRegisterFetchEvent<K, V> extends RegisterFetchEventRoot<Map<K, V>>
@@ -23,7 +19,7 @@ public abstract class MapRegisterFetchEvent<K, V> extends RegisterFetchEventRoot
 
         if(existing != null)
         {
-            Logging.Debug("The MapRegister " + identifier + " just overrode the key `" + key.toString() + "` within the event fetch cycle with `" + value.toString() + "`, previous value was: " + existing);
+            MJLogging.Debug("The MapRegister " + identifier + " just overrode the key `" + key.toString() + "` within the event fetch cycle with `" + value.toString() + "`, previous value was: " + existing);
         }
 
         return existing;
@@ -37,7 +33,7 @@ public abstract class MapRegisterFetchEvent<K, V> extends RegisterFetchEventRoot
 
             if(existing != null)
             {
-                Logging.Debug("The MapRegisterEvent " + identifier + " just overrode the existing key `" + key.toString() + "` in the corresponding register with `" + value.toString() + "`, previous value was: " + existing);
+                MJLogging.Debug("The MapRegisterEvent " + identifier + " just overrode the existing key `" + key.toString() + "` in the corresponding register with `" + value.toString() + "`, previous value was: " + existing);
             }
         });
     }

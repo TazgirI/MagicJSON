@@ -4,7 +4,7 @@ import net.tazgirl.magicjson.data.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
-public class Logging
+public class MJLogging
 {
     static Logger localLogger = MagicJson.LOGGER;
 

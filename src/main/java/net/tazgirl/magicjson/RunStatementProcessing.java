@@ -7,8 +7,6 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.tazgirl.magicjson.helpers.ResourceLocationToStatementAddress;
 import net.tazgirl.magicjson.processing.Tokenisation;
 import net.tazgirl.magicjson.processing.TokensToHolder;
-import net.tazgirl.magicjson.registration.RegistersForProcessing;
-import net.tazgirl.magicjson.registration.registers.base.Register;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 
 import java.io.IOException;
@@ -36,7 +34,7 @@ public class RunStatementProcessing
             }
             catch (IOException e)
             {
-                Logging.Warn(entry.getKey().toString() + " could not be opened, skipping file");
+                MJLogging.Warn(entry.getKey().toString() + " could not be opened, skipping file");
                 continue;
             }
         }

@@ -1,6 +1,6 @@
 package net.tazgirl.magicjson.statements.hooks.base;
 
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +29,7 @@ public abstract class Hook extends Base
             }
             else
             {
-                Logging.Debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
+                MJLogging.Debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
             }
         }
 

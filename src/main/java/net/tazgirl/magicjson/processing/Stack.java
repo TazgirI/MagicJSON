@@ -1,6 +1,6 @@
 package net.tazgirl.magicjson.processing;
 
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import net.tazgirl.magicjson.statements.objects.primitives.numbers.DoubleObject;
@@ -35,7 +35,7 @@ public class Stack
     {
         if(objectStack.size() <= 1)
         {
-            Logging.Debug("Attempted to close top of empty stack, action skipped.   Stack contents: " + objectStack.toString());
+            MJLogging.Debug("Attempted to close top of empty stack, action skipped.   Stack contents: " + objectStack.toString());
             return false;
         }
 
@@ -48,7 +48,7 @@ public class Stack
             return true;
         }
 
-        Logging.Debug(objectStack.getLast().toString() + " failed to handle " + top.toString() + " when processing " + processingResourceAddress + ".   Stack contents: " + objectStack);
+        MJLogging.Debug(objectStack.getLast().toString() + " failed to handle " + top.toString() + " when processing " + processingResourceAddress + ".   Stack contents: " + objectStack);
         return false;
     }
 

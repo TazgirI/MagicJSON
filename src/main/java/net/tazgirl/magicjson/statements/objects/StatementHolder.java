@@ -1,6 +1,6 @@
 package net.tazgirl.magicjson.statements.objects;
 
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.processing.Stack;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class StatementHolder
 
         if(root == null)
         {
-            Logging.Debug("The StatementHolder for \"" + address + "\" has failed to find an acceptable root and is incapable of running");
+            MJLogging.Debug("The StatementHolder for \"" + address + "\" has failed to find an acceptable root and is incapable of running");
         }
 
         constructor = null;

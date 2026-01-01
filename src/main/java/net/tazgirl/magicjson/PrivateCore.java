@@ -1,6 +1,5 @@
 package net.tazgirl.magicjson;
 
-import net.neoforged.neoforge.server.timings.ObjectTimings;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public class PrivateCore
 
         if(existing != null)
         {
-            Logging.Warn(address + " was just overwritten during Statement registration, if two mods are conflicting then you must create a synonym");
+            MJLogging.Warn(address + " was just overwritten during Statement registration, if two mods are conflicting then you must create a synonym");
         }
     }
 

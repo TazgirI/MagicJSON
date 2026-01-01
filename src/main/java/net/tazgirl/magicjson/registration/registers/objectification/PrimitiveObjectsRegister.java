@@ -1,6 +1,6 @@
 package net.tazgirl.magicjson.registration.registers.objectification;
 
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.magicjson_events.registers.bases.MapRegisterFetchEvent;
 import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
@@ -34,7 +34,7 @@ public class PrimitiveObjectsRegister extends MapRegister<String, PrimitiveInitR
         public PrimitiveInitRecord put(String address, PrimitiveInitRecord value)
         {
             if(!address.contains(":") || address.contains("/")){
-                Logging.Warn("Attempted to register a PrimitiveObject without using the correct form of \"namespace:token\", the attempted token registration for \"" + address + "\" has been skipped"); return null;}
+                MJLogging.Warn("Attempted to register a PrimitiveObject without using the correct form of \"namespace:token\", the attempted token registration for \"" + address + "\" has been skipped"); return null;}
 
             String synonym = RegistersForProcessing.tokenSynonyms.get(address);
 

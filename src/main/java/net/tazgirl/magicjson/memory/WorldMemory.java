@@ -4,11 +4,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.data.Constants;
-import net.tazgirl.magicjson.statements.objects.Base;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -42,7 +39,7 @@ public class WorldMemory extends SavedData
 
             if(object == null)
             {
-                Logging.Debug("Attempted to put unacceptable type into world memory, entry has not been saved and will be lost when server closes");
+                MJLogging.Debug("Attempted to put unacceptable type into world memory, entry has not been saved and will be lost when server closes");
                 continue;
             }
 
@@ -99,7 +96,7 @@ public class WorldMemory extends SavedData
             return true;
         }
 
-        Logging.Warn("Attempted to put unconvertable type in WorldMemory");
+        MJLogging.Warn("Attempted to put unconvertable type in WorldMemory");
         return false;
     }
 

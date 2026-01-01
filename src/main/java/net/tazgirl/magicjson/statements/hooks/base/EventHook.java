@@ -1,7 +1,7 @@
 package net.tazgirl.magicjson.statements.hooks.base;
 
 import net.neoforged.bus.api.Event;
-import net.tazgirl.magicjson.Logging;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
@@ -41,7 +41,7 @@ public abstract class EventHook extends Base
             }
             else
             {
-                Logging.Debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
+                MJLogging.Debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
             }
         }
 
