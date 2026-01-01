@@ -69,4 +69,10 @@ public class IntegerStatementOptional extends Number implements IStatementOption
     {
         return get().compareTo(o);
     }
+
+    @Override
+    public String toString()
+    {
+        return get().toString();
+    }
 }

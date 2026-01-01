@@ -70,4 +70,10 @@ public class NumberStatementOptional extends Number implements IStatementOptiona
     {
         return Double.compare(o.doubleValue(), o.doubleValue());
     }
+
+    @Override
+    public String toString()
+    {
+        return get().toString();
+    }
 }

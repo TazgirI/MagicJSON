@@ -69,4 +69,10 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
     {
         return get().compareTo(o);
     }
+
+    @Override
+    public String toString()
+    {
+        return get().toString();
+    }
 }

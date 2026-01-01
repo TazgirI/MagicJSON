@@ -69,4 +69,10 @@ public class LongStatementOptional extends Number implements IStatementOptional<
     {
         return get().compareTo(o);
     }
+
+    @Override
+    public String toString()
+    {
+        return get().toString();
+    }
 }
