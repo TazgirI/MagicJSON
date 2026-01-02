@@ -15,6 +15,11 @@ public class NumberStatementOptional extends Number implements IStatementOptiona
         this.defaultValue = defaultValue;
     }
 
+    public static NumberStatementOptional from(Number value)
+    {
+        return new NumberStatementOptional(value, 0);
+    }
+
     @Override
     public Number get()
     {

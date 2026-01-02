@@ -39,6 +39,11 @@ public class StringStatementOptional implements IStatementOptional<String>, Char
         return value;
     }
 
+    public static StringStatementOptional from(String value)
+    {
+        return new StringStatementOptional(value, "");
+    }
+
     @Override
     public int length()
     {

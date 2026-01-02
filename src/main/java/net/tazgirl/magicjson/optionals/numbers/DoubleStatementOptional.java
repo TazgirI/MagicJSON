@@ -1,7 +1,10 @@
 package net.tazgirl.magicjson.optionals.numbers;
 
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
+import net.tazgirl.magicjson.optionals.minecraft_types.MobEffectHolderStatementOptional;
 import org.jetbrains.annotations.NotNull;
 
 public class DoubleStatementOptional extends Number implements IStatementOptional<Double>, Comparable<Double>
@@ -13,6 +16,11 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
     {
         this.value = value;
         this.defaultValue = defaultValue;
+    }
+
+    public static DoubleStatementOptional from(Double value)
+    {
+        return new DoubleStatementOptional(value, 0.0);
     }
 
     @Override

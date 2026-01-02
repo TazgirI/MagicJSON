@@ -15,6 +15,11 @@ public class LongStatementOptional extends Number implements IStatementOptional<
         this.defaultValue = defaultValue;
     }
 
+    public static LongStatementOptional from(long value)
+    {
+        return new LongStatementOptional(value, 0L);
+    }
+
     @Override
     public Long get()
     {

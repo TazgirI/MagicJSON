@@ -15,6 +15,11 @@ public class FloatStatementOptional extends Number implements IStatementOptional
         this.defaultValue = defaultValue;
     }
 
+    public static FloatStatementOptional from(Float value)
+    {
+        return new FloatStatementOptional(value, 0f);
+    }
+
     @Override
     public Float get()
     {
