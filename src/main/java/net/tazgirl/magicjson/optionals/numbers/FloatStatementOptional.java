@@ -40,6 +40,12 @@ public class FloatStatementOptional extends Number implements IStatementOptional
     }
 
     @Override
+    public Float getWithArg(Object object)
+    {
+        return get();
+    }
+
+    @Override
     public Object getRaw()
     {
         return value;

@@ -43,6 +43,12 @@ public class DoubleStatementOptional extends Number implements IStatementOptiona
     }
 
     @Override
+    public Double getWithArg(Object object)
+    {
+        return get();
+    }
+
+    @Override
     public Object getRaw()
     {
         return value;

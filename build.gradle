@@ -169,6 +169,19 @@ idea {
     }
 }
 
+// AI generated, hope this works
+// Create a dedicated copy task
+tasks.register('copyToSurvivor', Copy) {
+    from layout.buildDirectory.dir("/libs")   // lazy provider, safe for config cache
+    into file('C:\\Users\\Migra\\Repos\\survivor\\libs')           // static path is fine
+    include '*.jar'
+}
+
+// Make the copy task run after build
+tasks.named('build') {
+    finalizedBy(tasks.named('copyToSurvivor'))
+}
+
 
 test {
     useJUnitPlatform()

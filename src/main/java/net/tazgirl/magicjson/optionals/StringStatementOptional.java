@@ -34,6 +34,12 @@ public class StringStatementOptional implements IStatementOptional<String>, Char
     }
 
     @Override
+    public String getWithArg(Object object)
+    {
+        return get();
+    }
+
+    @Override
     public Object getRaw()
     {
         return value;

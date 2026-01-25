@@ -40,6 +40,12 @@ public class NumberStatementOptional extends Number implements IStatementOptiona
     }
 
     @Override
+    public Number getWithArg(Object object)
+    {
+        return get();
+    }
+
+    @Override
     public Object getRaw()
     {
         return value;

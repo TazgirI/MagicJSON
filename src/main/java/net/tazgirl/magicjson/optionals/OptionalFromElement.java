@@ -2,12 +2,15 @@ package net.tazgirl.magicjson.optionals;
 
 import com.google.gson.JsonElement;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.optionals.minecraft_types.MobEffectHolderStatementOptional;
 import net.tazgirl.magicjson.optionals.numbers.DoubleStatementOptional;
 import net.tazgirl.magicjson.optionals.numbers.FloatStatementOptional;
@@ -158,17 +161,7 @@ public class OptionalFromElement
             return null;
         }
 
-        if(PrivateCore.hasStatement(elementString))
-        {
-            return new MobEffectHolderStatementOptional(elementString, MobEffects.DAMAGE_BOOST);
-        }
-
-        if(BuiltInRegistries.MOB_EFFECT.get(ResourceLocation.parse(elementString)) instanceof MobEffect mobEffect)
-        {
-            return new MobEffectHolderStatementOptional(Holder.direct(mobEffect), MobEffects.DAMAGE_BOOST);
-        }
-
-        return null;
+        return new MobEffectHolderStatementOptional(elementString, MobEffects.NIGHT_VISION);
     }
 
 

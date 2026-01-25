@@ -40,6 +40,12 @@ public class LongStatementOptional extends Number implements IStatementOptional<
     }
 
     @Override
+    public Long getWithArg(Object object)
+    {
+        return get();
+    }
+
+    @Override
     public Object getRaw()
     {
         return value;
