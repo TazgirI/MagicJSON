@@ -4,6 +4,7 @@ import net.tazgirl.magicjson.Config;
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.RegistersForProcessing;
+import net.tazgirl.magicjson.statements.objects.Execute;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
@@ -34,7 +35,7 @@ public class TokensToHolder
         if(tokens.isEmpty())
         {
             MJLogging.Debug("Statement at debug address \"" + stack.processingResourceAddress + "\" returned an empty tokens list");
-            stack.Put(new NullObject(stack.holder));
+            stack.put(new NullObject(stack.holder));
             return stack.finalise();
         }
 
@@ -51,13 +52,12 @@ public class TokensToHolder
 
             if(RegistersForProcessing.statementObjects.containsKey(token))
             {
-                stack.Put(RegistersForProcessing.statementObjects.getAsObject(token, stack.holder));
+                stack.put(RegistersForProcessing.statementObjects.getAsObject(token, stack.holder));
                 pings++;
             }
-
-            if(RegistersForProcessing.primitiveObjects.containsKey(token))
+            else if(RegistersForProcessing.primitiveObjects.containsKey(token))
             {
-                stack.Put(RegistersForProcessing.primitiveObjects.get(token).init(stack.holder));
+                stack.put(RegistersForProcessing.primitiveObjects.get(token).init(stack.holder));
                 // Primitives close themselves even if it doesn't feel like it i.e and(true true) the ending bracket closes the second true not the and
 //                if(tokens.get(i + 1).equals(")"))
 //                {
@@ -65,8 +65,13 @@ public class TokensToHolder
 //                }
                 pings++;
             }
-
-            if(Character.isDigit(token.charAt(0)))
+            else if(RegistersForProcessing.statementKeywords.containsKey(token))
+            {
+                Execute execute = new Execute(stack.holder, RegistersForProcessing.statementKeywords.get(token));
+                stack.put(execute);
+                pings++;
+            }
+            else if(Character.isDigit(token.charAt(0)))
             {
                 stack.PutNum(token);
                 pings++;
@@ -97,8 +102,8 @@ public class TokensToHolder
             // Arg("waves") and _waves will both create the same object
             else if(token.charAt(0) == '_')
             {
-                stack.Put(new ArgGet(stack.holder));
-                stack.Put(new StringObject(stack.holder, token.substring(1)));
+                stack.put(new ArgGet(stack.holder));
+                stack.put(new StringObject(stack.holder, token.substring(1)));
                 stack.Close(2);
                 pings++;
             }
@@ -107,7 +112,7 @@ public class TokensToHolder
             {
                 if(!(token.length() - 2 <= 0))
                 {
-                    stack.Put(new StringObject(stack.holder, token.substring(1, token.length() - 1)));
+                    stack.put(new StringObject(stack.holder, token.substring(1, token.length() - 1)));
                     stack.Close();
                     pings++;
                 }

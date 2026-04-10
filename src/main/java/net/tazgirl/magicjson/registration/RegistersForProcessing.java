@@ -24,13 +24,15 @@ public class RegistersForProcessing
     public static PrimitiveObjectsRegister primitiveObjects = new PrimitiveObjectsRegister();
     public static StatementObjectTokensRegister statementObjects = new StatementObjectTokensRegister();
     public static AppendHookRegister appendHooks = new AppendHookRegister();
+    public static StatementKeywordsRegister statementKeywords = new StatementKeywordsRegister();
+
 //    public static UniqueArgumentsRegister uniqueArguments = new UniqueArgumentsRegister();
 
     // Alternate processing
     public static TokenSynonymsRegister tokenSynonyms = new TokenSynonymsRegister();
 
     // WARN: tokenSynonyms MUST come before primitiveObjects and statementObjects
-    public static List<Register<?>> allRegisters = List.of(endChars, excludeChars, soloChars, closeTokens, tokenSynonyms, primitiveObjects, statementObjects, appendHooks);
+    public static List<Register<?>> allRegisters = List.of(endChars, excludeChars, soloChars, closeTokens, tokenSynonyms, primitiveObjects, statementObjects, appendHooks, statementKeywords);
 
     static boolean hasFired = false;
 

@@ -68,7 +68,7 @@ public class Stack
         objectStack.getLast().HandleUniqueArgument(string.substring(1).toLowerCase());
     }
 
-    public void Put(Base base)
+    public void put(Base base)
     {
         objectStack.add(base);
     }
@@ -79,10 +79,10 @@ public class Stack
         {
             if (numString.contains("."))
             {
-                Put(new DoubleObject(holder, Double.valueOf(numString)));
+                put(new DoubleObject(holder, Double.valueOf(numString)));
             } else
             {
-                Put(new IntegerObject(holder, Integer.valueOf(numString)));
+                put(new IntegerObject(holder, Integer.valueOf(numString)));
             }
             return;
         }
@@ -99,19 +99,19 @@ public class Stack
         {
             case 'i' ->
             {
-                Put(new IntegerObject(holder, Integer.valueOf(numString)));
+                put(new IntegerObject(holder, Integer.valueOf(numString)));
             }
             case 'f' ->
             {
-                Put(new FloatObject(holder, Float.valueOf(numString)));
+                put(new FloatObject(holder, Float.valueOf(numString)));
             }
             case 'd' ->
             {
-                Put(new DoubleObject(holder, Double.valueOf(numString)));
+                put(new DoubleObject(holder, Double.valueOf(numString)));
             }
             case 'l' ->
             {
-                Put(new LongObject(holder, Long.valueOf(numString)));
+                put(new LongObject(holder, Long.valueOf(numString)));
             }
         }
     }

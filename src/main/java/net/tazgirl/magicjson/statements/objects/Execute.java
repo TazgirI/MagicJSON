@@ -2,17 +2,24 @@ package net.tazgirl.magicjson.statements.objects;
 
 import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
+import net.tazgirl.magicjson.statements.objects.primitives.StringObject;
 import org.jetbrains.annotations.NotNull;
 
 public class Execute extends Base
 {
     Base address;
 
-    boolean nopass = false;
+    boolean noPass = false;
 
     public Execute(StatementHolder holder)
     {
         super(holder);
+    }
+
+    public Execute(StatementHolder holder, String string)
+    {
+        super(holder);
+        this.HandleBase(new StringObject(holder, string));
     }
 
     @Override
@@ -20,7 +27,7 @@ public class Execute extends Base
     {
         if(address.Resolve() instanceof String string && PrivateCore.hasStatement(string))
         {
-            if(!nopass)
+            if(!noPass)
             {
                 return PrivateCore.runStatement(string, holder.args);
             }
@@ -48,7 +55,7 @@ public class Execute extends Base
     {
         if(string.equals(".!pass") || string.equals(".nopass"))
         {
-            nopass = true;
+            noPass = true;
             return true;
         }
 

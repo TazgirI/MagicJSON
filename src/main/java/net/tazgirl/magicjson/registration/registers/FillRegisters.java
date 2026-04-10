@@ -6,6 +6,7 @@ import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.registers.objectification.CloseTokensRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.PrimitiveObjectsRegister;
+import net.tazgirl.magicjson.registration.registers.objectification.StatementKeywordsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.AppendHookRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.EndCharsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.ExcludeCharsRegister;
