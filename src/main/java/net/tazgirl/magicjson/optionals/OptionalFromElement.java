@@ -21,38 +21,6 @@ import java.util.Objects;
 
 public class OptionalFromElement
 {
-//    public static <T> Object get(JsonElement element, Class<T> checkClass)
-//    {
-//        if(checkClass == Integer.class)
-//        {
-//            return INT(element, 0);
-//        }
-//        if(checkClass == Float.class)
-//        {
-//            return FLOAT(element, 0f);
-//        }
-//        if(checkClass == Double.class)
-//        {
-//            return DOUBLE(element, 0.0);
-//        }
-//        if(checkClass == Long.class)
-//        {
-//            return LONG(element, 0L);
-//        }
-//        if(checkClass == String.class || checkClass == CharSequence.class)
-//        {
-//            return STRING(element, "");
-//        }
-//        if(checkClass == MobEffect.class)
-//        {
-//            return MOB_EFFECT_HOLDER(element, MobEffects.DAMAGE_BOOST);
-//        }
-//
-//
-//        return null;
-//    }
-
-
     public static IntegerStatementOptional INT(JsonElement element)
     {
         if(!element.isJsonPrimitive())
@@ -165,4 +133,7 @@ public class OptionalFromElement
     }
 
 
+    public static IStatementOptional<?> BOOL(JsonElement element)
+    {
+    }
 }

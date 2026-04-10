@@ -15,31 +15,6 @@ public class StringStatementOptional implements IStatementOptional<String>, Char
     }
 
     @Override
-    public String get()
-    {
-        Object tempValue = value;
-        if(tempValue instanceof String string && PrivateCore.hasStatement(string))
-        {
-            tempValue = PrivateCore.runStatement(string);
-        }
-
-        if(tempValue instanceof String parsedValue)
-        {
-            return parsedValue;
-        }
-        else
-        {
-            return defaultValue;
-        }
-    }
-
-    @Override
-    public String getWithArg(Object object)
-    {
-        return get();
-    }
-
-    @Override
     public Object getRaw()
     {
         return value;

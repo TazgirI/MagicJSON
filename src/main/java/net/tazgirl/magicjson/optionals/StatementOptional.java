@@ -5,35 +5,22 @@ import org.jetbrains.annotations.NotNull;
 
 public class StatementOptional<T>
 {
-    public Object value;
+    public OptionalValue<T> optionalValue;
     public T defaultValue;
 
-    public StatementOptional(Object value, @NotNull T defaultValue)
+    public StatementOptional(OptionalValue<T> optionalValue, @NotNull T defaultValue)
     {
-        this.value = value;
+        this.optionalValue = optionalValue;
         this.defaultValue = defaultValue;
     }
 
     public T get()
     {
-        Object tempValue = value;
-        if(tempValue instanceof String string && PrivateCore.hasStatement(string))
-        {
-            tempValue = PrivateCore.runStatement(string);
-        }
-
-        try
-        {
-            return (T) tempValue;
-        }
-        catch (ClassCastException e)
-        {
-            return defaultValue;
-        }
+        return optionalValue.get();
     }
 
     public Object getRaw()
     {
-        return value;
+        return optionalValue.getRaw();
     }
 }
