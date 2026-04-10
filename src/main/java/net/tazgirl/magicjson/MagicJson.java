@@ -22,27 +22,27 @@ public class  MagicJson
     public static final Logger LOGGER = LogUtils.getLogger();
 
 
-    public Object runStatement(String address)
+    public static Object runStatement(String address)
     {
         return PrivateCore.runStatement(address);
     }
 
-    public Object runStatement(String address, Map<String, Object> args)
+    public static Object runStatement(String address, Map<String, Object> args)
     {
         return PrivateCore.runStatement(address, args);
     }
 
-    public boolean statementExists(String address)
+    public static boolean statementExists(String address)
     {
         return PrivateCore.hasStatement(address);
     }
 
-    public boolean isAddress(Object object)
+    public static boolean isAddress(Object object)
     {
         return object instanceof String string && PrivateCore.hasStatement(string);
     }
 
-    public Object attemptRunObject(Object object)
+    public static Object attemptRunObject(Object object)
     {
         if(isAddress(object))
         {
@@ -52,7 +52,7 @@ public class  MagicJson
         return object;
     }
 
-    public Object attemptRunObject(Object object, Map<String, Object> args)
+    public static Object attemptRunObject(Object object, Map<String, Object> args)
     {
         if(isAddress(object))
         {
