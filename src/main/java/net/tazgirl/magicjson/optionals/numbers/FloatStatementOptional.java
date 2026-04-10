@@ -1,89 +1,19 @@
 package net.tazgirl.magicjson.optionals.numbers;
 
-import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
+import net.tazgirl.magicjson.optionals.OptionalValue;
 import org.jetbrains.annotations.NotNull;
 
-public class FloatStatementOptional extends Number implements IStatementOptional<Float>, Comparable<Float>
+public class FloatStatementOptional extends NumberStatementOptional<Float>
 {
-    public Object value;
-    public Float defaultValue;
-
-    public FloatStatementOptional(Object value, @NotNull Float defaultValue)
+    public FloatStatementOptional(OptionalValue<Float> optionalValue, @NotNull Number defaultValue)
     {
-        this.value = value;
-        this.defaultValue = defaultValue;
-    }
-
-    public static FloatStatementOptional from(Float value)
-    {
-        return new FloatStatementOptional(value, 0f);
+        super(optionalValue, defaultValue);
     }
 
     @Override
     public Float get()
     {
-        Object tempValue = value;
-        if(tempValue instanceof String string && PrivateCore.hasStatement(string))
-        {
-            tempValue = PrivateCore.runStatement(string);
-        }
-
-        if(tempValue instanceof Number number)
-        {
-            return number.floatValue();
-        }
-        else
-        {
-            return defaultValue;
-        }
-    }
-
-    @Override
-    public Float getWithArg(Object object)
-    {
-        return get();
-    }
-
-    @Override
-    public Object getRaw()
-    {
-        return value;
-    }
-
-    @Override
-    public int intValue()
-    {
-        return get().intValue();
-    }
-
-    @Override
-    public long longValue()
-    {
-        return get().longValue();
-    }
-
-    @Override
-    public float floatValue()
-    {
-        return get();
-    }
-
-    @Override
-    public double doubleValue()
-    {
-        return get().doubleValue();
-    }
-
-    @Override
-    public int compareTo(@NotNull Float o)
-    {
-        return get().compareTo(o);
-    }
-
-    @Override
-    public String toString()
-    {
-        return get().toString();
+        return super.get().floatValue();
     }
 }

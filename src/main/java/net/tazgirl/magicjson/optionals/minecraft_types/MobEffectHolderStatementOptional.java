@@ -1,115 +1,102 @@
 package net.tazgirl.magicjson.optionals.minecraft_types;
 
 import com.mojang.datafixers.util.Either;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderOwner;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
-import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
-import net.tazgirl.magicjson.optionals.StringStatementOptional;
+import net.tazgirl.magicjson.optionals.OptionalValue;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class MobEffectHolderStatementOptional implements IStatementOptional<Holder<MobEffect>>, Holder<MobEffect>
 {
-    public Object value;
+    public OptionalValue<Holder<MobEffect>> optionalValue;
     public Holder<MobEffect> defaultValue;
 
-    public MobEffectHolderStatementOptional(Object value, @NotNull Holder<MobEffect> defaultValue)
+    public MobEffectHolderStatementOptional(OptionalValue<Holder<MobEffect>> optionalValue, @NotNull Holder<MobEffect> defaultValue)
     {
-        this.value = value;
-//        if(value instanceof Holder<?> holder)
-//        {
-//            this.value = holder.value();
-//        }
+        this.optionalValue = optionalValue;
         this.defaultValue = defaultValue;
     }
 
-    public static MobEffectHolderStatementOptional from(MobEffect value)
+    public static MobEffectHolderStatementOptional from(Holder<MobEffect> value)
     {
-        return new MobEffectHolderStatementOptional(value, MobEffects.DAMAGE_BOOST);
+        return new MobEffectHolderStatementOptional(OptionalValue.from(value), MobEffects.DAMAGE_BOOST);
     }
 
     @Override
     public Holder<MobEffect> get()
     {
-        return getWithArg(null);
+        return getWithArgs();
     }
 
     @Override
-    public Holder<MobEffect> getWithArg(Object object)
+    public Holder<MobEffect> getWithArgs(Object... args)
     {
-        //        if(value instanceof MobEffect mobEffect)
-//        {
-//            return Holder.direct(mobEffect);
-//        }
-
-        if(value instanceof Holder<?> holder && holder.value() instanceof MobEffect)
+        if(optionalValue.isPlain() || args == null || args.length == 0)
         {
+            return optionalValue.get();
+        }
+
+        Map<String, Object> argMap = new HashMap<>();
+        for(int i = 0; i < args.length; i++)
+        {
+            argMap.put("arg" + i, args[i]);
+        }
+
+        return getWithArgs(argMap);
+    }
+
+    @Override
+    public Holder<MobEffect> getWithArgs(Map<String, Object> args)
+    {
+        if(optionalValue.isPlain())
+        {
+            return optionalValue.get();
+        }
+
+        String address = optionalValue.getAddress();
+
+        Object result = MagicJson.runStatement(address, args);
+
+        if(result instanceof Holder<?> holder && holder.value() instanceof MobEffect)
+        {
+            //noinspection unchecked
             return (Holder<MobEffect>) holder;
         }
-
-        if(value instanceof String string)
+        if(result instanceof String string)
         {
-            Object result = PrivateCore.runStatement(string);
-
-            if(result instanceof Holder<?> holder && holder.value() instanceof MobEffect)
-            {
-                return (Holder<MobEffect>) holder;
-            }
-
-            Registry<MobEffect> registry;
-
-            if(object == null)
-            {
-                registry = Constants.server.registryAccess().registryOrThrow(Registries.MOB_EFFECT);
-            }
-            else if(object instanceof ServerLevel serverLevel)
-            {
-                registry = serverLevel.registryAccess().registryOrThrow(Registries.MOB_EFFECT);
-            }
-            else if(object instanceof Entity entity)
-            {
-                registry = entity.registryAccess().registryOrThrow(Registries.MOB_EFFECT);
-            }
-            else
-            {
-                registry = Constants.server.registryAccess().registryOrThrow(Registries.MOB_EFFECT);
-            }
-
-
-            ResourceLocation location = ResourceLocation.tryParse(string);
-
-            if(location == null)
-            {
-                return null;
-            }
-
-            return registry.getHolderOrThrow(ResourceKey.create(Registries.MOB_EFFECT, location));
+            return Constants.server.registryAccess().registry(Registries.MOB_EFFECT).get().getHolder(ResourceLocation.parse(string)).get();
         }
 
-        return defaultValue;
+        return null;
+    }
+
+    @Override
+    public OptionalValue<Holder<MobEffect>> getOptional()
+    {
+        return null;
     }
 
     @Override
     public Object getRaw()
     {
-        return value;
+        return optionalValue;
     }
 
 

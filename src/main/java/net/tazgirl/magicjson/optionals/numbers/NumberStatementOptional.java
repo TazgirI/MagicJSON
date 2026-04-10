@@ -1,54 +1,35 @@
 package net.tazgirl.magicjson.optionals.numbers;
 
-import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
+import net.tazgirl.magicjson.optionals.OptionalValue;
 import org.jetbrains.annotations.NotNull;
 
-public class NumberStatementOptional extends Number implements IStatementOptional<Number>, Comparable<Number>
+public class NumberStatementOptional<T extends Number> extends Number implements IStatementOptional<T>, Comparable<T>
 {
-    public Object value;
+    public OptionalValue<T> optionalValue;
     public Number defaultValue;
 
-    public NumberStatementOptional(Object value, @NotNull Number defaultValue)
+    public NumberStatementOptional(OptionalValue<T> optionalValue, @NotNull Number defaultValue)
     {
-        this.value = value;
+        this.optionalValue = optionalValue;
         this.defaultValue = defaultValue;
     }
 
-    public static NumberStatementOptional from(Number value)
+    public static <T extends Number> NumberStatementOptional<T> from(T value)
     {
-        return new NumberStatementOptional(value, 0);
+        return new NumberStatementOptional<T>(OptionalValue.from(value), 0);
     }
 
     @Override
-    public Number get()
+    public OptionalValue<T> getOptional()
     {
-        Object tempValue = value;
-        if(tempValue instanceof String string && PrivateCore.hasStatement(string))
-        {
-            tempValue = PrivateCore.runStatement(string);
-        }
-
-        if(tempValue instanceof Number number)
-        {
-            return number;
-        }
-        else
-        {
-            return defaultValue;
-        }
-    }
-
-    @Override
-    public Number getWithArg(Object object)
-    {
-        return get();
+        return optionalValue;
     }
 
     @Override
     public Object getRaw()
     {
-        return value;
+        return optionalValue;
     }
 
     @Override
@@ -75,11 +56,10 @@ public class NumberStatementOptional extends Number implements IStatementOptiona
         return get().doubleValue();
     }
 
-    // Probably useless but kind of funny
     @Override
-    public int compareTo(@NotNull Number o)
+    public int compareTo(@NotNull T o)
     {
-        return Double.compare(o.doubleValue(), o.doubleValue());
+        return Double.compare(o.doubleValue(), get().doubleValue());
     }
 
     @Override
