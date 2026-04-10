@@ -51,13 +51,7 @@ public class OptionalValue<T>
 
         if(args != null && args.length > 0)
         {
-            Map<String, Object> argMap = new HashMap<>();
-            for(int i = 0; i < args.length; i++)
-            {
-                argMap.put("arg" + i, args[i]);
-            }
-
-            result = MagicJson.runStatement(stringValue, argMap);
+            result = MagicJson.runStatement(stringValue, argMap(args));
         }
         else
         {
@@ -107,5 +101,23 @@ public class OptionalValue<T>
     public String getAddress()
     {
         return stringValue;
+    }
+
+    public Map<String, Object> argMap(Object[] args)
+    {
+        Map<String, Object> argMap = new HashMap<>();
+        for(int i = 0; i < args.length; i++)
+        {
+            argMap.put("arg" + i, args[i]);
+        }
+
+        return argMap;
+    }
+
+    @Override
+    public String toString()
+    {
+        String valueString = plainValue != null ? "literalValue: " + plainValue : "statementAdress: " + stringValue;
+        return "OptionalValue{ " + valueString + " }";
     }
 }

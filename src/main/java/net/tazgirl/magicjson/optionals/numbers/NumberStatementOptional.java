@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 public class NumberStatementOptional<T extends Number> extends Number implements IStatementOptional<T>, Comparable<T>
 {
     public OptionalValue<T> optionalValue;
-    public Number defaultValue;
+    public T defaultValue;
 
-    public NumberStatementOptional(OptionalValue<T> optionalValue, @NotNull Number defaultValue)
+    public NumberStatementOptional(OptionalValue<T> optionalValue, @NotNull T defaultValue)
     {
         this.optionalValue = optionalValue;
         this.defaultValue = defaultValue;
@@ -30,6 +30,12 @@ public class NumberStatementOptional<T extends Number> extends Number implements
     public Object getRaw()
     {
         return optionalValue;
+    }
+
+    @Override
+    public T getDefault()
+    {
+        return defaultValue;
     }
 
     @Override

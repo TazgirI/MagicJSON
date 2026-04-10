@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class FloatStatementOptional extends NumberStatementOptional<Float>
 {
-    public FloatStatementOptional(OptionalValue<Float> optionalValue, @NotNull Number defaultValue)
+    public FloatStatementOptional(OptionalValue<Float> optionalValue, @NotNull Float defaultValue)
     {
         super(optionalValue, defaultValue);
     }

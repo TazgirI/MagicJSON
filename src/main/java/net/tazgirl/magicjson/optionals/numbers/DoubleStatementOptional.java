@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class DoubleStatementOptional extends NumberStatementOptional<Double>
 {
-    public DoubleStatementOptional(OptionalValue<Double> optionalValue, @NotNull Number defaultValue)
+    public DoubleStatementOptional(OptionalValue<Double> optionalValue, @NotNull Double defaultValue)
     {
         super(optionalValue, defaultValue);
     }

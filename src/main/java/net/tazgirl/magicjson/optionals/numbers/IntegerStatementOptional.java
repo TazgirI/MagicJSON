@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class IntegerStatementOptional extends NumberStatementOptional<Integer>
 {
-    public IntegerStatementOptional(OptionalValue<Integer> optionalValue, @NotNull Number defaultValue)
+    public IntegerStatementOptional(OptionalValue<Integer> optionalValue, @NotNull Integer defaultValue)
     {
         super(optionalValue, defaultValue);
     }

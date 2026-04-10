@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LongStatementOptional extends NumberStatementOptional<Long>
 {
-    public LongStatementOptional(OptionalValue<Long> optionalValue, @NotNull Number defaultValue)
+    public LongStatementOptional(OptionalValue<Long> optionalValue, @NotNull Long defaultValue)
     {
         super(optionalValue, defaultValue);
     }

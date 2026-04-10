@@ -16,6 +16,7 @@ import net.tazgirl.magicjson.optionals.numbers.DoubleStatementOptional;
 import net.tazgirl.magicjson.optionals.numbers.FloatStatementOptional;
 import net.tazgirl.magicjson.optionals.numbers.IntegerStatementOptional;
 import net.tazgirl.magicjson.optionals.numbers.LongStatementOptional;
+import net.tazgirl.magicjson.optionals.tests.ResultTest;
 
 import java.util.Objects;
 
@@ -30,14 +31,14 @@ public class OptionalFromElement
 
         try
         {
-            return new IntegerStatementOptional(element.getAsInt(), 0);
+            return new IntegerStatementOptional(OptionalValue.from(element.getAsInt()), 0);
         }
         catch (Exception ignored)
         {
 
         }
 
-        return new IntegerStatementOptional(element.getAsString(), 0);
+        return new IntegerStatementOptional(OptionalValue.from(element.getAsString(), ResultTest.INTEGER), 0);
     }
 
     public static FloatStatementOptional FLOAT(JsonElement element)
@@ -49,14 +50,14 @@ public class OptionalFromElement
 
         try
         {
-            return new FloatStatementOptional(element.getAsFloat(), 0f);
+            return new FloatStatementOptional(OptionalValue.from(element.getAsFloat()), 0f);
         }
         catch (Exception ignored)
         {
 
         }
 
-        return new FloatStatementOptional(element.getAsString(), 0f);
+        return new FloatStatementOptional(OptionalValue.from(element.getAsString(), ResultTest.FLOAT), 0f);
     }
 
     public static DoubleStatementOptional DOUBLE(JsonElement element)
@@ -68,14 +69,14 @@ public class OptionalFromElement
 
         try
         {
-            return new DoubleStatementOptional(element.getAsDouble(), 0.0);
+            return new DoubleStatementOptional(OptionalValue.from(element.getAsDouble()), 0.0);
         }
         catch (Exception ignored)
         {
 
         }
 
-        return new DoubleStatementOptional(element.getAsString(), 0.0);
+        return new DoubleStatementOptional(OptionalValue.from(element.getAsString(), ResultTest.DOUBLE), 0.0);
     }
 
     public static LongStatementOptional LONG(JsonElement element)
@@ -87,21 +88,21 @@ public class OptionalFromElement
 
         try
         {
-            return new LongStatementOptional(element.getAsLong(), 0L);
+            return new LongStatementOptional(OptionalValue.from(element.getAsLong()), 0L);
         }
         catch (Exception ignored)
         {
 
         }
 
-        return new LongStatementOptional(element.getAsString(), 0L);
+        return new LongStatementOptional(OptionalValue.from(element.getAsString(), ResultTest.LONG), 0L);
     }
 
     public static StringStatementOptional STRING(JsonElement element)
     {
         try
         {
-            return new StringStatementOptional(element.getAsString(), "");
+            return new StringStatementOptional(OptionalValue.from(element.getAsString()), "");
         }
         catch (Exception ignored)
         {

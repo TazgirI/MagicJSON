@@ -15,6 +15,7 @@ import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
 import net.tazgirl.magicjson.optionals.OptionalValue;
+import net.tazgirl.magicjson.optionals.StatementOptional;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -23,15 +24,11 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class MobEffectHolderStatementOptional implements IStatementOptional<Holder<MobEffect>>, Holder<MobEffect>
+public class MobEffectHolderStatementOptional extends StatementOptional<Holder<MobEffect>> implements Holder<MobEffect>
 {
-    public OptionalValue<Holder<MobEffect>> optionalValue;
-    public Holder<MobEffect> defaultValue;
-
     public MobEffectHolderStatementOptional(OptionalValue<Holder<MobEffect>> optionalValue, @NotNull Holder<MobEffect> defaultValue)
     {
-        this.optionalValue = optionalValue;
-        this.defaultValue = defaultValue;
+        super(optionalValue, defaultValue);
     }
 
     public static MobEffectHolderStatementOptional from(Holder<MobEffect> value)
