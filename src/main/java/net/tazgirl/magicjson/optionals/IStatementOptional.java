@@ -10,47 +10,21 @@ public interface IStatementOptional<T>
 
     default T get()
     {
-        T value = getOptional().get();
-
-        if(value == null)
-        {
-            MJLogging.Debug("StatementOptional returned null, using default value   " + getOptional().toString());
-            value = getDefault();
-        }
-
-        return value;
+        return getOptional().get();
     }
 
     default T getWithArgs(Object[] args)
     {
-        T value = getOptional().getWithArgs(args);
-
-        if(value == null)
-        {
-            MJLogging.Debug("StatementOptional returned null, using default value   " + getOptional().toString());
-            value = getDefault();
-        }
-
-        return value;
+        return getOptional().getWithArgs(args);
     }
 
     default T getWithArgs(Map<String, Object> args)
     {
-        T value = getOptional().getWithArgs(args);
-
-        if(value == null)
-        {
-            MJLogging.Debug("StatementOptional returned null, using default value   " + getOptional().toString());
-            value = getDefault();
-        }
-
-        return value;
+        return getOptional().getWithArgs(args);
     }
 
     default Object getRaw()
     {
         return getOptional().getRaw();
     }
-
-    T getDefault();
 }

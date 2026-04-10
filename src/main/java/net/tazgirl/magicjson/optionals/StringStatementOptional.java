@@ -3,63 +3,33 @@ package net.tazgirl.magicjson.optionals;
 import net.minecraft.data.worldgen.SurfaceRuleData;
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.MagicJson;
+import net.tazgirl.magicjson.optionals.tests.ResultTest;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 public class StringStatementOptional extends StatementOptional<String> implements IStatementOptional<String>, CharSequence, Comparable<String>
 {
-    public StringStatementOptional(OptionalValue<String> optionalValue, @NotNull String defaultValue)
+    private static final String executablePrefix = "\\_";
+
+    private StringStatementOptional(OptionalValue<String> optionalValue)
     {
-        super(optionalValue, defaultValue);
+        super(optionalValue);
     }
 
-    // This is so fucked up, but it is what it is, just leave in the documentation that String optionals need an _ if they are to be executed
-    @Override
-    public String get()
+    // String statement objects check starting characters to determine if they are to be executed or returned raw
+    // TODO: Ensure this is recorded in documentation
+    public static StringStatementOptional from(String string)
     {
-        String raw = (String) optionalValue.getRaw();
-
-        if(raw.charAt(0) == '_')
+        if(string.startsWith(executablePrefix))
         {
-            Object result = MagicJson.runStatement(((String) optionalValue.getRaw()).substring(1));
-            if(result instanceof String)
-            {
-                return (String) result;
-            }
+            MJLogging.Info("StringStatementOptional determined to be executable: " + string);
+            return new StringStatementOptional(OptionalValue.from(string.substring(2), ResultTest.STRING));
         }
 
-        return raw;
-    }
+        MJLogging.Info("StringStatementOptional determined to be literal: " + string);
 
-    @Override
-    public String getWithArgs(Map<String, Object> args)
-    {
-        String raw = (String) optionalValue.getRaw();
-
-        if(raw.charAt(0) == '_')
-        {
-            Object result = MagicJson.runStatement(((String) optionalValue.getRaw()).substring(1), args);
-            if(result instanceof String)
-            {
-                return (String) result;
-            }
-        }
-
-        return raw;
-    }
-
-    @Override
-    public String getWithArgs(Object[] args)
-    {
-        String raw = (String) optionalValue.getRaw();
-
-        if(raw.charAt(0) == '_')
-        {
-            return getWithArgs(optionalValue.argMap(args));
-        }
-
-        return raw;
+        return new StringStatementOptional(OptionalValue.from(string));
     }
 
     @Override

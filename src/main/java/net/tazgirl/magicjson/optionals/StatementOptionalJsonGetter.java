@@ -1,9 +1,7 @@
 package net.tazgirl.magicjson.optionals;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.neoforged.fml.Logging;
 import net.tazgirl.magicjson.MJLogging;
 
 import java.util.HashMap;
@@ -15,12 +13,12 @@ public record StatementOptionalJsonGetter<T>(String key, Class<T> type)
 {
     // Just don't touch and it works fine, the unsafe cast is a lie
     static Map<Class<?>, Function<JsonElement, IStatementOptional<?>>> deserializers = Map.of(
-            Double.class, OptionalFromElement::DOUBLE,
-            Integer.class, OptionalFromElement::INT,
-            String.class, OptionalFromElement::STRING,
-            Boolean.class, OptionalFromElement::BOOL,
-            Long.class, OptionalFromElement::LONG,
-            Float.class, OptionalFromElement::FLOAT);
+            Double.class, OptionalFrom::DOUBLE,
+            Integer.class, OptionalFrom::INT,
+            String.class, OptionalFrom::STRING,
+            Boolean.class, OptionalFrom::BOOL,
+            Long.class, OptionalFrom::LONG,
+            Float.class, OptionalFrom::FLOAT);
 
     public T read(JsonObject jsonObject)
     {

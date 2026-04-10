@@ -1,17 +1,26 @@
 package net.tazgirl.magicjson.optionals;
 
 import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.optionals.tests.ResultTest;
 import org.jetbrains.annotations.NotNull;
 
 public class StatementOptional<T> implements IStatementOptional<T>
 {
     public OptionalValue<T> optionalValue;
-    public T defaultValue;
 
-    public StatementOptional(OptionalValue<T> optionalValue, @NotNull T defaultValue)
+    public StatementOptional(OptionalValue<T> optionalValue)
     {
         this.optionalValue = optionalValue;
-        this.defaultValue = defaultValue;
+    }
+
+    public StatementOptional(T value)
+    {
+        this.optionalValue = OptionalValue.from(value);
+    }
+
+    public StatementOptional(String string, ResultTest<T> test)
+    {
+        this.optionalValue = OptionalValue.from(string, test);
     }
 
     @Override
@@ -28,11 +37,5 @@ public class StatementOptional<T> implements IStatementOptional<T>
     public Object getRaw()
     {
         return optionalValue.getRaw();
-    }
-
-    @Override
-    public T getDefault()
-    {
-        return defaultValue;
     }
 }

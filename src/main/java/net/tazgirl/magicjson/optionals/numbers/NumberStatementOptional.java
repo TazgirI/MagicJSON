@@ -7,17 +7,15 @@ import org.jetbrains.annotations.NotNull;
 public class NumberStatementOptional<T extends Number> extends Number implements IStatementOptional<T>, Comparable<T>
 {
     public OptionalValue<T> optionalValue;
-    public T defaultValue;
 
-    public NumberStatementOptional(OptionalValue<T> optionalValue, @NotNull T defaultValue)
+    public NumberStatementOptional(OptionalValue<T> optionalValue)
     {
         this.optionalValue = optionalValue;
-        this.defaultValue = defaultValue;
     }
 
     public static <T extends Number> NumberStatementOptional<T> from(T value)
     {
-        return new NumberStatementOptional<T>(OptionalValue.from(value), 0);
+        return new NumberStatementOptional<T>(OptionalValue.from(value));
     }
 
     @Override
@@ -30,12 +28,6 @@ public class NumberStatementOptional<T extends Number> extends Number implements
     public Object getRaw()
     {
         return optionalValue;
-    }
-
-    @Override
-    public T getDefault()
-    {
-        return defaultValue;
     }
 
     @Override

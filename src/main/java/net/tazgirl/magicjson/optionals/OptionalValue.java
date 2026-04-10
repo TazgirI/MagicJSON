@@ -106,12 +106,25 @@ public class OptionalValue<T>
     public Map<String, Object> argMap(Object[] args)
     {
         Map<String, Object> argMap = new HashMap<>();
-        for(int i = 0; i < args.length; i++)
+        for(Object object : args)
         {
-            argMap.put("arg" + i, args[i]);
+            argMap.put(classIncrement(object, argMap), object);
         }
 
         return argMap;
+    }
+
+    private String classIncrement(Object object, Map<String, Object> map)
+    {
+        int i = 1;
+        String base = object.getClass().getSimpleName().toLowerCase();
+
+        while(map.containsKey(base + i))
+        {
+            i++;
+        }
+
+        return base + i;
     }
 
     @Override

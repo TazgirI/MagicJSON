@@ -6,14 +6,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class IntegerStatementOptional extends NumberStatementOptional<Integer>
 {
-    public IntegerStatementOptional(OptionalValue<Integer> optionalValue, @NotNull Integer defaultValue)
+    public IntegerStatementOptional(OptionalValue<Integer> optionalValue)
     {
-        super(optionalValue, defaultValue);
+        super(optionalValue);
     }
 
     @Override
     public Integer get()
     {
-        return super.get().intValue();
+        return super.get();
     }
 }

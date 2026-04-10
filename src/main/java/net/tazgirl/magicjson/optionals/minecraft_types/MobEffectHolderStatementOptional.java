@@ -26,14 +26,14 @@ import java.util.stream.Stream;
 
 public class MobEffectHolderStatementOptional extends StatementOptional<Holder<MobEffect>> implements Holder<MobEffect>
 {
-    public MobEffectHolderStatementOptional(OptionalValue<Holder<MobEffect>> optionalValue, @NotNull Holder<MobEffect> defaultValue)
+    public MobEffectHolderStatementOptional(OptionalValue<Holder<MobEffect>> optionalValue)
     {
-        super(optionalValue, defaultValue);
+        super(optionalValue);
     }
 
     public static MobEffectHolderStatementOptional from(Holder<MobEffect> value)
     {
-        return new MobEffectHolderStatementOptional(OptionalValue.from(value), MobEffects.DAMAGE_BOOST);
+        return new MobEffectHolderStatementOptional(OptionalValue.from(value));
     }
 
     @Override

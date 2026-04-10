@@ -5,9 +5,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class BooleanStatementOptional extends StatementOptional<Boolean> implements IStatementOptional<Boolean>, Comparable<Boolean>
 {
-    public BooleanStatementOptional(OptionalValue<Boolean> optionalValue, @NotNull Boolean defaultValue)
+    public BooleanStatementOptional(OptionalValue<Boolean> optionalValue)
     {
-        super(optionalValue, defaultValue);
+        super(optionalValue);
     }
 
     @Override
