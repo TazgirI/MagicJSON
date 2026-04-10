@@ -1,58 +1,96 @@
 package net.tazgirl.magicjson.optionals;
 
-import net.tazgirl.magicjson.PrivateCore;
+import net.minecraft.data.worldgen.SurfaceRuleData;
+import net.tazgirl.magicjson.MJLogging;
+import net.tazgirl.magicjson.MagicJson;
 import org.jetbrains.annotations.NotNull;
 
-public class StringStatementOptional implements IStatementOptional<String>, CharSequence, Comparable<String>
-{
-    public Object value;
-    public String defaultValue;
+import java.util.Map;
 
-    public StringStatementOptional(Object value, @NotNull String defaultValue)
+public class StringStatementOptional extends StatementOptional<String> implements IStatementOptional<String>, CharSequence, Comparable<String>
+{
+    public StringStatementOptional(OptionalValue<String> optionalValue, @NotNull String defaultValue)
     {
-        this.value = value;
-        this.defaultValue = defaultValue;
+        super(optionalValue, defaultValue);
+    }
+
+    // This is so fucked up, but it is what it is, just leave in the documentation that String optionals need an _ if they are to be executed
+    @Override
+    public String get()
+    {
+        String raw = (String) optionalValue.getRaw();
+
+        if(raw.charAt(0) == '_')
+        {
+            Object result = MagicJson.runStatement(((String) optionalValue.getRaw()).substring(1));
+            if(result instanceof String)
+            {
+                return (String) result;
+            }
+        }
+
+        return raw;
     }
 
     @Override
-    public Object getRaw()
+    public String getWithArgs(Map<String, Object> args)
     {
-        return value;
+        String raw = (String) optionalValue.getRaw();
+
+        if(raw.charAt(0) == '_')
+        {
+            Object result = MagicJson.runStatement(((String) optionalValue.getRaw()).substring(1), args);
+            if(result instanceof String)
+            {
+                return (String) result;
+            }
+        }
+
+        return raw;
     }
 
-    public static StringStatementOptional from(String value)
+    @Override
+    public String getWithArgs(Object[] args)
     {
-        return new StringStatementOptional(value, "");
+        String raw = (String) optionalValue.getRaw();
+
+        if(raw.charAt(0) == '_')
+        {
+            return getWithArgs(optionalValue.argMap(args));
+        }
+
+        return raw;
     }
 
     @Override
     public int length()
     {
-        return get().length();
+        String result = optionalValue.get();
+        return result == null ? -1 : result.length();
     }
 
     @Override
     public char charAt(int index)
     {
-        return get().charAt(index);
+
+        return optionalValue.get().charAt(index);
     }
 
     @Override
     public @NotNull CharSequence subSequence(int start, int end)
     {
-        return get().substring(start,end);
+        return optionalValue.get().subSequence(start, end);
     }
 
-    // Infinite loop potential, I think, if passed a StringStatementOptional as a String (Or I'm too tired and that's only if I used o.compareTo(get()))
     @Override
     public int compareTo(@NotNull String o)
     {
-        return get().compareTo(o);
+        return o.compareTo(optionalValue.get());
     }
 
     @Override
-    public @NotNull String toString()
+    public OptionalValue<String> getOptional()
     {
-        return get();
+        return optionalValue;
     }
 }
