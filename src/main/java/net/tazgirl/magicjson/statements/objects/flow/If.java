@@ -18,17 +18,17 @@ public class If extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
-        if(check.Resolve() instanceof Boolean bool)
+        if(check.resolve() instanceof Boolean bool)
         {
             if(bool && trueBase != null)
             {
-                return trueBase.Resolve();
+                return trueBase.resolve();
             }
             else if(falseBase != null)
             {
-                return falseBase.Resolve();
+                return falseBase.resolve();
             }
 
             return bool;
@@ -38,7 +38,7 @@ public class If extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(check == null)
         {
@@ -60,13 +60,13 @@ public class If extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         return false;
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -84,7 +84,7 @@ public class If extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(check == oldBase)
         {

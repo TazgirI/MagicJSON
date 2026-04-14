@@ -17,7 +17,7 @@ public class DoubleObject extends NumberObject<Double>
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         return false;
     }

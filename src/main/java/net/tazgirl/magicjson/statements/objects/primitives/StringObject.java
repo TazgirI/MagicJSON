@@ -22,13 +22,13 @@ public class StringObject extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         return value;
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         return false;
     }
@@ -45,13 +45,13 @@ public class StringObject extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         return false;
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -69,7 +69,7 @@ public class StringObject extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
 
     }

@@ -24,7 +24,7 @@ public abstract class EventHook extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         Map<String, Base> hookArguments = new HashMap<>();
 
@@ -35,13 +35,13 @@ public abstract class EventHook extends Base
 
         for(HookArgument argument: arguments)
         {
-            if(argument.Resolve() instanceof Map.Entry<String, Base> entry)
+            if(argument.resolve() instanceof Map.Entry<String, Base> entry)
             {
                 hookArguments.put(entry.getKey(), entry.getValue());
             }
             else
             {
-                MJLogging.Debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
+                MJLogging.debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
             }
         }
 
@@ -49,19 +49,19 @@ public abstract class EventHook extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(base instanceof HookArgument argument)
         {
             arguments.add(argument);
             return true;
         }
-        DebugUnHandledType(base);
+        debugUnHandledType(base);
         return false;
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         if(function == null)
         {
@@ -73,7 +73,7 @@ public abstract class EventHook extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return new HookArgument(holder);
     }
@@ -85,7 +85,7 @@ public abstract class EventHook extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(oldBase instanceof HookArgument && newBase instanceof HookArgument)
         {

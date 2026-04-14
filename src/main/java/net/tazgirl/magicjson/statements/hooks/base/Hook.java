@@ -19,17 +19,17 @@ public abstract class Hook extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         for(HookArgument argument: arguments)
         {
-            if(argument.Resolve() instanceof Map.Entry<String, Base> entry)
+            if(argument.resolve() instanceof Map.Entry<String, Base> entry)
             {
                 referenceArguments.put(entry.getKey(), entry.getValue());
             }
             else
             {
-                MJLogging.Debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
+                MJLogging.debug("HookArguments name Object did not resolve to a String " + argument + "   within: " + holder.getAddress());
             }
         }
 
@@ -39,7 +39,7 @@ public abstract class Hook extends Base
     public abstract Object RunHook(Map<String, Base> hookArgs);
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(base instanceof HookArgument argument)
         {
@@ -47,12 +47,12 @@ public abstract class Hook extends Base
             return true;
         }
 
-        DebugUnHandledType(base.getClass());
+        debugUnHandledType(base.getClass());
         return false;
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return new HookArgument(holder);
     }

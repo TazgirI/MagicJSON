@@ -26,13 +26,13 @@ public abstract class NumericalMutator extends Base
     abstract BiFunction<Number, Number, Number> initMyFunction();
 
     @Override
-    public Number Resolve()
+    public Number resolve()
     {
         List<Number> finalNumbers = new ArrayList<>();
 
         Number returnNum = 0;
 
-        if(values.getFirst().Resolve() instanceof Number number)
+        if(values.getFirst().resolve() instanceof Number number)
         {
             returnNum = number;
             finalNumbers.add(number);
@@ -42,7 +42,7 @@ public abstract class NumericalMutator extends Base
         {
             Base base = values.get(i);
 
-            if(base.Resolve() instanceof Number loopNum)
+            if(base.resolve() instanceof Number loopNum)
             {
                 returnNum = function.apply(returnNum, loopNum);
                 finalNumbers.add(loopNum);
@@ -59,7 +59,7 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         values.add(base);
         holder.AddRelationship(this, base);
@@ -67,7 +67,7 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         if(NumberHandling.numberClassStrings.get(string) instanceof Class<? extends Number> numberClass)
         {
@@ -78,7 +78,7 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         int index = values.indexOf(oldBase);
         if(index != -1)
@@ -88,7 +88,7 @@ public abstract class NumericalMutator extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }

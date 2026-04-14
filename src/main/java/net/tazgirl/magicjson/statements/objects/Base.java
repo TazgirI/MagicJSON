@@ -3,6 +3,8 @@ package net.tazgirl.magicjson.statements.objects;
 import net.tazgirl.magicjson.MJLogging;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public abstract class Base
 {
 
@@ -16,10 +18,10 @@ public abstract class Base
     }
 
 
-    public abstract Object Resolve();
+    public abstract Object resolve();
 
     @NotNull
-    public abstract Boolean HandleBase(Base base);
+    public abstract Boolean handleBase(Base base);
 
     @NotNull
     public Boolean HandleObject(Object object)
@@ -28,10 +30,10 @@ public abstract class Base
     }
 
     @NotNull
-    public abstract Boolean HandleUniqueArgument(String string);
+    public abstract Boolean handleUniqueArgument(String string);
 
 
-    public abstract Base ImplicitChild();
+    public abstract Base implicitChild();
 
     @NotNull
     public abstract String setIdentifier();
@@ -39,15 +41,26 @@ public abstract class Base
     @Override
     public abstract String toString();
 
-    public abstract void Replace(Base oldBase, Base newBase);
+    public abstract void replace(Base oldBase, Base newBase);
 
-    public void DebugUnHandledType(Class<?> failedType)
+    public void debugUnHandledType(Class<?> failedType)
     {
-        MJLogging.Debug("Failed to handle Object of type \"" + failedType.toString() + "\" in a(n) " + identifier + " within: " + holder.getAddress());
+        MJLogging.debug("Failed to handle Object of type \"" + failedType.toString() + "\" in a(n) " + identifier + " within: " + holder.getAddress());
     }
 
-    public void DebugUnHandledType(Object object)
+    public void debugUnHandledType(Object object)
     {
-        DebugUnHandledType(object.getClass());
+        debugUnHandledType(object.getClass());
+    }
+
+    protected List<Base> replaceInList(Base oldBase, Base newBase, List<Base> sourceList)
+    {
+        if(sourceList.contains(oldBase))
+        {
+            sourceList.add(sourceList.indexOf(oldBase), newBase);
+            sourceList.remove(oldBase);
+        }
+
+        return sourceList;
     }
 }

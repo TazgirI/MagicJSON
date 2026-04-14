@@ -2,11 +2,7 @@ package net.tazgirl.magicjson.statements.objects.compounds;
 
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
-import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEvaluatorBase;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Parameter;
-import java.util.function.BiFunction;
 
 public class And extends CompoundBase
 {
@@ -16,12 +12,12 @@ public class And extends CompoundBase
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         boolean returnBool = true;
         for(Base base: values)
         {
-            if(base.Resolve() instanceof Boolean bool && !bool)
+            if(base.resolve() instanceof Boolean bool && !bool)
             {
                 returnBool = false;
                 if(breakOnFind){break;}

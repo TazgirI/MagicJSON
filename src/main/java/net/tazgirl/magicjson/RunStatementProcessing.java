@@ -34,7 +34,7 @@ public class RunStatementProcessing
             }
             catch (IOException e)
             {
-                MJLogging.Warn(entry.getKey().toString() + " could not be opened, skipping file");
+                MJLogging.warn(entry.getKey().toString() + " could not be opened, skipping file");
                 continue;
             }
         }

@@ -17,11 +17,11 @@ public class ArgCreate extends ArgBase
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
-        if(address.Resolve() instanceof String string && !holder.args.containsKey(string))
+        if(address.resolve() instanceof String string && !holder.args.containsKey(string))
         {
-            Object value = initValue.Resolve();
+            Object value = initValue.resolve();
             holder.args.put(string, value);
             return true;
         }
@@ -30,7 +30,7 @@ public class ArgCreate extends ArgBase
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(address == null)
         {
@@ -47,7 +47,7 @@ public class ArgCreate extends ArgBase
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -65,7 +65,7 @@ public class ArgCreate extends ArgBase
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
 
     }

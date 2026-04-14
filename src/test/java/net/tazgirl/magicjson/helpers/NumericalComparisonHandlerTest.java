@@ -1,7 +1,5 @@
 package net.tazgirl.magicjson.helpers;
 
-import net.tazgirl.magicjson.processing.Stack;
-import net.tazgirl.magicjson.processing.TokensToHolder;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import net.tazgirl.magicjson.statements.objects.compounds.And;
 import net.tazgirl.magicjson.statements.objects.compounds.Or;
@@ -18,17 +16,17 @@ class NumericalComparisonHandlerTest
         StatementHolder holder = new StatementHolder(StatementHolder.TEST_CASE.THIS_IS_A_TEST_OPTION_ONLY_FOR_CONTROLLED_SITUATIONS);
 
         And leftOperand = new And(holder);
-        leftOperand.HandleBase(new IntegerObject(holder, 2));
-        leftOperand.HandleBase(new IntegerObject(holder, 5));
+        leftOperand.handleBase(new IntegerObject(holder, 2));
+        leftOperand.handleBase(new IntegerObject(holder, 5));
 
         Or rightOperand = new Or(holder);
-        rightOperand.HandleBase(new IntegerObject(holder, 2));
-        rightOperand.HandleBase(new IntegerObject(holder, 5));
+        rightOperand.handleBase(new IntegerObject(holder, 2));
+        rightOperand.handleBase(new IntegerObject(holder, 5));
 
         Equals equals = new Equals(holder);
-        equals.HandleBase(leftOperand);
-        equals.HandleBase(rightOperand);
+        equals.handleBase(leftOperand);
+        equals.handleBase(rightOperand);
 
-        Assertions.assertEquals(true, equals.Resolve());
+        Assertions.assertEquals(true, equals.resolve());
     }
 }

@@ -18,14 +18,14 @@ public abstract class CompoundBase extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         values.add(base);
         return true;
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         // One of these will always be active by default but this allows for statements to be strongly typed against changes in the default case
         if(string.equals(".break"))
@@ -43,7 +43,7 @@ public abstract class CompoundBase extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -55,7 +55,7 @@ public abstract class CompoundBase extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
 
         int index = values.indexOf(oldBase);
@@ -75,6 +75,6 @@ public abstract class CompoundBase extends Base
     public Object ResolveSpecific(int index)
     {
         if(values.size() <= index){return null;}
-        return values.get(index).Resolve();
+        return values.get(index).resolve();
     }
 }

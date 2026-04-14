@@ -19,12 +19,12 @@ public class ArgSet extends ArgBase
 
     // Will return newValue but is best use in sequence(ArgSet() ?())
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
-        Object key = address.Resolve();
+        Object key = address.resolve();
         if(key instanceof String string && holder.args.containsKey(string))
         {
-            Object value = newValue.Resolve();
+            Object value = newValue.resolve();
             holder.args.replace(string, value);
             return value;
         }
@@ -33,7 +33,7 @@ public class ArgSet extends ArgBase
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
 
         if(address == null)
@@ -51,7 +51,7 @@ public class ArgSet extends ArgBase
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -69,7 +69,7 @@ public class ArgSet extends ArgBase
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(address == oldBase)
         {

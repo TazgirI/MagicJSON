@@ -19,13 +19,13 @@ public class Execute extends Base
     public Execute(StatementHolder holder, String string)
     {
         super(holder);
-        this.HandleBase(new StringObject(holder, string));
+        this.handleBase(new StringObject(holder, string));
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
-        if(address.Resolve() instanceof String string && PrivateCore.hasStatement(string))
+        if(address.resolve() instanceof String string && PrivateCore.hasStatement(string))
         {
             if(!noPass)
             {
@@ -39,7 +39,7 @@ public class Execute extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(address == null)
         {
@@ -51,7 +51,7 @@ public class Execute extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         if(string.equals(".!pass") || string.equals(".nopass"))
         {
@@ -63,7 +63,7 @@ public class Execute extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -81,7 +81,7 @@ public class Execute extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(address == oldBase)
         {

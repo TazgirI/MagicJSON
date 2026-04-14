@@ -18,7 +18,7 @@ public class Random extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         if(end == null && start == null)
         {
@@ -27,13 +27,13 @@ public class Random extends Base
 
         java.util.Random random = new java.util.Random();
 
-        if(end.Resolve() instanceof Number endNum)
+        if(end.resolve() instanceof Number endNum)
         {
             if(type == null){type=endNum.getClass();}
 
             Number beginNum = 0;
 
-            if(start != null && start.Resolve() instanceof Number startNum)
+            if(start != null && start.resolve() instanceof Number startNum)
             {
                 beginNum = startNum;
             }
@@ -60,7 +60,7 @@ public class Random extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(end == null)
         {
@@ -77,7 +77,7 @@ public class Random extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         switch (string)
         {
@@ -94,7 +94,7 @@ public class Random extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -112,7 +112,7 @@ public class Random extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(end == oldBase)
         {

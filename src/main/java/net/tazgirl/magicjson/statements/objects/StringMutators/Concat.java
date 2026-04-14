@@ -18,33 +18,33 @@ public class Concat extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Base base: values)
         {
-            stringBuilder.append(base.Resolve());
+            stringBuilder.append(base.resolve());
         }
 
         return stringBuilder.toString();
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         values.add(base);
         return true;
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         return false;
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -62,7 +62,7 @@ public class Concat extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if (values.contains(oldBase))
         {

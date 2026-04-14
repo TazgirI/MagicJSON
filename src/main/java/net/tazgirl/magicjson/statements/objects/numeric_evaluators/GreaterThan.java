@@ -43,9 +43,9 @@ public class GreaterThan extends NumericEvaluatorBase
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
-        if(!super.HandleUniqueArgument(string))
+        if(!super.handleUniqueArgument(string))
         {
             if(string.contains(".equal"))
             {

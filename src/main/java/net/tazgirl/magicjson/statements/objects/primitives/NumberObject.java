@@ -29,7 +29,7 @@ public abstract class NumberObject<T extends Number> extends Base
     protected abstract Class<? extends Number> setType();
 
     @Override
-    public T Resolve()
+    public T resolve()
     {
         return value;
     }
@@ -46,20 +46,20 @@ public abstract class NumberObject<T extends Number> extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         return false;
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         return false;
     }
 
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -71,7 +71,7 @@ public abstract class NumberObject<T extends Number> extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
 
     }

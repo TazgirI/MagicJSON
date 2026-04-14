@@ -12,7 +12,7 @@ public abstract class ArgBase extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         // Handled before any arguments are input basically just allows Arg.get() instead of Argget
         // On second thought, I'm not going to add Argget so all Arg instructions are through unique arguments

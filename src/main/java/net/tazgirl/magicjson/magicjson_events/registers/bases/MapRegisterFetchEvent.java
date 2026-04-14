@@ -19,7 +19,7 @@ public abstract class MapRegisterFetchEvent<K, V> extends RegisterFetchEventRoot
 
         if(existing != null)
         {
-            MJLogging.Debug("The MapRegister " + identifier + " just overrode the key `" + key.toString() + "` within the event fetch cycle with `" + value.toString() + "`, previous value was: " + existing);
+            MJLogging.debug("The MapRegister " + identifier + " just overrode the key `" + key.toString() + "` within the event fetch cycle with `" + value.toString() + "`, previous value was: " + existing);
         }
 
         return existing;
@@ -33,7 +33,7 @@ public abstract class MapRegisterFetchEvent<K, V> extends RegisterFetchEventRoot
 
             if(existing != null)
             {
-                MJLogging.Debug("The MapRegisterEvent " + identifier + " just overrode the existing key `" + key.toString() + "` in the corresponding register with `" + value.toString() + "`, previous value was: " + existing);
+                MJLogging.debug("The MapRegisterEvent " + identifier + " just overrode the existing key `" + key.toString() + "` in the corresponding register with `" + value.toString() + "`, previous value was: " + existing);
             }
         });
     }

@@ -1,12 +1,8 @@
 package net.tazgirl.magicjson.optionals;
 
-import net.minecraft.data.worldgen.SurfaceRuleData;
 import net.tazgirl.magicjson.MJLogging;
-import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.optionals.tests.ResultTest;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Map;
 
 public class StringStatementOptional extends StatementOptional<String> implements IStatementOptional<String>, CharSequence, Comparable<String>
 {
@@ -23,11 +19,11 @@ public class StringStatementOptional extends StatementOptional<String> implement
     {
         if(string.startsWith(executablePrefix))
         {
-            MJLogging.Info("StringStatementOptional determined to be executable: " + string);
+            MJLogging.info("StringStatementOptional determined to be executable: " + string);
             return new StringStatementOptional(OptionalValue.from(string.substring(2), ResultTest.STRING));
         }
 
-        MJLogging.Info("StringStatementOptional determined to be literal: " + string);
+        MJLogging.info("StringStatementOptional determined to be literal: " + string);
 
         return new StringStatementOptional(OptionalValue.from(string));
     }
@@ -62,5 +58,11 @@ public class StringStatementOptional extends StatementOptional<String> implement
     public OptionalValue<String> getOptional()
     {
         return optionalValue;
+    }
+
+    @Override
+    public String identifier()
+    {
+        return "StringStatementOptional";
     }
 }

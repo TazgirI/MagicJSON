@@ -31,7 +31,7 @@ public class StatementObjectTokensRegister extends MapRegister<String, Class<? e
         }
 
 
-        MJLogging.Debug("Attempted to get an object from unrecognised token: " + token);
+        MJLogging.debug("Attempted to get an object from unrecognised token: " + token);
         return null;
     }
 
@@ -59,7 +59,7 @@ public class StatementObjectTokensRegister extends MapRegister<String, Class<? e
         public Class<? extends Base> put(String address, Class<? extends Base> value)
         {
             if(!address.contains(":") || address.contains("/")){
-                MJLogging.Warn("Attempted to register a StatementObject without using the correct form of \"namespace:token\", subfolders such as \"namespace:mutators/token\" are not allowed for token addresses. The attempted token registration for \"" + address + "\" has been skipped"); return null;}
+                MJLogging.warn("Attempted to register a StatementObject without using the correct form of \"namespace:token\", subfolders such as \"namespace:mutators/token\" are not allowed for token addresses. The attempted token registration for \"" + address + "\" has been skipped"); return null;}
 
             String synonym = RegistersForProcessing.tokenSynonyms.get(address);
 

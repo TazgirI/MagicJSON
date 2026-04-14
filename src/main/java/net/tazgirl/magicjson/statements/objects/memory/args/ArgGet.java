@@ -20,9 +20,9 @@ public class ArgGet extends ArgBase
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
-        if(argumentName.Resolve() instanceof String string)
+        if(argumentName.resolve() instanceof String string)
         {
             return holder.args.get(string);
         }
@@ -30,7 +30,7 @@ public class ArgGet extends ArgBase
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(argumentName == null)
         {
@@ -42,7 +42,7 @@ public class ArgGet extends ArgBase
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -60,7 +60,7 @@ public class ArgGet extends ArgBase
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(argumentName == oldBase)
         {

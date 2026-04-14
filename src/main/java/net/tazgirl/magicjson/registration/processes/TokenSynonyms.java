@@ -53,7 +53,7 @@ public class TokenSynonyms
                     }
                     catch (IllegalStateException | NullPointerException e)
                     {
-                        MJLogging.Warn("JsonObject \"" + elementEntry.getKey() + "\" did not have the expected contents of two JsonPrimitive Strings named \"" + Constants.hookSynonymAddressElement + "\" and \"" + Constants.hookSynonymSynonymElement + "\" respectively");
+                        MJLogging.warn("JsonObject \"" + elementEntry.getKey() + "\" did not have the expected contents of two JsonPrimitive Strings named \"" + Constants.hookSynonymAddressElement + "\" and \"" + Constants.hookSynonymSynonymElement + "\" respectively");
                         return;
                     }
 
@@ -61,14 +61,14 @@ public class TokenSynonyms
 
                     if(previousSynonym != null)
                     {
-                        MJLogging.Debug("Added the synonym \"" + synonym + "\" for the address \"" + address + "\", overriding the old synonym of \"" + previousSynonym + "\"");
+                        MJLogging.debug("Added the synonym \"" + synonym + "\" for the address \"" + address + "\", overriding the old synonym of \"" + previousSynonym + "\"");
                     }
                 }
             });
         }
         catch (IOException e)
         {
-            MJLogging.Error("Could not process .json: " + entry.getKey());
+            MJLogging.error("Could not process .json: " + entry.getKey());
         }
     }
 }

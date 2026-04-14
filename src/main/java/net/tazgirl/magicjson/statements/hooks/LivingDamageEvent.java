@@ -33,7 +33,7 @@ public class LivingDamageEvent extends EventHook
 
     private Object RunPost(Map<String, Base> hookArguments)
     {
-        if(hookArguments.get(Constants.eventParamName).Resolve() instanceof net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post postEvent)
+        if(hookArguments.get(Constants.eventParamName).resolve() instanceof net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post postEvent)
         {
             return switch(function)
             {
@@ -53,7 +53,7 @@ public class LivingDamageEvent extends EventHook
 
     private Object RunPre(Map<String, Base> hookArguments)
     {
-        if(hookArguments.get(Constants.eventParamName).Resolve() instanceof net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Pre preEvent)
+        if(hookArguments.get(Constants.eventParamName).resolve() instanceof net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Pre preEvent)
         {
             return switch(function)
             {
@@ -71,7 +71,7 @@ public class LivingDamageEvent extends EventHook
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         if(UAtoEnum.get(State.class, string) instanceof State newState)
         {
@@ -79,7 +79,7 @@ public class LivingDamageEvent extends EventHook
             return true;
         }
         
-        return super.HandleUniqueArgument(string);
+        return super.handleUniqueArgument(string);
     }
 
     @Override

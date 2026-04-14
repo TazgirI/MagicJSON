@@ -3,7 +3,6 @@ package net.tazgirl.magicjson.statements.objects.numeric_evaluators;
 import net.tazgirl.magicjson.helpers.NumericalComparisonHandler;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
-import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public abstract class NumericEvaluatorBase extends Base
 //    f t f
 //    F
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         if(values.size() == 2)
         {
@@ -42,7 +41,7 @@ public abstract class NumericEvaluatorBase extends Base
         }
         if(values.size() == 1)
         {
-            return values.getFirst().Resolve();
+            return values.getFirst().resolve();
         }
 
         // Allows for sequantial pairs just for sequantial pairs sake i.e 12 & 3 & 4 < 12 & 5 & 6 < 9 || 5 || 1
@@ -64,14 +63,14 @@ public abstract class NumericEvaluatorBase extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         values.add(base);
         return true;
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         // One of these will always be active by default but this allows for statements to be strongly typed against changes in the default case
         // ****************************************************************
@@ -107,7 +106,7 @@ public abstract class NumericEvaluatorBase extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         int index = values.indexOf(oldBase);
         if(index != -1)
@@ -117,7 +116,7 @@ public abstract class NumericEvaluatorBase extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }

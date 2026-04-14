@@ -35,20 +35,20 @@ public class Stack
     {
         if(objectStack.size() <= 1)
         {
-            MJLogging.Debug("Attempted to close top of empty stack, action skipped.   Stack contents: " + objectStack.toString());
+            MJLogging.debug("Attempted to close top of empty stack, action skipped.   Stack contents: " + objectStack.toString());
             return false;
         }
 
         Base top = objectStack.getLast();
         objectStack.removeLast();
 
-        if(objectStack.getLast().HandleBase(top))
+        if(objectStack.getLast().handleBase(top))
         {
             holder.AddRelationship(objectStack.getLast(), top);
             return true;
         }
 
-        MJLogging.Debug(objectStack.getLast().toString() + " failed to handle " + top.toString() + " when processing " + processingResourceAddress + ".   Stack contents: " + objectStack);
+        MJLogging.debug(objectStack.getLast().toString() + " failed to handle " + top.toString() + " when processing " + processingResourceAddress + ".   Stack contents: " + objectStack);
         return false;
     }
 
@@ -65,7 +65,7 @@ public class Stack
 
     public void PutUniqueArgument(String string)
     {
-        objectStack.getLast().HandleUniqueArgument(string.substring(1).toLowerCase());
+        objectStack.getLast().handleUniqueArgument(string.substring(1).toLowerCase());
     }
 
     public void put(Base base)

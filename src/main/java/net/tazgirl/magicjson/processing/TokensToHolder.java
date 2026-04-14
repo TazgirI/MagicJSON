@@ -34,7 +34,7 @@ public class TokensToHolder
 
         if(tokens.isEmpty())
         {
-            MJLogging.Debug("Statement at debug address \"" + stack.processingResourceAddress + "\" returned an empty tokens list");
+            MJLogging.debug("Statement at debug address \"" + stack.processingResourceAddress + "\" returned an empty tokens list");
             stack.put(new NullObject(stack.holder));
             return stack.finalise();
         }
@@ -89,7 +89,7 @@ public class TokensToHolder
                     }
                     catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
                     {
-                        MJLogging.Error("Failed to construct the AppendHook with the token of " + token.substring(2));
+                        MJLogging.error("Failed to construct the AppendHook with the token of " + token.substring(2));
                     }
                 }
                 else
@@ -118,17 +118,17 @@ public class TokensToHolder
                 }
                 else
                 {
-                    MJLogging.Debug("Detected token '" + token + "' is a string but is too short to process");
+                    MJLogging.debug("Detected token '" + token + "' is a string but is too short to process");
                 }
             }
 
             if(Config.OBJECTIFICATION_PING_COUNT.getAsBoolean())
             {
-                MJLogging.Info("The token \"" + token + "\" was pinged " + pings + " time(s) during object construction");
+                MJLogging.info("The token \"" + token + "\" was pinged " + pings + " time(s) during object construction");
             }
             if(Config.OBJECTIFICATION_PING_CONTENTS.getAsBoolean())
             {
-                MJLogging.Info(stack.objectStack.toString());
+                MJLogging.info(stack.objectStack.toString());
             }
 
 

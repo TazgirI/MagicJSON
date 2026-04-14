@@ -39,7 +39,7 @@ public class WorldMemory extends SavedData
 
             if(object == null)
             {
-                MJLogging.Debug("Attempted to put unacceptable type into world memory, entry has not been saved and will be lost when server closes");
+                MJLogging.debug("Attempted to put unacceptable type into world memory, entry has not been saved and will be lost when server closes");
                 continue;
             }
 
@@ -96,7 +96,7 @@ public class WorldMemory extends SavedData
             return true;
         }
 
-        MJLogging.Warn("Attempted to put unconvertable type in WorldMemory");
+        MJLogging.warn("Attempted to put unconvertable type in WorldMemory");
         return false;
     }
 

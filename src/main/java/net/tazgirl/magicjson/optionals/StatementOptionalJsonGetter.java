@@ -39,7 +39,7 @@ public record StatementOptionalJsonGetter<T>(String key, Class<T> type)
             Object value = getter.read(jsonObject);
             if(value == null)
             {
-                MJLogging.Debug("Attempted to read \"" + getter.key + "\" from JsonObject but found a null value");
+                MJLogging.debug("Attempted to read \"" + getter.key + "\" from JsonObject but found a null value");
                 return null;
             }
 

@@ -12,12 +12,12 @@ public class Or extends CompoundBase
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         boolean returnBool = false;
         for(Base base: values)
         {
-            if(base.Resolve() instanceof Boolean bool && bool)
+            if(base.resolve() instanceof Boolean bool && bool)
             {
                 returnBool = true;
                 if(breakOnFind){break;}

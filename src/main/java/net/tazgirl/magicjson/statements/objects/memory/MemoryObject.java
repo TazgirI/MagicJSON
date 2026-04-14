@@ -27,13 +27,13 @@ public class MemoryObject extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         return switch (function)
         {
             case GET ->
             {
-                Object addressResult = address.Resolve();
+                Object addressResult = address.resolve();
                 if(addressResult instanceof String string)
                 {
                     if(namespace == Namespace.LOCAL)
@@ -47,7 +47,7 @@ public class MemoryObject extends Base
             }
             case PUT ->
             {
-                Object addressResult = address.Resolve();
+                Object addressResult = address.resolve();
                 if(addressResult instanceof String string)
                 {
                     if(namespace == Namespace.LOCAL)
@@ -55,17 +55,17 @@ public class MemoryObject extends Base
                         string = holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
                     }
 
-                    yield space.supplier.get().put(string, optionalValue.Resolve());
+                    yield space.supplier.get().put(string, optionalValue.resolve());
                 }
 
                 yield null;
             }
             case VALID ->
             {
-                Object addressResult = address.Resolve();
+                Object addressResult = address.resolve();
                 if(addressResult instanceof String)
                 {
-                    yield WorldMemory.isTypeAcceptable(optionalValue.Resolve());
+                    yield WorldMemory.isTypeAcceptable(optionalValue.resolve());
                 }
 
                 yield false;
@@ -74,7 +74,7 @@ public class MemoryObject extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(address == null)
         {
@@ -91,7 +91,7 @@ public class MemoryObject extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         if(UAtoEnum.get(Function.class, string) instanceof Function func)
         {
@@ -113,7 +113,7 @@ public class MemoryObject extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -131,7 +131,7 @@ public class MemoryObject extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(address == oldBase)
         {

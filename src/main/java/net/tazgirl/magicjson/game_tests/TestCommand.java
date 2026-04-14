@@ -36,7 +36,7 @@ public class TestCommand
                                 SendMessage.All(component);
                                 if(component.getStyle().getColor() == red)
                                 {
-                                    MJLogging.Error(component.getString());
+                                    MJLogging.error(component.getString());
                                 }
                             }
 

@@ -18,13 +18,13 @@ public class HookArgument extends Base
     }
 
     @Override
-    public Map.Entry<String, Base> Resolve()
+    public Map.Entry<String, Base> resolve()
     {
-        return name.Resolve() instanceof String string ? Map.entry(string,value) : null;
+        return name.resolve() instanceof String string ? Map.entry(string,value) : null;
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
 
         if(name == null)
@@ -43,13 +43,13 @@ public class HookArgument extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         return false;
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -67,7 +67,7 @@ public class HookArgument extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(name == oldBase)
         {

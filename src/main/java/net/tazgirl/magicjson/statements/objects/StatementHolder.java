@@ -35,7 +35,7 @@ public class StatementHolder
 
     public Object Run()
     {
-        Object result = root.Resolve();
+        Object result = root.resolve();
 
         args = new HashMap<>();
 
@@ -44,7 +44,7 @@ public class StatementHolder
 
     public Object RunKeepArgs()
     {
-        return root.Resolve();
+        return root.resolve();
     }
 
     public void AddRelationship(Base parent, Base child)
@@ -71,7 +71,7 @@ public class StatementHolder
 
         if(root == null)
         {
-            MJLogging.Debug("The StatementHolder for \"" + address + "\" has failed to find an acceptable root and is incapable of running");
+            MJLogging.debug("The StatementHolder for \"" + address + "\" has failed to find an acceptable root and is incapable of running");
         }
 
         constructor = null;
@@ -104,7 +104,7 @@ public class StatementHolder
         if(childToParent.containsKey(oldBase))
         {
             Base parent = childToParent.get(oldBase);
-            parent.Replace(oldBase, newBase);
+            parent.replace(oldBase, newBase);
             childToParent.remove(oldBase);
             childToParent.put(newBase, parent);
         }
@@ -118,7 +118,7 @@ public class StatementHolder
             for(Base child: children)
             {
                 childToParent.remove(child);
-                if(newBase.HandleBase(child))
+                if(newBase.handleBase(child))
                 {
                     acceptedChildren.add(child);
                     childToParent.put(child, newBase);

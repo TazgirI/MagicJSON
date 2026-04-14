@@ -23,13 +23,13 @@ public class Uuid extends Base
     }
 
     @Override
-    public Object Resolve()
+    public Object resolve()
     {
         switch (function)
         {
             case TOENTITY ->
             {
-                if(!(uuidBase.Resolve() instanceof String string)){return null;}
+                if(!(uuidBase.resolve() instanceof String string)){return null;}
 
                 UUID uuid;
 
@@ -56,7 +56,7 @@ public class Uuid extends Base
             }
             case VALID ->
             {
-                if(!(uuidBase.Resolve() instanceof String string)){return false;}
+                if(!(uuidBase.resolve() instanceof String string)){return false;}
 
                 try
                 {
@@ -71,7 +71,7 @@ public class Uuid extends Base
             }
             case FROM ->
             {
-                if(!(uuidBase.Resolve() instanceof String string)){return null;}
+                if(!(uuidBase.resolve() instanceof String string)){return null;}
 
                 try
                 {
@@ -84,7 +84,7 @@ public class Uuid extends Base
             }
             case FROMENTITY ->
             {
-                if(!(uuidBase.Resolve() instanceof Entity entity)){return null;}
+                if(!(uuidBase.resolve() instanceof Entity entity)){return null;}
 
                 return entity.getUUID();
             }
@@ -94,7 +94,7 @@ public class Uuid extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleBase(Base base)
+    public @NotNull Boolean handleBase(Base base)
     {
         if(uuidBase == null)
         {
@@ -106,7 +106,7 @@ public class Uuid extends Base
     }
 
     @Override
-    public @NotNull Boolean HandleUniqueArgument(String string)
+    public @NotNull Boolean handleUniqueArgument(String string)
     {
         function = UAtoEnum.get(Function.class, string);
 
@@ -114,7 +114,7 @@ public class Uuid extends Base
     }
 
     @Override
-    public Base ImplicitChild()
+    public Base implicitChild()
     {
         return null;
     }
@@ -132,7 +132,7 @@ public class Uuid extends Base
     }
 
     @Override
-    public void Replace(Base oldBase, Base newBase)
+    public void replace(Base oldBase, Base newBase)
     {
         if(uuidBase == oldBase)
         {

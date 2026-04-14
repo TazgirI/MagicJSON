@@ -34,7 +34,7 @@ public class PrimitiveObjectsRegister extends MapRegister<String, PrimitiveInitR
         public PrimitiveInitRecord put(String address, PrimitiveInitRecord value)
         {
             if(!address.contains(":") || address.contains("/")){
-                MJLogging.Warn("Attempted to register a PrimitiveObject without using the correct form of \"namespace:token\", the attempted token registration for \"" + address + "\" has been skipped"); return null;}
+                MJLogging.warn("Attempted to register a PrimitiveObject without using the correct form of \"namespace:token\", the attempted token registration for \"" + address + "\" has been skipped"); return null;}
 
             String synonym = RegistersForProcessing.tokenSynonyms.get(address);
 
