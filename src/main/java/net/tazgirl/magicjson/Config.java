@@ -1,10 +1,9 @@
 package net.tazgirl.magicjson;
 
-import java.util.List;
-
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import net.tazgirl.magicjson.optionals.OptionalValue;
+import net.tazgirl.magicjson.optionals.numbers.DoubleStatementOptional;
+import net.tazgirl.magicjson.optionals.tests.ResultTest;
 
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Neo's config APIs
@@ -31,7 +30,9 @@ public class Config
             .define("objectificationPingContents", false);
     // *****************************************************************************************************************************
 
-
+    public static final MagicJsonConfigValue.DoubleValue TEST_DOUBLE_OPTIONAL = new MagicJsonConfigValue.DoubleValue(BUILDER
+            .comment("Testing optional builder")
+            .define("testDoubleOptional", "magicjson:test_double"));
 
 
 
