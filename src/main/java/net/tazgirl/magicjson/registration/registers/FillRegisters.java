@@ -14,6 +14,7 @@ import net.tazgirl.magicjson.registration.registers.tokenisation.SoloCharsRegist
 import net.tazgirl.magicjson.registration.registers.objectification.StatementObjectTokensRegister;
 import net.tazgirl.magicjson.statements.hooks.LivingDamageEvent;
 import net.tazgirl.magicjson.statements.objects.StringMutators.Concat;
+import net.tazgirl.magicjson.statements.objects.flow.If;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.complex_numeric.Gaussian;
@@ -84,8 +85,9 @@ public class FillRegisters
 
             "concat", Concat.class,
 
-            "random", Random.class
+            "random", Random.class,
 
+            "if", If.class
 
     );
 
