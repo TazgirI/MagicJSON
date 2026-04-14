@@ -35,6 +35,20 @@ public class OptionalValue<T>
         return new OptionalValue<>(plainValue);
     }
 
+    public static <T> OptionalValue<T> from(Object value, ResultTest<T> test)
+    {
+        if(value instanceof String)
+        {
+            return new OptionalValue<>((String) value, test);
+        }
+         else if(test.test(value))
+        {
+            return new OptionalValue<>((T) value);
+        }
+
+        return null;
+    }
+
     public T get()
     {
         return getWithArgs();
