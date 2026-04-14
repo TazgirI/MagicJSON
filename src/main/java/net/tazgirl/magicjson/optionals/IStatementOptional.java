@@ -8,6 +8,8 @@ public interface IStatementOptional<T>
 {
     OptionalValue<T> getOptional();
 
+    String identifier();
+
     default T get()
     {
         return getOptional().get();
@@ -26,5 +28,10 @@ public interface IStatementOptional<T>
     default Object getRaw()
     {
         return getOptional().getRaw();
+    }
+
+    default String getString()
+    {
+        return identifier() + "( " + getOptional().toString() + " )";
     }
 }

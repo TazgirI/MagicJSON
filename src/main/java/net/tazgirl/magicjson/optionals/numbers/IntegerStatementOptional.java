@@ -11,9 +11,20 @@ public class IntegerStatementOptional extends NumberStatementOptional<Integer>
         super(optionalValue);
     }
 
+    public static IntegerStatementOptional from(int value)
+    {
+        return new IntegerStatementOptional(OptionalValue.from(value));
+    }
+
     @Override
     public Integer get()
     {
         return super.get();
+    }
+
+    @Override
+    public String identifier()
+    {
+        return "IntegerStatementOptional";
     }
 }

@@ -63,6 +63,12 @@ public class NumberStatementOptional<T extends Number> extends Number implements
     @Override
     public String toString()
     {
-        return get().toString();
+        return getString();
+    }
+
+    @Override
+    public String identifier()
+    {
+        return "NumberStatementOptional";
     }
 }

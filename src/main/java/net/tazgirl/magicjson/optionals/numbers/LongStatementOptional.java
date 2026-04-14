@@ -12,9 +12,20 @@ public class LongStatementOptional extends NumberStatementOptional<Long>
         super(optionalValue);
     }
 
+    public static LongStatementOptional from(long value)
+    {
+        return new LongStatementOptional(OptionalValue.from(value));
+    }
+
     @Override
     public Long get()
     {
         return super.get();
+    }
+
+    @Override
+    public String identifier()
+    {
+        return "LongStatementOptional";
     }
 }

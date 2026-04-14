@@ -38,4 +38,16 @@ public class StatementOptional<T> implements IStatementOptional<T>
     {
         return optionalValue.getRaw();
     }
+
+    @Override
+    public String identifier()
+    {
+        return "TypeTStatementOptional";
+    }
+
+    @Override
+    public String toString()
+    {
+        return getString();
+    }
 }

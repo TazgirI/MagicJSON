@@ -11,9 +11,20 @@ public class FloatStatementOptional extends NumberStatementOptional<Float>
         super(optionalValue);
     }
 
+    public static FloatStatementOptional from(float value)
+    {
+        return new FloatStatementOptional(OptionalValue.from(value));
+    }
+
     @Override
     public Float get()
     {
         return super.get();
+    }
+
+    @Override
+    public String identifier()
+    {
+        return "FloatStatementOptional";
     }
 }

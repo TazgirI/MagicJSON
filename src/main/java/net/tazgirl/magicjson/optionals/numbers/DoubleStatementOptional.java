@@ -3,6 +3,7 @@ package net.tazgirl.magicjson.optionals.numbers;
 import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.optionals.IStatementOptional;
 import net.tazgirl.magicjson.optionals.OptionalValue;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class DoubleStatementOptional extends NumberStatementOptional<Double>
@@ -12,9 +13,14 @@ public class DoubleStatementOptional extends NumberStatementOptional<Double>
         super(optionalValue);
     }
 
-    @Override
-    public Double get()
+    public static DoubleStatementOptional from(double value)
     {
-        return super.get();
+        return new DoubleStatementOptional(OptionalValue.from(value));
+    }
+
+    @Override
+    public String identifier()
+    {
+        return "DoubleStatementOptional";
     }
 }

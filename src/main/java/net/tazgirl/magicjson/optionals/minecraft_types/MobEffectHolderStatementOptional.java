@@ -96,14 +96,6 @@ public class MobEffectHolderStatementOptional extends StatementOptional<Holder<M
         return optionalValue;
     }
 
-
-    @Override
-    public String toString()
-    {
-        return get().toString();
-    }
-
-
     @Override
     public @NotNull MobEffect value()
     {

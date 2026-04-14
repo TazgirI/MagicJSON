@@ -21,4 +21,10 @@ public class BooleanStatementOptional extends StatementOptional<Boolean> impleme
     {
         return optionalValue;
     }
+
+    @Override
+    public String identifier()
+    {
+        return "BooleanStatementOptional";
+    }
 }
