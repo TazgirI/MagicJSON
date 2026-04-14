@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson;
 
+import net.tazgirl.magicjson.data.Constants;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class PrivateCore
 
     public static Object runStatement(String address)
     {
-        if(statementRegister.get(address) instanceof StatementHolder holder)
+        if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
             return holder.Run();
         }
@@ -20,7 +21,7 @@ public class PrivateCore
 
     public static Object runStatement(String address, Map<String, Object> args)
     {
-        if(statementRegister.get(address) instanceof StatementHolder holder)
+        if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
             holder.setArgs(args);
             return holder.Run();
@@ -39,7 +40,7 @@ public class PrivateCore
 
         if(existing != null)
         {
-            MJLogging.Warn(address + " was just overwritten during Statement registration, if two mods are conflicting then you must create a synonym");
+            MJLogging.warn(address + " was just overwritten during Statement registration, if two mods are conflicting then you must create a synonym");
         }
     }
 
