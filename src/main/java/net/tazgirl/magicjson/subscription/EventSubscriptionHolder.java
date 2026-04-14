@@ -12,18 +12,20 @@ public abstract class EventSubscriptionHolder<T extends Event>
 {
     final EventPriority priority;
     final String address;
+    final Class<T> subscriptionClass;
 
-    public EventSubscriptionHolder(String address, EventPriority priority)
+    public EventSubscriptionHolder(String address, EventPriority priority, Class<T> subscriptionClass)
     {
         this.address = address;
         this.priority = priority;
+        this.subscriptionClass = subscriptionClass;
     }
 
     abstract Map<String, Object> constructArgs(T event);
 
-    public void subscribe(IEventBus bus, Class<T> type)
+    public void subscribe(IEventBus bus)
     {
-        bus.addListener(priority, type, this::consume);
+        bus.addListener(priority, subscriptionClass, this::consume);
     }
 
     public void consume(T event)

@@ -4,79 +4,108 @@ import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.neoforged.bus.api.Event;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.data.Constants;
+import net.tazgirl.magicjson.helpers.EventPriorityFrom;
 import net.tazgirl.magicjson.helpers.InputStreamToJson;
+import net.tazgirl.magicjson.subscription.EventSubscriptionHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 public class SubscriptionFetcher
 {
-    public static StatementPriorityQueue fetchAddresses(String eventKey)
+    public static <E extends Event, T extends EventSubscriptionHolder<E>> List<T> setupSubscribers(String eventKey, BiFunction<String, EventPriority, T> builder, IEventBus eventBus)
     {
-        Map<ResourceLocation, Resource> files = GetFiles(eventKey);
-        if(files == null){return null;}
+        List<T> returnList = new ArrayList<>();
 
-        Map<ExecutableAddress, Integer> returnMap = new HashMap<>();
+        Map<ResourceLocation, Resource> files = getFiles(eventKey);
+        if(files == null)
+        {
+            return null;
+        }
 
         for(Map.Entry<ResourceLocation, Resource> entry : files.entrySet())
         {
-            Map<ExecutableAddress, Integer> entryResult = objectToEntry(entry);
-
-            if(!entryResult.isEmpty())
+            List<T> holders = objectToEntry(entry, builder, eventBus);
+            if(!holders.isEmpty())
             {
-                returnMap.putAll(entryResult);
+                returnList.addAll(holders);
             }
         }
 
-        return new StatementPriorityQueue(returnMap);
+        return returnList;
     }
 
-    static Map<ExecutableAddress, Integer> objectToEntry(Map.Entry<ResourceLocation, Resource> entry)
+    @NotNull
+    static <E extends Event, T extends EventSubscriptionHolder<E>> List<T> objectToEntry(Map.Entry<ResourceLocation, Resource> entry, BiFunction<String, EventPriority, T> builder, IEventBus eventBus)
     {
-        Map<ExecutableAddress, Integer> returnMap = new HashMap<>();
+        List<T> returnList = new ArrayList<>();
 
         try(InputStream inputStream = entry.getValue().open())
         {
             JsonObject jsonObject = InputStreamToJson.getJson(inputStream);
 
-            if(jsonObject == null){return returnMap;}
+            if(jsonObject == null)
+            {
+                return returnList;
+            }
 
             jsonObject.entrySet().forEach(elementEntry ->
             {
                 if(elementEntry.getValue() instanceof JsonObject entryObject)
                 {
-                    String address;
-                    int priority;
+                    String address = null;
+                    EventPriority priority = EventPriority.NORMAL;
                     try
                     {
                         address = entryObject.get(Constants.statementSubscriberAddresssElement).getAsString();
-                        priority = entryObject.get(Constants.statementSubscriberPriorityElement).getAsInt();
-
-                        returnMap.put(new ExecutableAddress(address), priority);
+                        priority = EventPriorityFrom.element(entryObject.get(Constants.statementSubscriberPriorityElement));
                     }
                     catch (IllegalStateException | NullPointerException e)
                     {
-                        MJLogging.Warn("JsonObject \"" + elementEntry.getKey() + "\" did not have the expected contents of two JsonPrimitive Strings named \"" + Constants.hookSynonymAddressElement + "\" and \"" + Constants.hookSynonymSynonymElement + "\" respectively");
+                        if(address == null)
+                        {
+                            MJLogging.debug("JsonObject \"" + elementEntry.getKey() + "\" did not have an element called \"" + Constants.statementSubscriberAddresssElement + "\", skipping this object");
+                        }
+                        else
+                        {
+                            MJLogging.info("JsonObject \"" + elementEntry.getKey() + "\" did not have an element called \"" + Constants.statementSubscriberPriorityElement + "\", defaulting to NORMAL(3)");
+                        }
                     }
 
+                    if(address != null)
+                    {
+                        T holder = builder.apply(address, priority);
+                        holder.subscribe(eventBus);
+
+                        returnList.add(holder);
+                    }
                 }
             });
         }
         catch (IOException e)
         {
-            MJLogging.Error("Could not process .json: " + entry.getKey());
+            MJLogging.error("Could not process .json: " + entry.getKey());
         }
 
-        return returnMap;
+        return returnList;
     }
 
-    static Map<ResourceLocation, Resource> GetFiles(String filePath)
+    static Map<ResourceLocation, Resource> getFiles(String filePath)
     {
-        if(Constants.server == null){return null;}
+        if(Constants.server == null)
+        {
+            return null;
+        }
 
         ResourceManager resourceManager = Constants.server.getResourceManager();
 
