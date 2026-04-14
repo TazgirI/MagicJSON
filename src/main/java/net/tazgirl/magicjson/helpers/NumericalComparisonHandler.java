@@ -430,7 +430,7 @@ public class NumericalComparisonHandler
 
            if(tempRight instanceof Number rightNum)
            {
-               Object tempLeft = leftOperand.Resolve();
+               Object tempLeft = leftOperand.resolve();
 
                if(tempLeft instanceof Number tempLeftNum)
                {
@@ -483,7 +483,7 @@ public class NumericalComparisonHandler
 
         if(leftnum == null)
         {
-            Object tempLeft = leftOperand.Resolve();
+            Object tempLeft = leftOperand.resolve();
 
             if(tempLeft instanceof Number num)
             {
@@ -577,8 +577,8 @@ public class NumericalComparisonHandler
     // If no nums found it defaults to false
     static Boolean bothNonCompounds(Base leftOperand, Base rightOperand, NumericEvaluatorBase evaluator)
     {
-        Object leftResult = leftOperand.Resolve();
-        Object rightResult = rightOperand.Resolve();
+        Object leftResult = leftOperand.resolve();
+        Object rightResult = rightOperand.resolve();
 
         if(leftResult instanceof Boolean){return (Boolean) leftResult;}
         if(rightResult instanceof Boolean){return (Boolean) rightResult;}

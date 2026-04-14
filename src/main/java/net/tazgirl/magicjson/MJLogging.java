@@ -14,7 +14,7 @@ public class MJLogging
 
 
 
-    public static void Warn(@NotNull String warnMessage)
+    public static void warn(@NotNull String warnMessage)
     {
         if(Constants.chatDebugFlags)
         {
@@ -24,7 +24,7 @@ public class MJLogging
         localLogger.warn(warnMessage.concat(currentBuildInformation));
     }
 
-    public static void Error(@NotNull String errorMessage)
+    public static void error(@NotNull String errorMessage)
     {
         if(Constants.chatDebugFlags)
         {
@@ -34,7 +34,7 @@ public class MJLogging
         localLogger.error(errorMessage.concat(currentBuildInformation));
     }
 
-    public static void Debug(@NotNull String debugMessage)
+    public static void debug(@NotNull String debugMessage)
     {
         if(Constants.chatDebugFlags)
         {
@@ -44,7 +44,7 @@ public class MJLogging
         localLogger.debug(debugMessage);
     }
 
-    public static void Info(@NotNull String infoMessage)
+    public static void info(@NotNull String infoMessage)
     {
         if(Constants.chatDebugFlags)
         {
