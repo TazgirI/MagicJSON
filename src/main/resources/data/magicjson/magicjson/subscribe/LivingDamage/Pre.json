@@ -1,7 +1,7 @@
 {
   "thingy":
   {
-    "address": "magicjson:thing",
+    "address": "magicjson:teleport_test",
     "priority": 2
   }
 }
