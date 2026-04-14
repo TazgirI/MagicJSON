@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson.game_tests;
 
+import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.network.chat.Component;
 import net.tazgirl.magicjson.processing.Tokenisation;
 
