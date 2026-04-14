@@ -1,6 +1,5 @@
-package net.tazgirl.magicjson.registration;
+package net.tazgirl.magicjson.registration.registers;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
@@ -39,7 +38,7 @@ public class FillStatementKeywordsRegister
             }
             catch (IOException ignored)
             {
-                MJLogging.Debug("Failed to get StatementKeyword json as a JsonArray, skipping file. Source pack id: " + resource.sourcePackId());
+                MJLogging.debug("Failed to get StatementKeyword json as a JsonArray, skipping file. Source pack id: " + resource.sourcePackId());
                 continue;
             }
 
@@ -48,11 +47,12 @@ public class FillStatementKeywordsRegister
                 continue;
             }
 
-            for(JsonElement element : jsonObject.asMap().values())
+            for(Map.Entry<String, JsonElement> entry : jsonObject.asMap().entrySet())
             {
+                JsonElement element = entry.getValue();
                 if(element.isJsonPrimitive())
                 {
-                    event.put(event.getIdentifier(), element.getAsString());
+                    event.put(entry.getKey(), element.getAsString());
                 }
             }
         }
