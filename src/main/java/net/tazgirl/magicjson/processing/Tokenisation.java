@@ -29,7 +29,7 @@ public class Tokenisation
 
             // Checks that do not halt this char:
 
-            if(RegistersForProcessing.endChars.contains(currentChar) && !currentToken.isEmpty())
+            if(RegistersForProcessing.endChars.contains(currentChar) && !currentToken.isEmpty() && !(currentChar == '.' && currentToken.toString().matches("[0-9]+")))
             {
                 EndChar();
             }
