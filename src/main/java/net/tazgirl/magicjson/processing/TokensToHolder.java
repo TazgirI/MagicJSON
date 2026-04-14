@@ -104,7 +104,7 @@ public class TokensToHolder
             {
                 stack.put(new ArgGet(stack.holder));
                 stack.put(new StringObject(stack.holder, token.substring(1)));
-                stack.Close(2);
+                stack.Close(1);
                 pings++;
             }
             // Any token beginning with '"' has the first and last character stripped and is then passed as a StringObject
