@@ -21,6 +21,8 @@ public class  MagicJson
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    static IEventBus MOD_EVENT_BUS;
+
 
     public static Object runStatement(String address)
     {
@@ -65,6 +67,7 @@ public class  MagicJson
 
     public MagicJson(IEventBus modEventBus, ModContainer modContainer)
     {
+        MOD_EVENT_BUS = modEventBus;
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
     }
 
