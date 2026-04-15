@@ -24,6 +24,7 @@ import net.tazgirl.magicjson.statements.objects.compounds.Or;
 import net.tazgirl.magicjson.statements.objects.minecraft.Teleport;
 import net.tazgirl.magicjson.statements.objects.numeric_evaluators.GreaterThan;
 import net.tazgirl.magicjson.statements.objects.numeric_evaluators.LessThan;
+import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEquals;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Add;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Divide;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Subtract;
@@ -72,6 +73,9 @@ public class FillRegisters
                     Map.entry(List.of("lessthan", "<"), LessThan.class),
                     Map.entry(List.of("greaterthan", ">"), GreaterThan.class),
                     Map.entry(List.of("equals","=", "=="), Equals.class),
+                    Map.entry(List.of("numequals","num=", "num=="), NumericEquals.class),
+
+
 
                     Map.entry(List.of("div", "/"), Divide.Full.class),
                     Map.entry(List.of("mod", "%"), Divide.Modulus.class),
