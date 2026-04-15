@@ -63,7 +63,9 @@ public class HookArgument extends Base
     @Override
     public String toString()
     {
-        return identifier + "( " + name.toString() + "  " + value.toString() + " )";
+        String nameString = name == null ? "null" : name.toString();
+        String valueString = value == null ? "null" : value.toString();
+        return identifier + "( " + nameString + "  " + valueString + " )";
     }
 
     @Override
