@@ -4,6 +4,7 @@ import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import net.tazgirl.magicjson.statements.objects.compounds.And;
 import net.tazgirl.magicjson.statements.objects.compounds.Or;
 import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
+import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEquals;
 import net.tazgirl.magicjson.statements.objects.primitives.numbers.IntegerObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class NumericalComparisonHandlerTest
         rightOperand.handleBase(new IntegerObject(holder, 2));
         rightOperand.handleBase(new IntegerObject(holder, 5));
 
-        Equals equals = new Equals(holder);
+        NumericEquals equals = new NumericEquals(holder);
         equals.handleBase(leftOperand);
         equals.handleBase(rightOperand);
 
