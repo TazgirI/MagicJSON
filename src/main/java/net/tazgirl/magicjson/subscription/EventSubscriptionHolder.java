@@ -3,10 +3,12 @@ package net.tazgirl.magicjson.subscription;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.subscription.base.ExecutableAddress;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class EventSubscriptionHolder<T extends Event>
 {
@@ -21,7 +23,10 @@ public abstract class EventSubscriptionHolder<T extends Event>
         this.subscriptionClass = subscriptionClass;
     }
 
-    abstract Map<String, Object> constructArgs(T event);
+    Map<String, Object> constructArgs(T event)
+    {
+        return Map.of("event", event);
+    }
 
     public void subscribe(IEventBus bus)
     {
@@ -31,5 +36,14 @@ public abstract class EventSubscriptionHolder<T extends Event>
     public void consume(T event)
     {
         MagicJson.runStatement(address, constructArgs(event));
+    }
+
+    protected Map<String, Object> eventifyArgs(Map<String, Object> args)
+    {
+        return args.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> "event_" + entry.getKey(),
+                        Map.Entry::getValue
+                ));
     }
 }
