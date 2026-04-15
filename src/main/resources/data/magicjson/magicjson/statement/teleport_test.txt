@@ -1,0 +1,1 @@
+teleport(living_damage.victim({"event" _event}) 0 0 0)

@@ -3,7 +3,7 @@ package net.tazgirl.magicjson.helpers;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import net.tazgirl.magicjson.statements.objects.compounds.And;
 import net.tazgirl.magicjson.statements.objects.compounds.Or;
-import net.tazgirl.magicjson.statements.objects.numeric_evaluators.Equals;
+import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
 import net.tazgirl.magicjson.statements.objects.primitives.numbers.IntegerObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
