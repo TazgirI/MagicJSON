@@ -11,13 +11,12 @@ import net.tazgirl.magicjson.subscription.base.SubscriptionFetcher;
 import java.util.List;
 import java.util.Map;
 
-@EventBusSubscriber
 public class LivingDamageSubscribers
 {
     @EventBusSubscriber
     public static class Pre
     {
-        private static final String dir = "LivingDamage/Pre";
+        private static final String dir = "living_damage/pre";
         static List<EventSubscriptionHolder<LivingDamageEvent.Pre>> holders;
 
         @SubscribeEvent
@@ -32,19 +31,13 @@ public class LivingDamageSubscribers
             {
                 super(address, priority, LivingDamageEvent.Pre.class);
             }
-
-            @Override
-            Map<String, Object> constructArgs(LivingDamageEvent.Pre event)
-            {
-                return Map.of();
-            }
         }
     }
 
     @EventBusSubscriber
     public static class Post
     {
-        private static final String dir = "LivingDamage/Post";
+        private static final String dir = "living_damage/Post";
         static List<EventSubscriptionHolder<LivingDamageEvent.Post>> holders;
 
         @SubscribeEvent
@@ -58,12 +51,6 @@ public class LivingDamageSubscribers
             public LivingDamagePostSubscriptionHolder(String address, EventPriority priority)
             {
                 super(address, priority, LivingDamageEvent.Post.class);
-            }
-
-            @Override
-            Map<String, Object> constructArgs(LivingDamageEvent.Post event)
-            {
-                return Map.of();
             }
         }
     }
