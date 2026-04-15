@@ -6,14 +6,14 @@ import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.registers.objectification.CloseTokensRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.PrimitiveObjectsRegister;
-import net.tazgirl.magicjson.registration.registers.objectification.StatementKeywordsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.AppendHookRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.EndCharsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.ExcludeCharsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.SoloCharsRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.StatementObjectTokensRegister;
-import net.tazgirl.magicjson.statements.hooks.LivingDamageEvent;
+import net.tazgirl.magicjson.statements.hooks.LivingDamageEventStatementObject;
 import net.tazgirl.magicjson.statements.objects.StringMutators.Concat;
+import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
 import net.tazgirl.magicjson.statements.objects.flow.If;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
 import net.tazgirl.magicjson.statements.objects.Base;
@@ -21,7 +21,7 @@ import net.tazgirl.magicjson.statements.objects.complex_numeric.Gaussian;
 import net.tazgirl.magicjson.statements.objects.complex_numeric.Random;
 import net.tazgirl.magicjson.statements.objects.compounds.And;
 import net.tazgirl.magicjson.statements.objects.compounds.Or;
-import net.tazgirl.magicjson.statements.objects.numeric_evaluators.Equals;
+import net.tazgirl.magicjson.statements.objects.minecraft.Teleport;
 import net.tazgirl.magicjson.statements.objects.numeric_evaluators.GreaterThan;
 import net.tazgirl.magicjson.statements.objects.numeric_evaluators.LessThan;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Add;
@@ -43,6 +43,8 @@ public class FillRegisters
         event.put(')');
         event.put(' ');
         event.put('.');
+        event.put('{');
+        event.put('}');
     }
 
     @SubscribeEvent
@@ -51,6 +53,8 @@ public class FillRegisters
         event.put('(');
         event.put(')');
         event.put(' ');
+        event.put('{');
+        event.put('}');
     }
 
     @SubscribeEvent
@@ -67,7 +71,7 @@ public class FillRegisters
                     // FEAT: Allow <= and >= to init with unique argument of .equals
                     Map.entry(List.of("lessthan", "<"), LessThan.class),
                     Map.entry(List.of("greaterthan", ">"), GreaterThan.class),
-                    Map.entry(List.of("equal", "equals", "=", "=="), Equals.class),
+                    Map.entry(List.of("equals","=", "=="), Equals.class),
 
                     Map.entry(List.of("div", "/"), Divide.Full.class),
                     Map.entry(List.of("mod", "%"), Divide.Modulus.class),
@@ -77,7 +81,7 @@ public class FillRegisters
                     Map.entry(List.of("gaussian", "gauss"), Gaussian.class),
 
 
-                    Map.entry(List.of("LivingDamage", "LivingDamage"), LivingDamageEvent.class)
+                    Map.entry(List.of("livingdamage", "living_damage"), LivingDamageEventStatementObject.class)
             );
 
     final static Map<String, Class<? extends Base>> singles = Map.of(
@@ -87,7 +91,11 @@ public class FillRegisters
 
             "random", Random.class,
 
-            "if", If.class
+            "if", If.class,
+
+            "teleport", Teleport.class,
+
+            "livingdamage", LivingDamageEventStatementObject.class
 
     );
 
@@ -110,6 +118,7 @@ public class FillRegisters
     {
         event.put(")");
         event.put(" ");
+        event.put("}");
     }
 
     @SubscribeEvent
