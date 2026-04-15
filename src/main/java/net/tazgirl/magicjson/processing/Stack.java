@@ -57,7 +57,11 @@ public class Stack
         boolean returnBool = true;
         for(int i = 0; i < amount; i++)
         {
-            returnBool = returnBool ? Close() : false;
+            if(!Close())
+            {
+                returnBool = false;
+                break;
+            }
         }
 
         return returnBool;
