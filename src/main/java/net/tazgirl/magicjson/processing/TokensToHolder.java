@@ -43,11 +43,35 @@ public class TokensToHolder
         {
             int pings = 0;
             token = tokens.get(i);
+            char zeroChar = token.charAt(0);
 
             if(RegistersForProcessing.closeTokens.contains(token))
             {
                 stack.Close();
                 pings++;
+            }
+
+            // Pass in unique arguments like constructor params, always pass the string as StatementObjects must do handling
+            // Can be written in a way like Divide(10 .modulus 2) but is intended to be written as Divide.modulus(10 2)
+            if(token.charAt(0) == '.')
+            {
+                if(token.charAt(1) == '.' && RegistersForProcessing.appendHooks.containsKey(token.substring(2)))
+                {
+                    try
+                    {
+                        RegistersForProcessing.appendHooks.get(token).getDeclaredConstructor().newInstance().Trigger(stack.objectStack.getLast(), stack, stack.holder, this);
+                        pings++;
+                    }
+                    catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
+                    {
+                        MJLogging.error("Failed to construct the AppendHook with the token of " + token.substring(2));
+                    }
+                }
+                else
+                {
+                    stack.PutUniqueArgument(token);
+                    pings++;
+                }
             }
 
             if(RegistersForProcessing.statementObjects.containsKey(token))
@@ -71,55 +95,38 @@ public class TokensToHolder
                 stack.put(execute);
                 pings++;
             }
-            else if(Character.isDigit(token.charAt(0)))
+            else if(Character.isDigit(zeroChar))
             {
                 stack.PutNum(token);
                 pings++;
             }
-            // Pass in unique arguments like constructor params, always pass the string as StatementObjects must do handling
-            // Can be written in a way like Divide(10 .modulus 2) but is intended to be written as Divide.modulus(10 2)
-            else if(token.charAt(0) == '.')
-            {
-                if(token.charAt(1) == '.' && RegistersForProcessing.appendHooks.containsKey(token.substring(2)))
-                {
-                    try
-                    {
-                        RegistersForProcessing.appendHooks.get(token).getDeclaredConstructor().newInstance().Trigger(stack.objectStack.getLast(), stack, stack.holder, this);
-                        pings++;
-                    }
-                    catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
-                    {
-                        MJLogging.error("Failed to construct the AppendHook with the token of " + token.substring(2));
-                    }
-                }
-                else
-                {
-                    stack.PutUniqueArgument(token);
-                    pings++;
-                }
-            }
             // Any token beginning with '_' is treated as shorthand for an arg fetch
             // Arg("waves") and _waves will both create the same object
-            else if(token.charAt(0) == '_')
+            else if(zeroChar == '_')
             {
                 stack.put(new ArgGet(stack.holder));
                 stack.put(new StringObject(stack.holder, token.substring(1)));
-                stack.Close(1);
+                stack.Close();
                 pings++;
             }
             // Any token beginning with '"' has the first and last character stripped and is then passed as a StringObject
-            else if(token.charAt(0) == '"')
+            else if(zeroChar == '"')
             {
                 if(!(token.length() - 2 <= 0))
                 {
                     stack.put(new StringObject(stack.holder, token.substring(1, token.length() - 1)));
-                    stack.Close();
                     pings++;
                 }
                 else
                 {
                     MJLogging.debug("Detected token '" + token + "' is a string but is too short to process");
                 }
+            }
+            // Any token that directly equals "{" triggers the implicitChild of the last added token to stack
+            else if (token.equals("{"))
+            {
+                stack.put(stack.objectStack.getLast().implicitChild());
+                pings++;
             }
 
             if(Config.OBJECTIFICATION_PING_COUNT.getAsBoolean())
