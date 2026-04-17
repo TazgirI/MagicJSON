@@ -2,9 +2,11 @@ package net.tazgirl.magicjson.registration.registers;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.registers.objectification.CloseTokensRegister;
+import net.tazgirl.magicjson.registration.registers.objectification.LeadTokenCharsRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.PrimitiveObjectsRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.AppendHookRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.EndCharsRegister;
@@ -60,6 +62,12 @@ public class FillRegisters
 
     @SubscribeEvent
     public static void fillExcludeChars(ExcludeCharsRegister.FetchEvent event)
+    {
+
+    }
+
+    @SubscribeEvent
+    public static void fillLeadTokenChars(LeadTokenCharsRegister.FetchEvent event)
     {
 
     }
@@ -138,6 +146,8 @@ public class FillRegisters
     {
 
     }
+
+
 
 //    @SubscribeEvent
 //    public static void fillUniqueArguments(UniqueArgumentsRegister.FetchEvent event)
