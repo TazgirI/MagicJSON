@@ -1,7 +1,5 @@
 package net.tazgirl.magicjson.registration;
 
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.registers.base.Register;
 import net.tazgirl.magicjson.registration.registers.objectification.*;
 import net.tazgirl.magicjson.registration.registers.tokenisation.AppendHookRegister;
@@ -25,7 +23,7 @@ public class RegistersForProcessing
     public static StatementObjectTokensRegister statementObjects = new StatementObjectTokensRegister();
     public static AppendHookRegister appendHooks = new AppendHookRegister();
     public static StatementKeywordsRegister statementKeywords = new StatementKeywordsRegister();
-    public static LeadTokenCharsRegister leadTokenChars = new LeadTokenCharsRegister();
+    public static LeadCharTokensRegister leadCharTokens = new LeadCharTokensRegister();
 
 //    public static UniqueArgumentsRegister uniqueArguments = new UniqueArgumentsRegister();
 
@@ -33,7 +31,7 @@ public class RegistersForProcessing
     public static TokenSynonymsRegister tokenSynonyms = new TokenSynonymsRegister();
 
     // WARN: tokenSynonyms MUST come before primitiveObjects and statementObjects
-    public static List<Register<?>> allRegisters = List.of(endChars, excludeChars, soloChars, closeTokens, tokenSynonyms, primitiveObjects, statementObjects, appendHooks, statementKeywords, leadTokenChars);
+    public static List<Register<?>> allRegisters = List.of(endChars, excludeChars, soloChars, closeTokens, tokenSynonyms, primitiveObjects, statementObjects, appendHooks, statementKeywords, leadCharTokens);
 
     static boolean hasFired = false;
 

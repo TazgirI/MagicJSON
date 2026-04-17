@@ -7,12 +7,12 @@ import net.tazgirl.magicjson.statements.objects.Base;
 
 import java.util.function.Function;
 
-public class LeadTokenCharsRegister extends MapRegister<String, Function<String, Base>>
+public class LeadCharTokensRegister extends MapRegister<String, Function<String, Base>>
 {
     @Override
     protected String getIdentifier()
     {
-        return "LeadTokenChars";
+        return "LeadCharTokens";
     }
 
     @Override
@@ -27,7 +27,7 @@ public class LeadTokenCharsRegister extends MapRegister<String, Function<String,
         @Override
         public String getIdentifier()
         {
-            return "LeadTokenCharsEvent";
+            return "LeadCharTokensEvent";
         }
     }
 }
