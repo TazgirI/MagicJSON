@@ -53,4 +53,9 @@ public class MJLogging
 
         localLogger.info(infoMessage);
     }
+
+    public static void crossRegisterDuplicateLog(String sourceRegister, String foundRegister)
+    {
+        MJLogging.debug("Attempted to register with " + sourceRegister + " but the token is already in use by " + foundRegister + ", this keyword has not been stored in " + sourceRegister);
+    }
 }
