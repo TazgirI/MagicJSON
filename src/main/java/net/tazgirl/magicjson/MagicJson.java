@@ -1,5 +1,7 @@
 package net.tazgirl.magicjson;
 
+import net.tazgirl.magicjson.processing.Tokenisation;
+import net.tazgirl.magicjson.processing.TokensToHolder;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -63,7 +65,15 @@ public class  MagicJson
 
         return object;
     }
+    public static Object tokeniseAndRun(String string)
+    {
+        return tokeniseAndRun(string, "N:A");
+    }
 
+    public static Object tokeniseAndRun(String string, String debugAddress)
+    {
+        return new TokensToHolder(new Tokenisation(string), debugAddress);
+    }
 
     public MagicJson(IEventBus modEventBus, ModContainer modContainer)
     {
