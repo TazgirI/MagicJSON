@@ -4,10 +4,13 @@ import net.tazgirl.magicjson.magicjson_events.registers.bases.MapRegisterFetchEv
 import net.tazgirl.magicjson.magicjson_events.registers.bases.RegisterFetchEventRoot;
 import net.tazgirl.magicjson.registration.registers.base.MapRegister;
 import net.tazgirl.magicjson.statements.objects.Base;
+import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import org.checkerframework.checker.units.qual.C;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class LeadCharTokensRegister extends MapRegister<String, Function<String, Base>>
+public class LeadCharTokensRegister extends MapRegister<Character, BiFunction<String, StatementHolder, Base>>
 {
     @Override
     protected String getIdentifier()
@@ -21,7 +24,7 @@ public class LeadCharTokensRegister extends MapRegister<String, Function<String,
         return null;
     }
 
-    public static class FetchEvent extends MapRegisterFetchEvent<String, Function<String, Base>>
+    public static class FetchEvent extends MapRegisterFetchEvent<Character, BiFunction<String, StatementHolder, Base>>
     {
 
         @Override
