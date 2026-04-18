@@ -31,6 +31,7 @@ import net.tazgirl.magicjson.statements.objects.numerical_mutators.Divide;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Subtract;
 import net.tazgirl.magicjson.statements.objects.primitives.BooleanObject;
 import net.tazgirl.magicjson.statements.objects.primitives.NullObject;
+import net.tazgirl.magicjson.statements.objects.primitives.StringObject;
 
 import java.util.List;
 import java.util.Map;
@@ -68,7 +69,17 @@ public class FillRegisters
     @SubscribeEvent
     public static void fillLeadCharTokens(LeadCharTokensRegister.FetchEvent event)
     {
+        // Full stop entry is only here to make sure no-one tries to register behaviour that can't be hit as it's
+        event.put('.', null);
 
+        // Any token beginning with '_' is treated as shorthand for an arg fetch
+        // Arg("waves") and _waves will both create the same object
+        event.put('_', (string, holder) ->
+        {
+            ArgGet argGet = new ArgGet(holder);
+            argGet.handleBase(new StringObject(holder, string));
+            return argGet;
+        });
     }
 
     private static final Map<List<String>, Class<? extends Base>> multiples =
