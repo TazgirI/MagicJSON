@@ -53,7 +53,13 @@ public class TokensToHolder
 
             // Pass in unique arguments like constructor params, always pass the string as StatementObjects must do handling
             // Can be written in a way like Divide(10 .modulus 2) but is intended to be written as Divide.modulus(10 2)
-            if(token.charAt(0) == '.')
+            // This isn't implemented with the lead char register as it is handled completely uniquely
+            if(RegistersForProcessing.statementObjects.containsKey(token))
+            {
+                stack.put(RegistersForProcessing.statementObjects.getAsObject(token, stack.holder));
+                pings++;
+            }
+            else if(zeroChar == '.')
             {
                 if(token.charAt(1) == '.' && RegistersForProcessing.appendHooks.containsKey(token.substring(2)))
                 {
@@ -73,12 +79,14 @@ public class TokensToHolder
                     pings++;
                 }
             }
-
-            if(RegistersForProcessing.statementObjects.containsKey(token))
+            // The passed String WILL be stripped of the leading char before being applied
+            else if(RegistersForProcessing.leadCharTokens.containsKey(zeroChar))
             {
-                stack.put(RegistersForProcessing.statementObjects.getAsObject(token, stack.holder));
+                stack.put(RegistersForProcessing.leadCharTokens.get(zeroChar).apply(token.substring(1), stack.holder));
                 pings++;
             }
+
+
             else if(RegistersForProcessing.primitiveObjects.containsKey(token))
             {
                 stack.put(RegistersForProcessing.primitiveObjects.get(token).init(stack.holder));
@@ -100,14 +108,10 @@ public class TokensToHolder
                 stack.PutNum(token);
                 pings++;
             }
-            // Any token beginning with '_' is treated as shorthand for an arg fetch
-            // Arg("waves") and _waves will both create the same object
+
             else if(zeroChar == '_')
             {
-                stack.put(new ArgGet(stack.holder));
-                stack.put(new StringObject(stack.holder, token.substring(1)));
-                stack.Close();
-                pings++;
+sdgsdgsdgsdgsdgds
             }
             // Any token beginning with '"' has the first and last character stripped and is then passed as a StringObject
             else if(zeroChar == '"')
