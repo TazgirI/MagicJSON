@@ -82,7 +82,16 @@ public class TokensToHolder
             // The passed String WILL be stripped of the leading char before being applied
             else if(RegistersForProcessing.leadCharTokens.containsKey(zeroChar))
             {
-                stack.put(RegistersForProcessing.leadCharTokens.get(zeroChar).apply(token.substring(1), stack.holder));
+                Base base = RegistersForProcessing.leadCharTokens.get(zeroChar).apply(token.substring(1), stack.holder);
+                if(base != null)
+                {
+                    stack.put(base);
+                }
+                else
+                {
+                    MJLogging.debug("leadCharToken attempted to build but returned null");
+                }
+
                 pings++;
             }
 
