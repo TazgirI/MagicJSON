@@ -12,6 +12,8 @@ import java.util.function.Function;
 
 public class LeadCharTokensRegister extends MapRegister<Character, BiFunction<String, StatementHolder, Base>>
 {
+    // TODO: This works however currently only the final object is properly added to the stack in a way that stores children relations. i.e if you have ArgGet(StringObject()) then the String object thats created within the BifFunction cannot be found by any "meta" objects or code that alter the structure of constructed statements
+
     @Override
     protected String getIdentifier()
     {
