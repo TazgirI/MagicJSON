@@ -26,12 +26,12 @@ public class StatementObjectTokensRegister extends MapRegister<String, Class<? e
             }
             catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e)
             {
+                MJLogging.debug("Attempted to get an object from unrecognised token \"" + token + "\" but hit an error");
                 throw new RuntimeException(e);
             }
         }
 
 
-        MJLogging.debug("Attempted to get an object from unrecognised token: " + token);
         return null;
     }
 
