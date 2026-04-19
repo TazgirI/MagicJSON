@@ -2,6 +2,7 @@ package net.tazgirl.magicjson.registration.registers;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.registers.objectification.CloseTokensRegister;
@@ -66,6 +67,7 @@ public class FillRegisters
 
     }
 
+    // REMEMBER TAZ, LEAD CHAR IS PRE-REMOVED
     @SubscribeEvent
     public static void fillLeadCharTokens(LeadCharTokensRegister.FetchEvent event)
     {
@@ -80,6 +82,23 @@ public class FillRegisters
             argGet.handleBase(new StringObject(holder, string));
             return argGet;
         });
+
+        // Any token beginning with '"' has the first and last character stripped and is then passed as a StringObjectpo
+        event.put('"', (string, holder) ->
+        {
+            // If there is another character plus the ending speech mark
+            if(!(string.length() >= 2))
+            {
+                return new StringObject(holder, string.substring(0, string.length() - 1));
+            }
+            else
+            {
+                MJLogging.debug("Detected string '" + "\"" + string + "'  but is too short to process");
+                return null;
+            }
+        });
+
+
     }
 
     private static final Map<List<String>, Class<? extends Base>> multiples =

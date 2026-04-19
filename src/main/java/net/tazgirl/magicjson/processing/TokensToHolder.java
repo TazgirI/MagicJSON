@@ -117,24 +117,6 @@ public class TokensToHolder
                 stack.PutNum(token);
                 pings++;
             }
-
-            else if(zeroChar == '_')
-            {
-sdgsdgsdgsdgsdgds
-            }
-            // Any token beginning with '"' has the first and last character stripped and is then passed as a StringObject
-            else if(zeroChar == '"')
-            {
-                if(!(token.length() - 2 <= 0))
-                {
-                    stack.put(new StringObject(stack.holder, token.substring(1, token.length() - 1)));
-                    pings++;
-                }
-                else
-                {
-                    MJLogging.debug("Detected token '" + token + "' is a string but is too short to process");
-                }
-            }
             // Any token that directly equals "{" triggers the implicitChild of the last added token to stack
             else if (token.equals("{"))
             {
