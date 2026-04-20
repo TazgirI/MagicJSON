@@ -1,7 +1,9 @@
 package net.tazgirl.magicjson.statements.objects;
 
 import net.tazgirl.magicjson.MJLogging;
+import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.processing.Stack;
+import oshi.jna.platform.mac.SystemB;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +59,7 @@ public class StatementHolder
         return root.resolve();
     }
 
-    public void AddRelationship(Base parent, Base child)
+    public void addRelationship(Base parent, Base child)
     {
         if(!uniques.contains(parent)){uniques.add(parent);}
         if(!uniques.contains(child)){uniques.add(child);}
@@ -70,6 +72,11 @@ public class StatementHolder
 
     public StatementHolder Finalise()
     {
+        if(uniques.size() != childToParent.size() + 1)
+        {
+            MJLogging.debug("The StatementHolder for \"" + address + "\" has " + uniques.size() + " uniques and " + childToParent.size() + " childrenToParent mappings, if there is more uniques than mappings+1 then there are multiple possible roots");
+        }
+
         for(Base base: uniques)
         {
             if(!childToParent.containsKey(base))
