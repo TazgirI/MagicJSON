@@ -33,11 +33,11 @@ public class StatementHolder
     }
 
 
-    public Object Run()
+    public Object run()
     {
         Object result = root.resolve();
 
-        args = new HashMap<>();
+        clearArgs();
 
         return result;
     }
@@ -94,6 +94,16 @@ public class StatementHolder
     public void setArgs(Map<String, Object> args)
     {
         this.args = args;
+    }
+
+    public Object addArg(String string, Object object)
+    {
+        return args.put(string, object);
+    }
+
+    public void clearArgs()
+    {
+        args = new HashMap<>();
     }
 
     public void Replace(Base oldBase, Base newBase)
