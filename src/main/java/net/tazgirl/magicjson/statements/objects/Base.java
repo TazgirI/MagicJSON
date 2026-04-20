@@ -9,7 +9,7 @@ public abstract class Base
 {
 
     protected StatementHolder holder;
-    protected static String identifier;
+    protected String identifier;
 
     public Base(StatementHolder holder)
     {
