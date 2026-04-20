@@ -42,7 +42,17 @@ public class StatementHolder
         return result;
     }
 
-    public Object RunKeepArgs()
+    public PrivateCore.StatementResultAndArgs runAndReturnFinalArgs()
+    {
+        Object result = root.resolve();
+        PrivateCore.StatementResultAndArgs returnValue = new PrivateCore.StatementResultAndArgs(result, new HashMap<>(args));
+
+        clearArgs();
+
+        return returnValue;
+    }
+
+    public Object runKeepArgs()
     {
         return root.resolve();
     }

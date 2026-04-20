@@ -14,7 +14,7 @@ public class PrivateCore
     {
         if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
-            return holder.Run();
+            return holder.run();
         }
         return null;
     }
@@ -24,8 +24,27 @@ public class PrivateCore
         if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
             holder.setArgs(args);
-            return holder.Run();
+            return holder.run();
         }
+        return null;
+    }
+
+    public static StatementResultAndArgs runStatementAndGetFinalArgs(String address)
+    {
+        if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
+        {
+
+        }
+    }
+
+    public static StatementResultAndArgs runStatementAndGetFinalArgs(String address, Map<String, Object> args)
+    {
+        if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
+        {
+            holder.setArgs(args);
+            return holder.runAndReturnFinalArgs();
+        }
+
         return null;
     }
 
@@ -55,5 +74,10 @@ public class PrivateCore
         {
             holder.clearRelations();
         }
+    }
+
+    public record StatementResultAndArgs(Object result, Map<String, Object> args)
+    {
+
     }
 }
