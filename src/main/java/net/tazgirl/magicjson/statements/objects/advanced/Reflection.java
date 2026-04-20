@@ -15,7 +15,7 @@ public class Reflection extends Base
     Base target;
     Base method;
 
-    List<Base> parameters;
+    List<ReflectionParameter> parameters = null;
 
     public Reflection(StatementHolder holder)
     {
@@ -23,6 +23,7 @@ public class Reflection extends Base
     }
 
     // WARN: Wonky, apparently cannot find a method that wants a primitive but fuck it this isn't designed for general use
+    // UPDATE: Added the stringToClass registry and now you can manually declare the types, including primitives
     @Override
     public Object resolve()
     {
@@ -30,14 +31,15 @@ public class Reflection extends Base
         {
             Object targetObj = target.resolve();
             String methodName = (String) method.resolve();
-            if(parameters.isEmpty())
+            if(parameters == null)
             {
                 return targetObj.getClass().getMethod(methodName).invoke(targetObj);
             }
             else
             {
-                Object[] paramaterObjects = parameters.stream().map(Base::resolve).toArray();
-                Class<?>[] classes = Arrays.stream(paramaterObjects).map(Object::getClass).toArray(Class<?>[]::new);
+                ReflectionParamaterRecord[] records = parameters.stream().map(Base::resolve).toArray(ReflectionParamaterRecord[]::new);
+                Object[] paramaterObjects = Arrays.stream(records).map(ReflectionParamaterRecord::object).toArray();
+                Class<?>[] classes = Arrays.stream(records).map(ReflectionParamaterRecord::type).toArray(Class<?>[]::new);
                 return targetObj.getClass().getMethod(methodName, classes).invoke(targetObj, paramaterObjects);
             }
 
@@ -55,15 +57,21 @@ public class Reflection extends Base
         if(target == null)
         {
             target = base;
-            return true;
         }
-        if(method == null)
+        else if(method == null)
         {
             method = base;
-            return true;
+        }
+        else if(base instanceof ReflectionParameter reflectionParameter)
+        {
+            if(parameters == null)
+            {
+                parameters = new ArrayList<>();
+            }
+            parameters.add(reflectionParameter);
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -75,7 +83,7 @@ public class Reflection extends Base
     @Override
     public Base implicitChild()
     {
-        return null;
+        return new ReflectionParameter(holder);
     }
 
     @Override
@@ -101,5 +109,10 @@ public class Reflection extends Base
         {
             method = newBase;
         }
+    }
+
+    public record ReflectionParamaterRecord(Object object, Class<?> type)
+    {
+
     }
 }
