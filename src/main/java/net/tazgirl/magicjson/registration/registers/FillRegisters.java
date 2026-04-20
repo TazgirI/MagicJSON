@@ -5,6 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
+import net.tazgirl.magicjson.registration.registers.execution.StringToClassRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.CloseTokensRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.LeadCharTokensRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.PrimitiveObjectsRegister;
@@ -15,7 +16,9 @@ import net.tazgirl.magicjson.registration.registers.tokenisation.SoloCharsRegist
 import net.tazgirl.magicjson.registration.registers.objectification.StatementObjectTokensRegister;
 import net.tazgirl.magicjson.statements.hooks.LivingDamageEventStatementObject;
 import net.tazgirl.magicjson.statements.objects.StringMutators.Concat;
+import net.tazgirl.magicjson.statements.objects.advanced.Reflection;
 import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
+import net.tazgirl.magicjson.statements.objects.evaluation.Is;
 import net.tazgirl.magicjson.statements.objects.flow.If;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
 import net.tazgirl.magicjson.statements.objects.Base;
@@ -30,6 +33,7 @@ import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEquals
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Add;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Divide;
 import net.tazgirl.magicjson.statements.objects.numerical_mutators.Subtract;
+import net.tazgirl.magicjson.statements.objects.primitive_adjacent.ClassObject;
 import net.tazgirl.magicjson.statements.objects.primitives.BooleanObject;
 import net.tazgirl.magicjson.statements.objects.primitives.NullObject;
 import net.tazgirl.magicjson.statements.objects.primitives.StringObject;
@@ -87,7 +91,7 @@ public class FillRegisters
         event.put('"', (string, holder) ->
         {
             // If there is another character plus the ending speech mark
-            if(!(string.length() >= 2))
+            if(string.length() >= 2)
             {
                 return new StringObject(holder, string.substring(0, string.length() - 1));
             }
@@ -122,7 +126,9 @@ public class FillRegisters
                     Map.entry(List.of("gaussian", "gauss"), Gaussian.class),
 
 
-                    Map.entry(List.of("livingdamage", "living_damage"), LivingDamageEventStatementObject.class)
+                    Map.entry(List.of("livingdamage", "living_damage"), LivingDamageEventStatementObject.class),
+
+                    Map.entry(List.of("reflect", "reflection"), Reflection.class)
             );
 
     final static Map<String, Class<? extends Base>> singles = Map.of(
@@ -133,10 +139,13 @@ public class FillRegisters
             "random", Random.class,
 
             "if", If.class,
+            "is", Is.class,
 
             "teleport", Teleport.class,
 
-            "livingdamage", LivingDamageEventStatementObject.class
+            "livingdamage", LivingDamageEventStatementObject.class,
+
+            "class", ClassObject.class
 
     );
 
@@ -176,7 +185,18 @@ public class FillRegisters
 
     }
 
-
+    // Mainly exists for allowing players to access primitive class types but may be expanded in the future
+    // Double can be accessed through Class(0.0) but double cannot be accessed except with this register, there will likely be other classes that need arbitrary access in the future
+    @SubscribeEvent
+    public static void fillStringToClass(StringToClassRegister.FetchEvent event)
+    {
+        event.put("int", int.class);
+        event.put("double", double.class);
+        event.put("short", short.class);
+        event.put("float", float.class);
+        event.put("char", char.class);
+        event.put("character", Character.class);
+    }
 
 //    @SubscribeEvent
 //    public static void fillUniqueArguments(UniqueArgumentsRegister.FetchEvent event)
