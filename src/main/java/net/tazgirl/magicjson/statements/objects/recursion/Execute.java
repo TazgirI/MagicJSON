@@ -1,15 +1,23 @@
-package net.tazgirl.magicjson.statements.objects;
+package net.tazgirl.magicjson.statements.objects.recursion;
 
 import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
+import net.tazgirl.magicjson.statements.hooks.base.HookArgument;
+import net.tazgirl.magicjson.statements.objects.Base;
+import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import net.tazgirl.magicjson.statements.objects.primitives.StringObject;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Execute extends Base
 {
     Base address;
+    List<HookArgument> arguments = new ArrayList<>();
 
-    boolean noPass = false;
+    boolean argPass = true;
+    boolean argSync = true;
 
     public Execute(StatementHolder holder)
     {
@@ -27,7 +35,7 @@ public class Execute extends Base
     {
         if(address.resolve() instanceof String string && PrivateCore.hasStatement(string))
         {
-            if(!noPass)
+            if(argPass)
             {
                 return PrivateCore.runStatement(string, holder.args);
             }
@@ -41,6 +49,11 @@ public class Execute extends Base
     @Override
     public @NotNull Boolean handleBase(Base base)
     {
+        if(base instanceof HookArgument hookArgument)
+        {
+            arguments.add(hookArgument);
+            return true;
+        }
         if(address == null)
         {
             address = base;
@@ -55,7 +68,7 @@ public class Execute extends Base
     {
         if(string.equals(".!pass") || string.equals(".nopass"))
         {
-            noPass = true;
+            argPass = false;
             return true;
         }
 
@@ -65,7 +78,7 @@ public class Execute extends Base
     @Override
     public Base implicitChild()
     {
-        return null;
+        return new HookArgument(holder);
     }
 
     @Override
