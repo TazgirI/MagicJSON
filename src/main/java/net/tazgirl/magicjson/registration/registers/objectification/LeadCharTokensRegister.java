@@ -23,7 +23,7 @@ public class LeadCharTokensRegister extends MapRegister<Character, BiFunction<St
     @Override
     public RegisterFetchEventRoot<?> getFreshStaticEvent()
     {
-        return null;
+        return new FetchEvent();
     }
 
     public static class FetchEvent extends MapRegisterFetchEvent<Character, BiFunction<String, StatementHolder, Base>>
