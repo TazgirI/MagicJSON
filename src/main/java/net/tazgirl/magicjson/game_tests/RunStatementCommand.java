@@ -27,7 +27,7 @@ public class RunStatementCommand
                             }
                             else
                             {
-                                String result =  new TokensToHolder(new Tokenisation(statement), "command:run").process().Run().toString();
+                                String result =  new TokensToHolder(new Tokenisation(statement), "command:run").process().run().toString();
                                 SendMessage.All(result);
                             }
 

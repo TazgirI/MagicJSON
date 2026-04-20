@@ -73,7 +73,7 @@ public class  MagicJson
 
     public static Object tokeniseAndRun(String string, String debugAddress)
     {
-        return tokeniseAndBuild(string, debugAddress).Run();
+        return tokeniseAndBuild(string, debugAddress).run();
     }
 
     public static StatementHolder tokeniseAndBuild(String string)

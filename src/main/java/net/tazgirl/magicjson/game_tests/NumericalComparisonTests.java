@@ -1,8 +1,6 @@
 package net.tazgirl.magicjson.game_tests;
 
-import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.network.chat.Component;
-import net.tazgirl.magicjson.processing.Tokenisation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,7 @@ public class NumericalComparisonTests extends TestRoot
 
         for(Map.Entry<String, Boolean> entry: testStatements.entrySet())
         {
-            if(constructStatement(entry.getKey()).Run() == entry.getValue())
+            if(constructStatement(entry.getKey()).run() == entry.getValue())
             {
                 returnComponents.add(CustomSuccessMessage(entry.getKey() + " passed"));
             }

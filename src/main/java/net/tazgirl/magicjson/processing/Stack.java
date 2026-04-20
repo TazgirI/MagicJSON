@@ -44,7 +44,7 @@ public class Stack
 
         if(objectStack.getLast().handleBase(top))
         {
-            holder.AddRelationship(objectStack.getLast(), top);
+            holder.addRelationship(objectStack.getLast(), top);
             return true;
         }
 

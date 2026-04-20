@@ -62,7 +62,7 @@ public abstract class NumericalMutator extends Base
     public @NotNull Boolean handleBase(Base base)
     {
         values.add(base);
-        holder.AddRelationship(this, base);
+        holder.addRelationship(this, base);
         return true;
     }
 

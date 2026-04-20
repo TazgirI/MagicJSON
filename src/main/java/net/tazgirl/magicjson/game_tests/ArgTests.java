@@ -17,7 +17,7 @@ public class ArgTests extends TestRoot
     {
         StatementHolder holder = constructStatement("arg(\"value\")");
         holder.setArgs(Map.of("value", true));
-        if(holder.Run() instanceof Boolean bool && bool)
+        if(holder.run() instanceof Boolean bool && bool)
         {
             return List.of(assertSuccess("trueArgTest"));
         }
