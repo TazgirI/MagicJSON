@@ -3,10 +3,8 @@ package net.tazgirl.magicjson.statements.objects.primitives;
 import net.tazgirl.magicjson.helpers.NumberHandling;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
-import net.tazgirl.magicjson.statements.objects.numeric_evaluators.NumericEvaluatorBase;
+import net.tazgirl.magicjson.statements.objects.primitive_adjacent.ClassObject;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.BiFunction;
 
 public abstract class NumberObject<T extends Number> extends Base
 {
