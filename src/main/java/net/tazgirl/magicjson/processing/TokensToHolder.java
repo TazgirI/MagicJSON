@@ -54,7 +54,7 @@ public class TokensToHolder
             // Pass in unique arguments like constructor params, always pass the string as StatementObjects must do handling
             // Can be written in a way like Divide(10 .modulus 2) but is intended to be written as Divide.modulus(10 2)
             // This isn't implemented with the lead char register as it is handled completely uniquely
-            if(RegistersForProcessing.statementObjects.containsKey(token))
+            if(RegistersForProcessing.statementObjects.containsKey(token.toLowerCase()))
             {
                 stack.put(RegistersForProcessing.statementObjects.getAsObject(token, stack.holder));
                 pings++;
