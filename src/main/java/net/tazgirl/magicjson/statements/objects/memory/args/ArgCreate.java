@@ -47,12 +47,6 @@ public class ArgCreate extends ArgBase
     }
 
     @Override
-    public Base implicitChild()
-    {
-        return null;
-    }
-
-    @Override
     public @NotNull String setIdentifier()
     {
         return "Arg.Create";

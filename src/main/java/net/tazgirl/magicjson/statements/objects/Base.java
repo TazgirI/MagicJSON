@@ -33,7 +33,10 @@ public abstract class Base
     public abstract Boolean handleUniqueArgument(String string);
 
 
-    public abstract Base implicitChild();
+    public Base implicitChild()
+    {
+        return null;
+    }
 
     @NotNull
     public abstract String setIdentifier();
