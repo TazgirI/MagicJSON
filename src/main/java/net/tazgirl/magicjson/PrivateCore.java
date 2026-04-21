@@ -31,10 +31,7 @@ public class PrivateCore
 
     public static StatementResultAndArgs runStatementAndGetFinalArgs(String address)
     {
-        if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
-        {
-
-        }
+        return runStatementAndGetFinalArgs(address,new HashMap<>());
     }
 
     public static StatementResultAndArgs runStatementAndGetFinalArgs(String address, Map<String, Object> args)
