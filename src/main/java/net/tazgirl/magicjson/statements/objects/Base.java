@@ -66,4 +66,16 @@ public abstract class Base
 
         return sourceList;
     }
+
+    protected String containerString(Object... objects)
+    {
+        StringBuilder objectString = new StringBuilder();
+        for(Object object : objects)
+        {
+            objectString.append(object.toString() + ", ");
+        }
+        int length = objectString.length();
+        objectString.delete(length - 2, length);
+        return identifier + "( " + objectString + " )";
+    }
 }
