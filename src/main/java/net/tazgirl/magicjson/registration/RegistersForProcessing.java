@@ -2,6 +2,7 @@ package net.tazgirl.magicjson.registration;
 
 import net.tazgirl.magicjson.registration.registers.base.Register;
 import net.tazgirl.magicjson.registration.registers.execution.StringToClassRegister;
+import net.tazgirl.magicjson.registration.registers.execution.StringToResourceKeyRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.*;
 import net.tazgirl.magicjson.registration.registers.tokenisation.AppendHookRegister;
 import net.tazgirl.magicjson.registration.registers.tokenisation.EndCharsRegister;
@@ -28,6 +29,7 @@ public class RegistersForProcessing
 
     // Execution
     public static StringToClassRegister stringToClass = new StringToClassRegister();
+    public static StringToResourceKeyRegister stringToResourceKey = new StringToResourceKeyRegister();
 
 //    public static UniqueArgumentsRegister uniqueArguments = new UniqueArgumentsRegister();
 
@@ -35,7 +37,7 @@ public class RegistersForProcessing
     public static TokenSynonymsRegister tokenSynonyms = new TokenSynonymsRegister();
 
     // WARN: tokenSynonyms MUST come before primitiveObjects and statementObjects
-    public static List<Register<?>> allRegisters = List.of(endChars, excludeChars, soloChars, closeTokens, tokenSynonyms, primitiveObjects, statementObjects, appendHooks, statementKeywords, leadCharTokens, stringToClass);
+    public static List<Register<?>> allRegisters = List.of(endChars, excludeChars, soloChars, closeTokens, tokenSynonyms, primitiveObjects, statementObjects, appendHooks, statementKeywords, leadCharTokens, stringToClass, stringToResourceKey);
 
     static boolean hasFired = false;
 

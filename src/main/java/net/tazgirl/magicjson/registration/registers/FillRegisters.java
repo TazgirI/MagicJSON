@@ -19,6 +19,7 @@ import net.tazgirl.magicjson.statements.objects.StringMutators.Concat;
 import net.tazgirl.magicjson.statements.objects.advanced.Reflection;
 import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
 import net.tazgirl.magicjson.statements.objects.evaluation.Is;
+import net.tazgirl.magicjson.statements.objects.evaluation.Not;
 import net.tazgirl.magicjson.statements.objects.flow.If;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
 import net.tazgirl.magicjson.statements.objects.Base;
@@ -109,6 +110,8 @@ public class FillRegisters
             Map.ofEntries(
                     Map.entry(List.of("and", "&"), And.class),
                     Map.entry(List.of("or", "||"), Or.class),
+                    Map.entry(List.of("not", "!"), Not.class),
+
 
                     // FEAT: Allow <= and >= to init with unique argument of .equals
                     Map.entry(List.of("lessthan", "<"), LessThan.class),
