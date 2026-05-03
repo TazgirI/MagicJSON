@@ -1,11 +1,16 @@
 package net.tazgirl.magicjson.registration.registers;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.registration.PrimitiveInitRecord;
 import net.tazgirl.magicjson.registration.registers.execution.StringToClassRegister;
+import net.tazgirl.magicjson.registration.registers.execution.StringToResourceKeyRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.CloseTokensRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.LeadCharTokensRegister;
 import net.tazgirl.magicjson.registration.registers.objectification.PrimitiveObjectsRegister;
@@ -196,6 +201,16 @@ public class FillRegisters
         event.put("float", float.class);
         event.put("char", char.class);
         event.put("character", Character.class);
+
+        event.put("entity", Entity.class);
+        event.put("living_entity", LivingEntity.class);
+        event.put("player", ServerPlayer.class);
+    }
+
+    @SubscribeEvent
+    public static void fillStringToResourceKey(StringToResourceKeyRegister.FetchEvent event)
+    {
+        event.put("entity_type", Registries.ENTITY_TYPE);
     }
 
 //    @SubscribeEvent

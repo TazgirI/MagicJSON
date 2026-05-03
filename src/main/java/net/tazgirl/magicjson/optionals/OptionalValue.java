@@ -14,13 +14,13 @@ public class OptionalValue<T>
     private T plainValue = null;
 
 
-    private OptionalValue(String stringValue, ResultTest<T> test)
+    protected OptionalValue(String stringValue, ResultTest<T> test)
     {
         this.stringValue = stringValue;
         this.test = test;
     }
 
-    private OptionalValue(T plainValue)
+    protected OptionalValue(T plainValue)
     {
         this.plainValue = plainValue;
     }
