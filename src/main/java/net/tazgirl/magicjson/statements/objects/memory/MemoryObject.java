@@ -71,6 +71,27 @@ public class MemoryObject extends Base implements IVariable
 
                 yield false;
             }
+            case COMPUTE_IF_MISSING ->
+            {
+                Object addressResult = address.resolve();
+                if(addressResult instanceof String string) {
+                    if (namespace == Namespace.LOCAL) {
+                        string = getNamespaceAddress(string);
+                    }
+
+                    Object result = space.supplier.get().get(string);
+
+                    if (result == null)
+                    {
+                        result = optionalValue.resolve();
+                        space.supplier.get().put(string, result);
+                    }
+
+                    yield result;
+                }
+
+                yield null;
+            }
         };
     }
 
@@ -158,7 +179,8 @@ public class MemoryObject extends Base implements IVariable
     {
         GET,
         PUT,
-        VALID
+        VALID,
+        COMPUTE_IF_MISSING
     }
 
     public enum Namespace implements EnumAliaseGetter<Namespace>
