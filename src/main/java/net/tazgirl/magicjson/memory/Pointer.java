@@ -1,15 +1,16 @@
 package net.tazgirl.magicjson.memory;
 
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import net.tazgirl.magicjson.statements.objects.memory.MemoryObject;
 
 public class Pointer
 {
     final String name;
     final Location location;
-    final MemoryNamespace memoryNamespace;
-    final MemorySpace memorySpace;
+    final MemoryObject.Namespace memoryNamespace;
+    final MemoryObject.Space memorySpace;
 
-    public Pointer(String name, Location location, MemoryNamespace memoryNamespace, MemorySpace memorySpace)
+    public Pointer(String name, Location location, MemoryObject.Namespace memoryNamespace, MemoryObject.Space memorySpace)
     {
         this.name = name;
         this.location = location;
@@ -31,17 +32,5 @@ public class Pointer
     {
         ARGS,
         MEMORY
-    }
-
-    public enum MemoryNamespace
-    {
-        LOCAL,
-        GLOBAL
-    }
-
-    public enum MemorySpace
-    {
-        RUNTIME,
-        WORLD
     }
 }
