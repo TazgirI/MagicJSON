@@ -90,6 +90,11 @@ public class  MagicJson
     {
         return new TokensToHolder(new Tokenisation(string), debugAddress, finalAddress).process();
     }
+
+    public static StatementHolder getHolder(String string)
+    {
+        return PrivateCore.getHolder(string);
+    }
     public MagicJson(IEventBus modEventBus, ModContainer modContainer)
     {
         MOD_EVENT_BUS = modEventBus;

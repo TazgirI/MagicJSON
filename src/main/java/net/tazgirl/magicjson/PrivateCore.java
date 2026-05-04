@@ -65,6 +65,11 @@ public class PrivateCore
         return statementRegister.containsKey(address);
     }
 
+    static StatementHolder getHolder(String address)
+    {
+        return statementRegister.get(address);
+    }
+
     static void clearHolderRelations()
     {
         for(StatementHolder holder: statementRegister.values())
