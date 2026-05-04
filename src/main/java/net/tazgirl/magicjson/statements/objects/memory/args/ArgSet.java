@@ -6,9 +6,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class ArgSet extends ArgBase
 {
-
-    Base address;
-
     Base newValue;
 
 
