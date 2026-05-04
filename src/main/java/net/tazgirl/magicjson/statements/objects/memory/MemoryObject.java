@@ -95,7 +95,8 @@ public class MemoryObject extends Base implements IVariable
         };
     }
 
-    private @NotNull String getNamespaceAddress(String string) {
+    private @NotNull String getNamespaceAddress(String string)
+    {
         return holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
     }
 

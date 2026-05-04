@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class OptionalValue<T>
 {
-    private String stringValue = null;
-    private ResultTest<T> test;
+    protected String stringValue = null;
+    protected ResultTest<T> test;
 
-    private T plainValue = null;
+    protected T plainValue = null;
 
 
     protected OptionalValue(String stringValue, ResultTest<T> test)
@@ -25,15 +25,19 @@ public class OptionalValue<T>
         this.plainValue = plainValue;
     }
 
-    public static <T> OptionalValue<T> from(String stringValue, ResultTest<T> test)
+    // NOTE: These two are protected to make sure people use the generic Object instructor, the specific ones are internal use only
+    // *****************************************
+    protected static <T> OptionalValue<T> from(String stringValue, ResultTest<T> test)
     {
         return new OptionalValue<>(stringValue, test);
     }
 
-    public static <T> OptionalValue<T> from(T plainValue)
+    protected static <T> OptionalValue<T> from(T plainValue)
     {
         return new OptionalValue<>(plainValue);
     }
+    // *****************************************
+
 
     public static <T> OptionalValue<T> from(Object value, ResultTest<T> test)
     {
