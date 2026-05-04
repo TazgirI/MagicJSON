@@ -83,9 +83,13 @@ public class  MagicJson
 
     public static StatementHolder tokeniseAndBuild(String string, String debugAddress)
     {
-        return new TokensToHolder(new Tokenisation(string), debugAddress).process();
+        return tokeniseAndBuild(string, debugAddress, "N:A");
     }
 
+    public static StatementHolder tokeniseAndBuild(String string, String debugAddress, String finalAddress)
+    {
+        return new TokensToHolder(new Tokenisation(string), debugAddress, finalAddress).process();
+    }
     public MagicJson(IEventBus modEventBus, ModContainer modContainer)
     {
         MOD_EVENT_BUS = modEventBus;

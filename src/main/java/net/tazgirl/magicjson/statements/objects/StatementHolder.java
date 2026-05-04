@@ -17,6 +17,7 @@ public class StatementHolder
     public Map<String, Object> args = new HashMap<>();
 
     String address;
+    String namespace;
 
     Base root = null;
 
@@ -26,9 +27,11 @@ public class StatementHolder
 
     Stack constructor;
 
-    public StatementHolder(Stack stack)
+    public StatementHolder(Stack stack, String finalAddress)
     {
         this.constructor = stack;
+        address = finalAddress;
+        namespace = address.substring(0, address.indexOf(':'));
     }
 
     public StatementHolder(TEST_CASE testCase)
@@ -108,6 +111,11 @@ public class StatementHolder
     public String getAddress()
     {
         return address;
+    }
+
+    public String getNamespace()
+    {
+        return namespace;
     }
 
     public void setArgs(Map<String, Object> args)

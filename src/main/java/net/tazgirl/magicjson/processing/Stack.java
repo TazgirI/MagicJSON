@@ -23,12 +23,12 @@ public class Stack
     // public void OnFirst() that adds object to uniques so holder knows it's root even if there's no children
     // When Put() uses HandleValue, send holder the relationship even on failure
 
-    public Stack(String processingResourceAddress, TokensToHolder manager)
+    public Stack(String processingResourceAddress, TokensToHolder manager, String finalAddress)
     {
         this.processingResourceAddress = processingResourceAddress;
         this.manager = manager;
 
-        holder = new StatementHolder(this);
+        holder = new StatementHolder(this, finalAddress);
     }
 
     public Boolean Close()

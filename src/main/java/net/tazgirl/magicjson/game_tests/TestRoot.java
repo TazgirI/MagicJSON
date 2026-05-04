@@ -93,6 +93,6 @@ public abstract class TestRoot
 
     public static StatementHolder constructStatement(String string)
     {
-        return new TokensToHolder(new Tokenisation(string), "test:build").process();
+        return new TokensToHolder(new Tokenisation(string), "test:build", "test:build_final").process();
     }
 }
