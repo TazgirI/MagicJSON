@@ -2,7 +2,9 @@ package net.tazgirl.magicjson.statements.objects;
 
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.memory.Pointer;
 import net.tazgirl.magicjson.processing.Stack;
+import net.tazgirl.magicjson.statements.objects.memory.IVariable;
 import oshi.jna.platform.mac.SystemB;
 
 import java.util.ArrayList;
@@ -158,6 +160,20 @@ public class StatementHolder
 
             parentToChildren.put(newBase, acceptedChildren);
         }
+    }
+
+    public List<Pointer> getPointers()
+    {
+        List<Pointer> returnList = new ArrayList<>();
+        for(Base base : uniques)
+        {
+            if(base instanceof IVariable iVariable)
+            {
+                returnList.add(iVariable.makePointer());
+            }
+        }
+
+        return returnList;
     }
 
     public enum TEST_CASE
