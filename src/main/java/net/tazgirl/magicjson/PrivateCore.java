@@ -10,7 +10,7 @@ public class PrivateCore
 {
     private static final Map<String, StatementHolder> statementRegister = new HashMap<>();
 
-    public static Object runStatement(String address)
+    static Object runStatement(String address)
     {
         if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
@@ -19,7 +19,7 @@ public class PrivateCore
         return null;
     }
 
-    public static Object runStatement(String address, Map<String, Object> args)
+    static Object runStatement(String address, Map<String, Object> args)
     {
         if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
@@ -29,12 +29,12 @@ public class PrivateCore
         return null;
     }
 
-    public static StatementResultAndArgs runStatementAndGetFinalArgs(String address)
+    static StatementResultAndArgs runStatementAndGetFinalArgs(String address)
     {
         return runStatementAndGetFinalArgs(address,new HashMap<>());
     }
 
-    public static StatementResultAndArgs runStatementAndGetFinalArgs(String address, Map<String, Object> args)
+    static StatementResultAndArgs runStatementAndGetFinalArgs(String address, Map<String, Object> args)
     {
         if(Constants.server != null && statementRegister.get(address) instanceof StatementHolder holder)
         {
@@ -60,7 +60,7 @@ public class PrivateCore
         }
     }
 
-    public static boolean hasStatement(String address)
+    static boolean hasStatement(String address)
     {
         return statementRegister.containsKey(address);
     }
