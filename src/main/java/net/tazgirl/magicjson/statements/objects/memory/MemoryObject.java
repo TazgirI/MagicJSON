@@ -3,6 +3,7 @@ package net.tazgirl.magicjson.statements.objects.memory;
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
 import net.tazgirl.magicjson.helpers.UAtoEnum;
 import net.tazgirl.magicjson.memory.Memory;
+import net.tazgirl.magicjson.memory.Pointer;
 import net.tazgirl.magicjson.memory.WorldMemory;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class MemoryObject extends Base
+public class MemoryObject extends Base implements IVariable
 {
     Function function = Function.GET;
     Namespace namespace = Namespace.LOCAL;
@@ -143,6 +144,12 @@ public class MemoryObject extends Base
         }
     }
 
+    @Override
+    public Pointer makePointer()
+    {
+        return new Pointer(address.resolve().toString(), Pointer.Location.MEMORY, namespace, space);
+    }
+
     enum Function
     {
         GET,
@@ -150,7 +157,7 @@ public class MemoryObject extends Base
         VALID
     }
 
-    enum Namespace implements EnumAliaseGetter<Namespace>
+    public enum Namespace implements EnumAliaseGetter<Namespace>
     {
         LOCAL("l","name","namespace", "private"),
         GLOBAL("g","public");
@@ -176,7 +183,7 @@ public class MemoryObject extends Base
         }
     }
 
-    enum Space implements EnumAliaseGetter<Space>
+    public enum Space implements EnumAliaseGetter<Space>
     {
         RUNTIME(Memory::getRuntimeMemory,"temp", "run", "r"),
         WORLD(Memory::getWorldMemoryMap,"perm", "w");
