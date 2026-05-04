@@ -8,20 +8,25 @@ import java.util.Map;
 
 public class OptionalValue<T>
 {
-    protected String stringValue = null;
-    protected ResultTest<T> test;
+    protected final String stringValue;
+    protected final ResultTest<T> test;
 
-    protected T plainValue = null;
+    protected final T plainValue;
 
 
     protected OptionalValue(String stringValue, ResultTest<T> test)
     {
         this.stringValue = stringValue;
         this.test = test;
+
+        this.plainValue = null;
     }
 
     protected OptionalValue(T plainValue)
     {
+        this.stringValue = null;
+        this.test = null;
+
         this.plainValue = plainValue;
     }
 
@@ -93,12 +98,7 @@ public class OptionalValue<T>
 
         Object result = MagicJson.runStatement(stringValue, argMap);
 
-        if(test.test(result))
-        {
-            return (T) result;
-        }
-
-        return null;
+        return test.testAndCast(result);
     }
 
     public Object getRaw()
