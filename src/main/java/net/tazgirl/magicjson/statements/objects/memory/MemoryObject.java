@@ -39,7 +39,7 @@ public class MemoryObject extends Base implements IVariable
                 {
                     if(namespace == Namespace.LOCAL)
                     {
-                        string = holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
+                        string = getNamespaceAddress(string);
                     }
 
                     yield space.supplier.get().get(string);
@@ -53,7 +53,7 @@ public class MemoryObject extends Base implements IVariable
                 {
                     if(namespace == Namespace.LOCAL)
                     {
-                        string = holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
+                        string = getNamespaceAddress(string);
                     }
 
                     yield space.supplier.get().put(string, optionalValue.resolve());
@@ -72,6 +72,10 @@ public class MemoryObject extends Base implements IVariable
                 yield false;
             }
         };
+    }
+
+    private @NotNull String getNamespaceAddress(String string) {
+        return holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
     }
 
     @Override
