@@ -1,8 +1,6 @@
 package net.tazgirl.magicjson.helpers;
 
-import java.util.Arrays;
-
-public class UAtoEnum
+public class EnumStringGetter
 {
 
     public static <T extends Enum<T>> T get(Class<T> e, String s)

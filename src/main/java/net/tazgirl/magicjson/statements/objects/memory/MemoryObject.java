@@ -1,7 +1,7 @@
 package net.tazgirl.magicjson.statements.objects.memory;
 
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
-import net.tazgirl.magicjson.helpers.UAtoEnum;
+import net.tazgirl.magicjson.helpers.EnumStringGetter;
 import net.tazgirl.magicjson.memory.Memory;
 import net.tazgirl.magicjson.memory.Pointer;
 import net.tazgirl.magicjson.memory.WorldMemory;
@@ -71,7 +71,7 @@ public class MemoryObject extends Base implements IVariable
 
                 yield false;
             }
-            case COMPUTE_IF_MISSING ->
+            case COMPUTE ->
             {
                 Object addressResult = address.resolve();
                 if(addressResult instanceof String string) {
@@ -120,29 +120,23 @@ public class MemoryObject extends Base implements IVariable
     @Override
     public @NotNull Boolean handleUniqueArgument(String string)
     {
-        if(UAtoEnum.get(Function.class, string) instanceof Function func)
+        if(EnumStringGetter.get(Function.class, string) instanceof Function func)
         {
             function = func;
             return true;
         }
-        if(UAtoEnum.get(Namespace.class, string) instanceof Namespace name)
+        if(EnumStringGetter.get(Namespace.class, string) instanceof Namespace name)
         {
             namespace = name;
             return true;
         }
-        if(UAtoEnum.get(Space.class, string) instanceof Space spc)
+        if(EnumStringGetter.get(Space.class, string) instanceof Space spc)
         {
             space = spc;
             return true;
         }
 
         return false;
-    }
-
-    @Override
-    public Base implicitChild()
-    {
-        return null;
     }
 
     @Override
@@ -181,7 +175,7 @@ public class MemoryObject extends Base implements IVariable
         GET,
         PUT,
         VALID,
-        COMPUTE_IF_MISSING
+        COMPUTE
     }
 
     public enum Namespace implements EnumAliaseGetter<Namespace>

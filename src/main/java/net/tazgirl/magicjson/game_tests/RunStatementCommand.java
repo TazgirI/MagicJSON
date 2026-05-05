@@ -21,9 +21,9 @@ public class RunStatementCommand
                 .then(Commands.argument("statement", StringArgumentType.greedyString())
                         .executes(ctx -> {
                             String statement = StringArgumentType.getString(ctx, "statement");
-                            if(PrivateCore.hasStatement(statement))
+                            if(MagicJson.statementExists(statement))
                             {
-                                SendMessage.All(PrivateCore.runStatement(statement).toString());
+                                SendMessage.All(MagicJson.runStatement(statement).toString());
                             }
                             else
                             {

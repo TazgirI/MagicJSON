@@ -2,7 +2,7 @@ package net.tazgirl.magicjson.statements.hooks;
 
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.tazgirl.magicjson.data.Constants;
-import net.tazgirl.magicjson.helpers.UAtoEnum;
+import net.tazgirl.magicjson.helpers.EnumStringGetter;
 import net.tazgirl.magicjson.statements.hooks.base.EventHook;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
@@ -74,7 +74,7 @@ public class LivingDamageEventStatementObject extends EventHook
     @Override
     public @NotNull Boolean handleUniqueArgument(String string)
     {
-        if(UAtoEnum.get(State.class, string) instanceof State newState)
+        if(EnumStringGetter.get(State.class, string) instanceof State newState)
         {
             state = newState;
             return true;

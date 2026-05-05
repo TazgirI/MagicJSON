@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson.statements.objects.recursion;
 
+import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
 import net.tazgirl.magicjson.statements.hooks.base.HookArgument;
@@ -37,10 +38,10 @@ public class Execute extends Base
         {
             if(argPass)
             {
-                return PrivateCore.runStatement(string, holder.args);
+                return MagicJson.runStatement(string, holder.args);
             }
 
-            return PrivateCore.runStatement(string);
+            return MagicJson.runStatement(string);
         }
 
         return null;

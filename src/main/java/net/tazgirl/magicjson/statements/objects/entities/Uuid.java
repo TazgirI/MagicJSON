@@ -3,7 +3,7 @@ package net.tazgirl.magicjson.statements.objects.entities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.tazgirl.magicjson.data.Constants;
-import net.tazgirl.magicjson.helpers.UAtoEnum;
+import net.tazgirl.magicjson.helpers.EnumStringGetter;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import org.jetbrains.annotations.NotNull;
@@ -108,7 +108,7 @@ public class Uuid extends Base
     @Override
     public @NotNull Boolean handleUniqueArgument(String string)
     {
-        function = UAtoEnum.get(Function.class, string);
+        function = EnumStringGetter.get(Function.class, string);
 
         return function == null;
     }
