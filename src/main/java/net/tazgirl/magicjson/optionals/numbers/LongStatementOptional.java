@@ -14,7 +14,7 @@ public class LongStatementOptional extends NumberStatementOptional<Long>
 
     public static LongStatementOptional from(long value)
     {
-        return new LongStatementOptional(OptionalValue.from(value));
+        return new LongStatementOptional(OptionalValue.from(value, null));
     }
 
     @Override

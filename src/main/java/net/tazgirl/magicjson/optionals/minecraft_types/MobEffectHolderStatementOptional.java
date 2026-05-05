@@ -33,7 +33,7 @@ public class MobEffectHolderStatementOptional extends StatementOptional<Holder<M
 
     public static MobEffectHolderStatementOptional from(Holder<MobEffect> value)
     {
-        return new MobEffectHolderStatementOptional(OptionalValue.from(value));
+        return new MobEffectHolderStatementOptional(OptionalValue.from(value, null));
     }
 
     @Override

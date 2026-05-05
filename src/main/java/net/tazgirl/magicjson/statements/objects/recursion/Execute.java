@@ -34,7 +34,7 @@ public class Execute extends Base
     @Override
     public Object resolve()
     {
-        if(address.resolve() instanceof String string && PrivateCore.hasStatement(string))
+        if(address.resolve() instanceof String string && MagicJson.statementExists(string))
         {
             if(argPass)
             {

@@ -15,7 +15,7 @@ public class DoubleStatementOptional extends NumberStatementOptional<Double>
 
     public static DoubleStatementOptional from(double value)
     {
-        return new DoubleStatementOptional(OptionalValue.from(value));
+        return new DoubleStatementOptional(OptionalValue.from(value, null));
     }
 
     @Override

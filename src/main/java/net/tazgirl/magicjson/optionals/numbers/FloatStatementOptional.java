@@ -13,7 +13,7 @@ public class FloatStatementOptional extends NumberStatementOptional<Float>
 
     public static FloatStatementOptional from(float value)
     {
-        return new FloatStatementOptional(OptionalValue.from(value));
+        return new FloatStatementOptional(OptionalValue.from(value, null));
     }
 
     @Override

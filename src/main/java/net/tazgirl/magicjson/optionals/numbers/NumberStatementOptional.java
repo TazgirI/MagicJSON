@@ -15,7 +15,7 @@ public class NumberStatementOptional<T extends Number> extends Number implements
 
     public static <T extends Number> NumberStatementOptional<T> from(T value)
     {
-        return new NumberStatementOptional<T>(OptionalValue.from(value));
+        return new NumberStatementOptional<T>(OptionalValue.from(value, null));
     }
 
     @Override
