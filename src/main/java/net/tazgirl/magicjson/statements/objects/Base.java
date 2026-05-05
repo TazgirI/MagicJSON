@@ -72,7 +72,7 @@ public abstract class Base
         StringBuilder objectString = new StringBuilder();
         for(Object object : objects)
         {
-            objectString.append(object.toString() + ", ");
+            objectString.append(object.toString()).append(", ");
         }
         int length = objectString.length();
         objectString.delete(length - 2, length);

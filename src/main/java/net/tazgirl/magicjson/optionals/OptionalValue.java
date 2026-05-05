@@ -81,12 +81,7 @@ public class OptionalValue<T>
             result = MagicJson.runStatement(stringValue);
         }
 
-        if(test.test(result))
-        {
-            return (T) result;
-        }
-
-        return null;
+        return test == null ? null : test.testAndCast(result);
     }
 
     public T getWithArgs(Map<String, Object> argMap)
@@ -98,7 +93,7 @@ public class OptionalValue<T>
 
         Object result = MagicJson.runStatement(stringValue, argMap);
 
-        return test.testAndCast(result);
+        return test == null ? null : test.testAndCast(result);
     }
 
     public Object getRaw()

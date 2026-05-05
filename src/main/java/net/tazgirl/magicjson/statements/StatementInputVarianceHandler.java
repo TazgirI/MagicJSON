@@ -37,7 +37,7 @@ public class StatementInputVarianceHandler
     {
         for(Object object : objects)
         {
-            if(object.getClass() == type);
+            if(object.getClass() == type)
             {
                 return (T) object;
             }
