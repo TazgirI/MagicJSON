@@ -2,7 +2,9 @@ package net.tazgirl.magicjson.statements.objects;
 
 import net.tazgirl.magicjson.MJLogging;
 import net.tazgirl.magicjson.PrivateCore;
+import net.tazgirl.magicjson.memory.Pointer;
 import net.tazgirl.magicjson.processing.Stack;
+import net.tazgirl.magicjson.statements.objects.memory.IVariable;
 import oshi.jna.platform.mac.SystemB;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class StatementHolder
     public Map<String, Object> args = new HashMap<>();
 
     String address;
+    String namespace;
 
     Base root = null;
 
@@ -24,9 +27,11 @@ public class StatementHolder
 
     Stack constructor;
 
-    public StatementHolder(Stack stack)
+    public StatementHolder(Stack stack, String finalAddress)
     {
         this.constructor = stack;
+        address = finalAddress;
+        namespace = address.substring(0, address.indexOf(':'));
     }
 
     public StatementHolder(TEST_CASE testCase)
@@ -108,6 +113,11 @@ public class StatementHolder
         return address;
     }
 
+    public String getNamespace()
+    {
+        return namespace;
+    }
+
     public void setArgs(Map<String, Object> args)
     {
         this.args = args;
@@ -158,6 +168,20 @@ public class StatementHolder
 
             parentToChildren.put(newBase, acceptedChildren);
         }
+    }
+
+    public List<Pointer> getPointers()
+    {
+        List<Pointer> returnList = new ArrayList<>();
+        for(Base base : uniques)
+        {
+            if(base instanceof IVariable iVariable)
+            {
+                returnList.add(iVariable.makePointer());
+            }
+        }
+
+        return returnList;
     }
 
     public enum TEST_CASE

@@ -26,7 +26,7 @@ public class RunStatementProcessing
                 String address = ResourceLocationToStatementAddress.handle(resourceAddress);
 
                 Tokenisation tokeniser = new Tokenisation(new String(inputStream.readAllBytes(), StandardCharsets.UTF_8));
-                TokensToHolder objectiser = new TokensToHolder(tokeniser, entry.getKey().toString());
+                TokensToHolder objectiser = new TokensToHolder(tokeniser, entry.getKey().toString(), address);
 
                 StatementHolder constructedStatement = objectiser.process();
 

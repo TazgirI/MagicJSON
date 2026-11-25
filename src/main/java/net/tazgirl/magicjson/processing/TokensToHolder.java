@@ -20,10 +20,10 @@ public class TokensToHolder
     int i = 0;
     String token;
 
-    public TokensToHolder(Tokenisation tokenisation, String debugResourceAddress)
+    public TokensToHolder(Tokenisation tokenisation, String debugResourceAddress, String finalAddress)
     {
         this.tokenisation = tokenisation;
-        this.stack = new Stack(debugResourceAddress, this);
+        this.stack = new Stack(debugResourceAddress, this, finalAddress);
     }
 
     public StatementHolder process()

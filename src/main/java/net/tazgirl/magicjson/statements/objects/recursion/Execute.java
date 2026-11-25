@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson.statements.objects.recursion;
 
+import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.PrivateCore;
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
 import net.tazgirl.magicjson.statements.hooks.base.HookArgument;
@@ -33,14 +34,14 @@ public class Execute extends Base
     @Override
     public Object resolve()
     {
-        if(address.resolve() instanceof String string && PrivateCore.hasStatement(string))
+        if(address.resolve() instanceof String string && MagicJson.statementExists(string))
         {
             if(argPass)
             {
-                return PrivateCore.runStatement(string, holder.args);
+                return MagicJson.runStatement(string, holder.args);
             }
 
-            return PrivateCore.runStatement(string);
+            return MagicJson.runStatement(string);
         }
 
         return null;

@@ -13,7 +13,7 @@ public class IntegerStatementOptional extends NumberStatementOptional<Integer>
 
     public static IntegerStatementOptional from(int value)
     {
-        return new IntegerStatementOptional(OptionalValue.from(value));
+        return new IntegerStatementOptional(OptionalValue.from(value, null));
     }
 
     @Override

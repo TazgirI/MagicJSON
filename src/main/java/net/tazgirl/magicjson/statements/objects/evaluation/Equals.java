@@ -37,7 +37,8 @@ public class Equals extends Base
             Object currentResult = bases.get(i).resolve();
             boolean equals = firstResult.equals(currentResult);
 
-            if(not ? equals : !equals)
+            // Equivalent of "not ? equals : !equals"
+            if(not == equals)
             {
                 returnValue = false;
                 break;

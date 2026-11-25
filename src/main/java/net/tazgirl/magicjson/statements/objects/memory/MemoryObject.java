@@ -1,8 +1,9 @@
 package net.tazgirl.magicjson.statements.objects.memory;
 
 import net.tazgirl.magicjson.helpers.EnumAliaseGetter;
-import net.tazgirl.magicjson.helpers.UAtoEnum;
+import net.tazgirl.magicjson.helpers.EnumStringGetter;
 import net.tazgirl.magicjson.memory.Memory;
+import net.tazgirl.magicjson.memory.Pointer;
 import net.tazgirl.magicjson.memory.WorldMemory;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class MemoryObject extends Base
+public class MemoryObject extends Base implements IVariable
 {
     Function function = Function.GET;
     Namespace namespace = Namespace.LOCAL;
@@ -38,7 +39,7 @@ public class MemoryObject extends Base
                 {
                     if(namespace == Namespace.LOCAL)
                     {
-                        string = holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
+                        string = getNamespaceAddress(string);
                     }
 
                     yield space.supplier.get().get(string);
@@ -52,7 +53,7 @@ public class MemoryObject extends Base
                 {
                     if(namespace == Namespace.LOCAL)
                     {
-                        string = holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
+                        string = getNamespaceAddress(string);
                     }
 
                     yield space.supplier.get().put(string, optionalValue.resolve());
@@ -70,7 +71,33 @@ public class MemoryObject extends Base
 
                 yield false;
             }
+            case COMPUTE ->
+            {
+                Object addressResult = address.resolve();
+                if(addressResult instanceof String string) {
+                    if (namespace == Namespace.LOCAL) {
+                        string = getNamespaceAddress(string);
+                    }
+
+                    Object result = space.supplier.get().get(string);
+
+                    if (result == null)
+                    {
+                        result = optionalValue.resolve();
+                        space.supplier.get().put(string, result);
+                    }
+
+                    yield result;
+                }
+
+                yield null;
+            }
         };
+    }
+
+    private @NotNull String getNamespaceAddress(String string)
+    {
+        return holder.getAddress().substring(0, string.indexOf(":") + 1) + string;
     }
 
     @Override
@@ -93,29 +120,23 @@ public class MemoryObject extends Base
     @Override
     public @NotNull Boolean handleUniqueArgument(String string)
     {
-        if(UAtoEnum.get(Function.class, string) instanceof Function func)
+        if(EnumStringGetter.get(Function.class, string) instanceof Function func)
         {
             function = func;
             return true;
         }
-        if(UAtoEnum.get(Namespace.class, string) instanceof Namespace name)
+        if(EnumStringGetter.get(Namespace.class, string) instanceof Namespace name)
         {
             namespace = name;
             return true;
         }
-        if(UAtoEnum.get(Space.class, string) instanceof Space spc)
+        if(EnumStringGetter.get(Space.class, string) instanceof Space spc)
         {
             space = spc;
             return true;
         }
 
         return false;
-    }
-
-    @Override
-    public Base implicitChild()
-    {
-        return null;
     }
 
     @Override
@@ -143,14 +164,21 @@ public class MemoryObject extends Base
         }
     }
 
+    @Override
+    public Pointer makePointer()
+    {
+        return new Pointer(address.resolve().toString(), Pointer.Location.MEMORY, namespace, space);
+    }
+
     enum Function
     {
         GET,
         PUT,
-        VALID
+        VALID,
+        COMPUTE
     }
 
-    enum Namespace implements EnumAliaseGetter<Namespace>
+    public enum Namespace implements EnumAliaseGetter<Namespace>
     {
         LOCAL("l","name","namespace", "private"),
         GLOBAL("g","public");
@@ -176,7 +204,7 @@ public class MemoryObject extends Base
         }
     }
 
-    enum Space implements EnumAliaseGetter<Space>
+    public enum Space implements EnumAliaseGetter<Space>
     {
         RUNTIME(Memory::getRuntimeMemory,"temp", "run", "r"),
         WORLD(Memory::getWorldMemoryMap,"perm", "w");

@@ -6,23 +6,22 @@ import org.jetbrains.annotations.NotNull;
 
 public class ArgGet extends ArgBase
 {
-    public Base argumentName;
 
     public ArgGet(StatementHolder holder)
     {
         super(holder);
     }
 
-    public ArgGet(StatementHolder holder, Base argumentName)
+    public ArgGet(StatementHolder holder, Base address)
     {
         super(holder);
-        this.argumentName = argumentName;
+        this.address = address;
     }
 
     @Override
     public Object resolve()
     {
-        if(argumentName.resolve() instanceof String string)
+        if(address.resolve() instanceof String string)
         {
             return holder.args.get(string);
         }
@@ -32,9 +31,9 @@ public class ArgGet extends ArgBase
     @Override
     public @NotNull Boolean handleBase(Base base)
     {
-        if(argumentName == null)
+        if(address == null)
         {
-            argumentName = base;
+            address = base;
             return true;
         }
 
@@ -56,15 +55,15 @@ public class ArgGet extends ArgBase
     @Override
     public String toString()
     {
-        return identifier + "( " + argumentName.toString() + " )";
+        return identifier + "( " + address.toString() + " )";
     }
 
     @Override
     public void replace(Base oldBase, Base newBase)
     {
-        if(argumentName == oldBase)
+        if(address == oldBase)
         {
-            argumentName = newBase;
+            address = newBase;
         }
     }
 }

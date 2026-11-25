@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 public class ArgCreate extends ArgBase
 {
 
-    Base address;
 
     Base initValue;
 

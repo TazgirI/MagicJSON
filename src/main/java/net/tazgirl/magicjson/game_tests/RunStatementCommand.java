@@ -21,13 +21,13 @@ public class RunStatementCommand
                 .then(Commands.argument("statement", StringArgumentType.greedyString())
                         .executes(ctx -> {
                             String statement = StringArgumentType.getString(ctx, "statement");
-                            if(PrivateCore.hasStatement(statement))
+                            if(MagicJson.statementExists(statement))
                             {
-                                SendMessage.All(PrivateCore.runStatement(statement).toString());
+                                SendMessage.All(MagicJson.runStatement(statement).toString());
                             }
                             else
                             {
-                                String result =  new TokensToHolder(new Tokenisation(statement), "command:run").process().run().toString();
+                                String result =  new TokensToHolder(new Tokenisation(statement), "command:run", "command:run_final").process().run().toString();
                                 SendMessage.All(result);
                             }
 

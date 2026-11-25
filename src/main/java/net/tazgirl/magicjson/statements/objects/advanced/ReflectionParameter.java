@@ -21,11 +21,11 @@ public class ReflectionParameter extends Base
         Object typeObj = type.resolve();
         if(typeObj instanceof Class<?> typeClass)
         {
-            return new Reflection.ReflectionParamaterRecord(object.resolve(), typeClass);
+            return new Reflection.ReflectionParameterRecord(object.resolve(), typeClass);
         }
 
         MJLogging.debug("ReflectionParameter failed to build record: " + this);
-        return null;
+        return new Reflection.ReflectionParameterRecord(null, null);
     }
 
     @Override

@@ -8,32 +8,41 @@ import java.util.Map;
 
 public class OptionalValue<T>
 {
-    private String stringValue = null;
-    private ResultTest<T> test;
+    protected final String stringValue;
+    protected final ResultTest<T> test;
 
-    private T plainValue = null;
+    protected final T plainValue;
 
 
-    private OptionalValue(String stringValue, ResultTest<T> test)
+    protected OptionalValue(String stringValue, ResultTest<T> test)
     {
         this.stringValue = stringValue;
         this.test = test;
+
+        this.plainValue = null;
     }
 
-    private OptionalValue(T plainValue)
+    protected OptionalValue(T plainValue)
     {
+        this.stringValue = null;
+        this.test = null;
+
         this.plainValue = plainValue;
     }
 
-    public static <T> OptionalValue<T> from(String stringValue, ResultTest<T> test)
+    // NOTE: These two are protected to make sure people use the generic Object instructor, the specific ones are internal use only
+    // *****************************************
+    protected static <T> OptionalValue<T> from(String stringValue, ResultTest<T> test)
     {
         return new OptionalValue<>(stringValue, test);
     }
 
-    public static <T> OptionalValue<T> from(T plainValue)
+    protected static <T> OptionalValue<T> from(T plainValue)
     {
         return new OptionalValue<>(plainValue);
     }
+    // *****************************************
+
 
     public static <T> OptionalValue<T> from(Object value, ResultTest<T> test)
     {
@@ -72,12 +81,7 @@ public class OptionalValue<T>
             result = MagicJson.runStatement(stringValue);
         }
 
-        if(test.test(result))
-        {
-            return (T) result;
-        }
-
-        return null;
+        return test == null ? null : test.testAndCast(result);
     }
 
     public T getWithArgs(Map<String, Object> argMap)
@@ -89,12 +93,7 @@ public class OptionalValue<T>
 
         Object result = MagicJson.runStatement(stringValue, argMap);
 
-        if(test.test(result))
-        {
-            return (T) result;
-        }
-
-        return null;
+        return test == null ? null : test.testAndCast(result);
     }
 
     public Object getRaw()

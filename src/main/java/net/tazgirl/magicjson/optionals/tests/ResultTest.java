@@ -46,4 +46,13 @@ public record ResultTest<T>(Class<T> type, Function<Object, Boolean> advancedTes
         return advancedTest.apply(input);
     }
 
+    public T testAndCast(Object input)
+    {
+        if(test(input))
+        {
+            return (T) input;
+        }
+
+        return null;
+    }
 }

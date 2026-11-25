@@ -44,7 +44,7 @@ public class EventPriorityFrom
     @NotNull
     public static EventPriority element(JsonElement element)
     {
-        EventPriority returnValue = EventPriority.NORMAL;
+        EventPriority returnValue;
 
         try
         {
@@ -73,6 +73,6 @@ public class EventPriorityFrom
         }
 
         MJLogging.debug("Failed to turn provided JsonElement into an EventPriority, reverting to NORMAL");
-        return returnValue;
+        return EventPriority.NORMAL;
     }
 }

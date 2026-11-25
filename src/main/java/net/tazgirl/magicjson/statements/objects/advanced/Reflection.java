@@ -37,10 +37,10 @@ public class Reflection extends Base
             }
             else
             {
-                ReflectionParamaterRecord[] records = parameters.stream().map(Base::resolve).toArray(ReflectionParamaterRecord[]::new);
-                Object[] paramaterObjects = Arrays.stream(records).map(ReflectionParamaterRecord::object).toArray();
-                Class<?>[] classes = Arrays.stream(records).map(ReflectionParamaterRecord::type).toArray(Class<?>[]::new);
-                return targetObj.getClass().getMethod(methodName, classes).invoke(targetObj, paramaterObjects);
+                ReflectionParameterRecord[] records = parameters.stream().map(ReflectionParameter::resolve).toArray(ReflectionParameterRecord[]::new);
+                Object[] parameterObjects = Arrays.stream(records).map(ReflectionParameterRecord::object).toArray();
+                Class<?>[] classes = Arrays.stream(records).map(ReflectionParameterRecord::type).toArray(Class<?>[]::new);
+                return targetObj.getClass().getMethod(methodName, classes).invoke(targetObj, parameterObjects);
             }
 
         }
@@ -111,7 +111,7 @@ public class Reflection extends Base
         }
     }
 
-    public record ReflectionParamaterRecord(Object object, Class<?> type)
+    public record ReflectionParameterRecord(Object object, Class<?> type)
     {
 
     }

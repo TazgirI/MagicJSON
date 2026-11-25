@@ -1,11 +1,15 @@
 package net.tazgirl.magicjson.statements.objects.memory.args;
 
+import net.tazgirl.magicjson.memory.Pointer;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
+import net.tazgirl.magicjson.statements.objects.memory.IVariable;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ArgBase extends Base
+public abstract class ArgBase extends Base implements IVariable
 {
+    Base address;
+
     public ArgBase(StatementHolder holder)
     {
         super(holder);
@@ -35,5 +39,10 @@ public abstract class ArgBase extends Base
             }
         }
         return false;
+    }
+
+    @Override
+    public Pointer makePointer() {
+        return new Pointer(address.resolve().toString(), Pointer.Location.ARGS, null, null);
     }
 }

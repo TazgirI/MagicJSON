@@ -1,5 +1,6 @@
 package net.tazgirl.magicjson.subscription.base;
 
+import net.tazgirl.magicjson.MagicJson;
 import net.tazgirl.magicjson.PrivateCore;
 
 import java.util.Map;
@@ -24,18 +25,18 @@ public class ExecutableAddress
     {
         if(preArgs == null)
         {
-            return PrivateCore.runStatement(address);
+            return MagicJson.runStatement(address);
         }
         else
         {
-            return PrivateCore.runStatement(address, preArgs);
+            return MagicJson.runStatement(address, preArgs);
         }
 
     }
 
     public Object Run(Map<String, Object> args)
     {
-        return PrivateCore.runStatement(address, args);
+        return MagicJson.runStatement(address, args);
     }
 
     public void setPreArgs(Map<String, Object> preArgs)
