@@ -7,7 +7,8 @@ public class EnumStringGetter
     {
         try
         {
-            s = s.substring(1).toUpperCase();
+            // s = s.substring(1).toUpperCase();
+            s = s.toUpperCase();
             return Enum.valueOf(e, s);
         }
         catch(IllegalArgumentException | NullPointerException exception)
