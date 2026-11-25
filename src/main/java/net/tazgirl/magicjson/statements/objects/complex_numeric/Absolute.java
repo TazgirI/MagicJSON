@@ -4,11 +4,11 @@ import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.StatementHolder;
 import org.jetbrains.annotations.NotNull;
 
-public class Absoloute extends Base
+public class Absolute extends Base
 {
     public Base base;
 
-    public Absoloute(StatementHolder holder)
+    public Absolute(StatementHolder holder)
     {
         super(holder);
     }
@@ -51,7 +51,7 @@ public class Absoloute extends Base
     @Override
     public String toString()
     {
-        return identifier + "( " + base.toString() + " )";
+        return containerString(base);
     }
 
     @Override

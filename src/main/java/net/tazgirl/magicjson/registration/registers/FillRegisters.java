@@ -22,11 +22,12 @@ import net.tazgirl.magicjson.registration.registers.objectification.StatementObj
 import net.tazgirl.magicjson.statements.hooks.LivingDamageEventStatementObject;
 import net.tazgirl.magicjson.statements.objects.StringMutators.Concat;
 import net.tazgirl.magicjson.statements.objects.advanced.Reflection;
-import net.tazgirl.magicjson.statements.objects.complex_numeric.Absoloute;
+import net.tazgirl.magicjson.statements.objects.complex_numeric.Absolute;
 import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
 import net.tazgirl.magicjson.statements.objects.evaluation.Is;
 import net.tazgirl.magicjson.statements.objects.evaluation.Not;
 import net.tazgirl.magicjson.statements.objects.flow.If;
+import net.tazgirl.magicjson.statements.objects.memory.MemoryObject;
 import net.tazgirl.magicjson.statements.objects.memory.args.ArgGet;
 import net.tazgirl.magicjson.statements.objects.Base;
 import net.tazgirl.magicjson.statements.objects.complex_numeric.Gaussian;
@@ -133,12 +134,14 @@ public class FillRegisters
                     Map.entry(List.of("sub", "-", "minus"), Subtract.class),
 
                     Map.entry(List.of("gaussian", "gauss"), Gaussian.class),
-                    Map.entry(List.of("absoloute", "abs"), Absoloute.class),
+                    Map.entry(List.of("absolute", "abs"), Absolute.class),
 
 
                     Map.entry(List.of("livingdamage", "living_damage"), LivingDamageEventStatementObject.class),
 
-                    Map.entry(List.of("reflect", "reflection"), Reflection.class)
+                    Map.entry(List.of("reflect", "reflection"), Reflection.class),
+
+                    Map.entry(List.of("memory", "mem"), MemoryObject.class)
             );
 
     final static Map<String, Class<? extends Base>> singles = Map.of(
