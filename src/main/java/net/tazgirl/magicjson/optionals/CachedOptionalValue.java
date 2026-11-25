@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+// TODO: Learn what the fuck this is
 public class CachedOptionalValue<T> extends OptionalValue<T>
 {
     List<String> argValues;
