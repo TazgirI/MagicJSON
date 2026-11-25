@@ -22,6 +22,7 @@ import net.tazgirl.magicjson.registration.registers.objectification.StatementObj
 import net.tazgirl.magicjson.statements.hooks.LivingDamageEventStatementObject;
 import net.tazgirl.magicjson.statements.objects.StringMutators.Concat;
 import net.tazgirl.magicjson.statements.objects.advanced.Reflection;
+import net.tazgirl.magicjson.statements.objects.complex_numeric.Absoloute;
 import net.tazgirl.magicjson.statements.objects.evaluation.Equals;
 import net.tazgirl.magicjson.statements.objects.evaluation.Is;
 import net.tazgirl.magicjson.statements.objects.evaluation.Not;
@@ -132,6 +133,7 @@ public class FillRegisters
                     Map.entry(List.of("sub", "-", "minus"), Subtract.class),
 
                     Map.entry(List.of("gaussian", "gauss"), Gaussian.class),
+                    Map.entry(List.of("absoloute", "abs"), Absoloute.class),
 
 
                     Map.entry(List.of("livingdamage", "living_damage"), LivingDamageEventStatementObject.class),
